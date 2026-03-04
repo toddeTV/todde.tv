@@ -1,11 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxt/image',
+    // ---
+    '@nuxtjs/seo', // must be before `@nuxt/content` (Nuxt Content v3 requirement)
+    '@nuxt/content',
   ],
 
   ssr: true,
@@ -42,6 +44,14 @@ export default defineNuxtConfig({
 
   css: [
   ],
+
+  site: { // for `@nuxtjs/seo` - shared site config used by all SEO sub-modules (like `ogImage`, `schemaOrg`, etc.)
+    url: 'https://todde.tv',
+    name: 'todde.tv',
+    description:
+      'Personal portfolio of Thorsten Seyschab - IT consultant, senior full-stack developer, and conference speaker.',
+    defaultLocale: 'en',
+  },
 
   content: { // for `@nuxt/content`
   },
@@ -85,5 +95,21 @@ export default defineNuxtConfig({
   },
 
   image: { // for `@nuxt/image`
+  },
+
+  ogImage: { // for `nuxt-og-image` (via `@nuxtjs/seo`)
+    defaults: {
+      component: 'OgImageHome',
+    },
+  },
+
+  schemaOrg: { // for `nuxt-schema-org` (via `@nuxtjs/seo`)
+    identity: {
+      type: 'Person',
+      name: 'Thorsten Seyschab',
+      url: 'https://todde.tv',
+      image: '/avatar.jpg',
+      // sameAs: [], // is populated at runtime from the `socials` content collection (see `app.vue`).
+    },
   },
 })
