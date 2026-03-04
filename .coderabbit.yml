@@ -6,7 +6,7 @@ enable_free_tier: false
 
 reviews:
   # "assertive" emits a broad range of issues including nitpicks and improvements.
-  # "chill" only reports critical issues.
+  # "chill" provides lighter feedback with fewer non-critical comments.
   profile: assertive
 
   # If true, CodeRabbit will request changes on the PR if there are issues. If false, it will only comment.
