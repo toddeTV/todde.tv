@@ -17,8 +17,8 @@ seo:
 ogImage:
   component: OgImageHome # REDUNDANT - already the default in nuxt.config.ts ogImage.defaults
   props:
-    title: todde.tv # REDUNDANT - matches OgImageHome withDefaults()
-    description: IT consultant, senior full-stack developer, and conference speaker. # REDUNDANT - matches OgImageHome withDefaults()
+    title: Thorsten Seyschab # OPTIONAL - in OgImageHome withDefaults() there is a default
+    description: IT consultant, senior full-stack developer, and conference speaker. # OPTIONAL - in OgImageHome withDefaults() there is a default
 sitemap:
   lastmod: 2026-03-04 # USEFUL - Google uses this for crawl scheduling
   changefreq: monthly # IGNORED - Google ignores changefreq since ~2023
