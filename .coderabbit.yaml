@@ -167,8 +167,8 @@ reviews:
     # And also incremental ones.
     auto_incremental_review: true
 
-    # Do not review draft PRs.
-    drafts: false
+    # Review draft PRs.
+    drafts: true
 
     # More ways to filter when to run automatic reviews.
     # ignore_title_keywords:
