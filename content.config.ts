@@ -15,7 +15,7 @@ export default defineContentConfig({
         source: {
           include: '**',
           exclude: [
-            'socials/**'
+            'socials/**',
           ],
         },
       }),
@@ -28,7 +28,7 @@ export default defineContentConfig({
         /** Display name of the social platform (e.g. "GitHub"). */
         name: z.string(),
         /** Full profile URL. */
-        url: z.string().url(),
+        url: z.url(),
         /** Iconify icon identifier (e.g. "simple-icons:github"). */
         icon: z.string(),
         /** Controls display order (ascending). */
