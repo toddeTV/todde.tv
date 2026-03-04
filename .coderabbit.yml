@@ -5,7 +5,8 @@ language: en-US
 enable_free_tier: false
 
 reviews:
-  # "assertive" emits a broad range of issues including nitpicks and improvements. "chill" only reports critical issues.
+  # "assertive" emits a broad range of issues including nitpicks and improvements.
+  # "chill" only reports critical issues.
   profile: assertive
 
   # If true, CodeRabbit will request changes on the PR if there are issues. If false, it will only comment.
@@ -37,6 +38,7 @@ reviews:
   changed_files_summary: true
 
   # Generate sequence diagrams to visualize control flow.
+  # Very useful for understanding logic in Nuxt server routes or complex composables.
   sequence_diagrams: true
 
   # Estimate the effort required to review the PR.
