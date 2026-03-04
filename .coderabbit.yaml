@@ -76,67 +76,67 @@ reviews:
     - "!.output/**"
     - "!dist/**"
 
-  # Project-level instructions applied to all reviewed files.
-  instructions: |
-    ## Project: todde.tv
-
-    Personal portfolio website for Thorsten Seyschab (username: toddeTV).
-    Live at https://todde.tv.
-
-    ### Tech Stack
-    Nuxt 4, TypeScript (strict, no `any`), Vue 3 Composition API, Tailwind CSS v4, `@nuxtjs/seo`, `@nuxt/content` (file-based CMS with Zod schemas), `@nuxt/image`, `@nuxt/fonts`.
-    Package manager: pnpm (never npm/yarn/bun).
-    No linter configured. No runtime env vars. Static site generation (`pnpm generate`).
-
-    ### Directory Layout
-    - `app/` - Frontend (components, composables, layouts, pages)
-    - `app/components/ui/` - Reusable UI primitives (App* prefix)
-    - `app/components/layout/` - Site-wide layout (header, footer)
-    - `app/components/content/` - Domain content components (cards, carousel)
-    - `app/components/OgImage/` - Satori-rendered OG image templates
-    - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/
-    - `public/` - Static assets
-    - `scripts/` - Maintenance scripts
-
-    ### Code Conventions
-    - File size target ~100 lines, hard limit 200 (exceptions: config files, dev scripts).
-    - Brief JSDoc on all functions.
-    - Vue components: PascalCase filenames. TS/JS files: kebab-case. Composables: `use` prefix.
-    - Prefer auto-imports. Use `import type` for types. Prefer `~/` paths.
-    - Always specify `.vue`, `.json`, `.mjs`, `.css` extensions in imports. Never specify `.ts`, `.js`.
-    - All code, comments, and docs in English.
-    - All dates in ISO 8601 format (YYYY-MM-DD).
-
-    ### Vue SFC Conventions
-    - Block order: `<script setup lang="ts">` -> `<template>` -> `<i18n lang="yaml">` -> `<style scoped>`.
-    - Use `<NuxtLink>` for ALL links (internal and external), never raw `<a>` tags.
-    - Use `<NuxtImg>` for ALL images (from `@nuxt/image`), never raw `<img>` tags.
-      Exception: `app/components/OgImage/` must use `<img>` (Satori limitation).
-    - Never nest `<a>` inside `<a>` (or `<NuxtLink>` inside a linked `AppCard`). Use the stretched-link pattern instead.
-    - Icons: `<Icon name="collection:name" :size="N" />`.
-
-    ### Styling
-    - Dark-only theme. No light mode. No theme toggle.
-    - Tailwind CSS v4 utility classes.
-    - All colors must come from defined palettes (primary/green, secondary/magenta, neutral/grays) or semantic aliases.
-    - Never use raw Tailwind grays (gray-*, slate-*, zinc-*, stone-*) or arbitrary hex values.
-    - Semantic aliases: bg, surface, surface-hover, border, text, text-muted, text-dim, accent, accent-hover, accent-dim.
-    - Font families: `--font-sans` (Inter) for body/headings, `--font-mono` (JetBrains Mono) for tags/dates/metadata.
-    - No underlines on links. No italics in the design system.
-    - No `<hr>` elements - use `border-t border-border` on section divs.
-    - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
-
-    ### Content Model (@nuxt/content)
-    - Collections: talks (Page, `talks/*.md`), projects (Page, `projects/*.md`), clients (Page, `clients/*.md`), publications (Data, `publications/*.yml`).
-    - Schemas defined in `content.config.ts` using Zod.
-    - Talk filenames: `YYYY-MM-DD-event-slug.md`. Slugs derived from filenames (kebab-case).
-    - Testimonials embedded as frontmatter arrays in talk/project/client files.
-
-    ### Nuxt Config
-    - Module-driven architecture. Check module docs before modifying module options.
-
-  # Path-specific reminders (details covered in project-level instructions above).
+  # Path-specific instructions for code review.
   path_instructions:
+    - path: "**"
+      instructions: |
+        ## Project: todde.tv
+
+        Personal portfolio website for Thorsten Seyschab (username: toddeTV).
+        Live at https://todde.tv.
+
+        ### Tech Stack
+        Nuxt 4, TypeScript (strict, no `any`), Vue 3 Composition API, Tailwind CSS v4, `@nuxtjs/seo`, `@nuxt/content` (file-based CMS with Zod schemas), `@nuxt/image`, `@nuxt/fonts`.
+        Package manager: pnpm (never npm/yarn/bun).
+        No linter configured. No runtime env vars. Static site generation (`pnpm generate`).
+
+        ### Directory Layout
+        - `app/` - Frontend (components, composables, layouts, pages)
+        - `app/components/ui/` - Reusable UI primitives (App* prefix)
+        - `app/components/layout/` - Site-wide layout (header, footer)
+        - `app/components/content/` - Domain content components (cards, carousel)
+        - `app/components/OgImage/` - Satori-rendered OG image templates
+        - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/
+        - `public/` - Static assets
+        - `scripts/` - Maintenance scripts
+
+        ### Code Conventions
+        - File size target ~100 lines, hard limit 200 (exceptions: config files, dev scripts).
+        - Brief JSDoc on all functions.
+        - Vue components: PascalCase filenames. TS/JS files: kebab-case. Composables: `use` prefix.
+        - Prefer auto-imports. Use `import type` for types. Prefer `~/` paths.
+        - Always specify `.vue`, `.json`, `.mjs`, `.css` extensions in imports. Never specify `.ts`, `.js`.
+        - All code, comments, and docs in English.
+        - All dates in ISO 8601 format (YYYY-MM-DD).
+
+        ### Vue SFC Conventions
+        - Block order: `<script setup lang="ts">` -> `<template>` -> `<i18n lang="yaml">` -> `<style scoped>`.
+        - Use `<NuxtLink>` for ALL links (internal and external), never raw `<a>` tags.
+        - Use `<NuxtImg>` for ALL images (from `@nuxt/image`), never raw `<img>` tags.
+          Exception: `app/components/OgImage/` must use `<img>` (Satori limitation).
+        - Never nest `<a>` inside `<a>` (or `<NuxtLink>` inside a linked `AppCard`). Use the stretched-link pattern instead.
+        - Icons: `<Icon name="collection:name" :size="N" />`.
+
+        ### Styling
+        - Dark-only theme. No light mode. No theme toggle.
+        - Tailwind CSS v4 utility classes.
+        - All colors must come from defined palettes (primary/green, secondary/magenta, neutral/grays) or semantic aliases.
+        - Never use raw Tailwind grays (gray-*, slate-*, zinc-*, stone-*) or arbitrary hex values.
+        - Semantic aliases: bg, surface, surface-hover, border, text, text-muted, text-dim, accent, accent-hover, accent-dim.
+        - Font families: `--font-sans` (Inter) for body/headings, `--font-mono` (JetBrains Mono) for tags/dates/metadata.
+        - No underlines on links. No italics in the design system.
+        - No `<hr>` elements - use `border-t border-border` on section divs.
+        - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
+
+        ### Content Model (@nuxt/content)
+        - Collections: talks (Page, `talks/*.md`), projects (Page, `projects/*.md`), clients (Page, `clients/*.md`), publications (Data, `publications/*.yml`).
+        - Schemas defined in `content.config.ts` using Zod.
+        - Talk filenames: `YYYY-MM-DD-event-slug.md`. Slugs derived from filenames (kebab-case).
+        - Testimonials embedded as frontmatter arrays in talk/project/client files.
+
+        ### Nuxt Config
+        - Module-driven architecture. Check module docs before modifying module options.
+
     - path: "**/*.vue"
       instructions: |
         Verify: SFC block order, `<NuxtLink>` instead of `<a>`, `<NuxtImg>` instead of `<img>`, no nested links (stretched-link pattern).
