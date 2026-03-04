@@ -21,7 +21,7 @@ withDefaults(defineProps<{
       height: '630px',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       backgroundColor: '#0a0a0b',
       fontFamily: 'Inter, system-ui, sans-serif',
       padding: '60px',
@@ -29,83 +29,112 @@ withDefaults(defineProps<{
       overflow: 'hidden',
     }"
   >
-    <!-- Radial accent glow (top-right) -->
+    <!-- Radial accent glow (top-right, behind avatar) -->
     <div
       :style="{
         position: 'absolute',
-        top: '-100px',
-        right: '-100px',
-        width: '500px',
-        height: '500px',
+        top: '-80px',
+        right: '100px',
+        width: '700px',
+        height: '700px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0,220,130,0.07) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(0,220,130,0.25) 0%, transparent 65%)',
       }"
     />
 
-    <!-- Top row: text left, avatar right -->
+    <!-- Secondary glow (bottom-left) -->
+    <div
+      :style="{
+        position: 'absolute',
+        bottom: '-200px',
+        left: '-100px',
+        width: '500px',
+        height: '500px',
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(0,220,130,0.18) 0%, transparent 65%)',
+      }"
+    />
+
+    <!-- Subtle horizontal rule -->
+    <div
+      :style="{
+        position: 'absolute',
+        top: '315px',
+        left: '60px',
+        width: '600px',
+        height: '1px',
+        background: 'linear-gradient(90deg, rgba(0,220,130,0.15), transparent)',
+      }"
+    />
+
+    <!-- Title and description (vertically centered) -->
     <div
       :style="{
         display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
+        flexDirection: 'column',
+        flexWrap: 'nowrap',
+        gap: '20px',
+        width: '670px',
       }"
     >
-      <!-- Title and description -->
       <div
         :style="{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          maxWidth: '750px',
+          fontSize: '72px',
+          fontWeight: 700,
+          color: '#fafafa',
+          lineHeight: 1.1,
+          letterSpacing: '-0.02em',
         }"
       >
-        <div
-          :style="{
-            fontSize: '64px',
-            fontWeight: 700,
-            color: '#fafafa',
-            lineHeight: 1.1,
-            letterSpacing: '-0.02em',
-          }"
-        >
-          {{ title }}
-        </div>
-        <div
-          :style="{
-            fontSize: '28px',
-            fontWeight: 400,
-            color: '#a1a1aa',
-            lineHeight: 1.4,
-          }"
-        >
-          {{ description }}
-        </div>
+        {{ title }}
       </div>
-
-      <!-- Avatar with accent gradient border -->
       <div
         :style="{
-          width: '140px',
-          height: '140px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, #00dc82, #00c474)',
-          padding: '4px',
-          flexShrink: '0',
+          fontSize: '30px',
+          fontWeight: 400,
+          color: '#a1a1aa',
+          lineHeight: 1.5,
         }"
       >
-        <img
-          alt="Thorsten Seyschab"
-          src="/avatar.jpg"
-          :style="{
-            width: '132px',
-            height: '132px',
-            borderRadius: '50%',
-            objectFit: 'cover',
-          }"
-        >
+        {{ description }}
       </div>
     </div>
 
-    <OgImageFooter />
+    <!-- Avatar with accent gradient border (large, centered-right) -->
+    <div
+      :style="{
+        position: 'absolute',
+        top: '115px',
+        right: '80px',
+        width: '350px',
+        height: '350px',
+        borderRadius: '50%',
+        background: 'linear-gradient(135deg, #00dc82, #00c474)',
+        padding: '5px',
+      }"
+    >
+      <img
+        alt="Thorsten Seyschab"
+        src="/avatar.jpg"
+        :style="{
+          width: '340px',
+          height: '340px',
+          borderRadius: '50%',
+          objectFit: 'cover',
+        }"
+      >
+    </div>
+
+    <!-- Footer (absolute to stay at bottom despite centered content) -->
+    <div
+      :style="{
+        position: 'absolute',
+        bottom: '60px',
+        left: '60px',
+        right: '60px',
+      }"
+    >
+      <OgImageFooter />
+    </div>
   </div>
 </template>

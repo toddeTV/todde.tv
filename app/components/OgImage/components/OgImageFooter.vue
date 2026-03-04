@@ -11,6 +11,7 @@
   <div
     :style="{
       display: 'flex',
+      flexWrap: 'nowrap',
       justifyContent: 'space-between',
       alignItems: 'flex-end',
     }"
