@@ -88,7 +88,9 @@ reviews:
         ### Tech Stack
         Nuxt 4, TypeScript (strict, no `any`), Vue 3 Composition API, Tailwind CSS v4, `@nuxtjs/seo`, `@nuxt/content` (file-based CMS with Zod schemas), `@nuxt/image`, `@nuxt/fonts`.
         Package manager: pnpm (never npm/yarn/bun).
-        No linter configured. No runtime env vars. Static site generation (`pnpm generate`).
+        ESLint configured.
+        No runtime env vars.
+        Static site generation (`pnpm generate`).
 
         ### Directory Layout
         - `app/` - Frontend (components, composables, layouts, pages)
