@@ -71,9 +71,9 @@
   "search.useIgnoreFiles": false,
 
   // TailwindCSS
-  "tailwindCSS.classAttributes": ["class", "ui"],
-  "tailwindCSS.experimental.classRegex": [
-    ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  "tailwindCSS.classAttributes": [
+    "class", 
+    "ui"
   ],
 
   // JS
