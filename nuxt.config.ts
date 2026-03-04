@@ -70,6 +70,12 @@ export default defineNuxtConfig({
   },
 
   eslint: { // for `@nuxt/eslint`
+    config: {
+      stylistic: {
+        indent: 2,
+        quotes: 'single',
+      },
+    },
   },
 
   fonts: { // for `@nuxt/fonts`
