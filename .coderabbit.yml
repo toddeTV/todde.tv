@@ -98,7 +98,7 @@ reviews:
         - `app/components/layout/` - Site-wide layout (header, footer)
         - `app/components/content/` - Domain content components (cards, carousel)
         - `app/components/OgImage/` - Satori-rendered OG image templates
-        - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/
+        - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/, socials/
         - `public/` - Static assets
         - `scripts/` - Maintenance scripts
 
@@ -131,7 +131,7 @@ reviews:
         - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
 
         ### Content Model (@nuxt/content)
-        - Collections: talks (Page, `talks/*.md`), projects (Page, `projects/*.md`), clients (Page, `clients/*.md`), publications (Data, `publications/*.yml`).
+        - Collections: talks (Page, `talks/*.md`), projects (Page, `projects/*.md`), clients (Page, `clients/*.md`), publications (Data, `publications/*.yml`), socials (Data, `socials/*.yml`).
         - Schemas defined in `content.config.ts` using Zod.
         - Talk filenames: `YYYY-MM-DD-event-slug.md`. Slugs derived from filenames (kebab-case).
         - Testimonials embedded as frontmatter arrays in talk/project/client files.
