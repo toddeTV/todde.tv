@@ -2,6 +2,19 @@
 
 Personal portfolio website for **Thorsten Seyschab** (toddeTV) - an IT consultant, senior full-stack developer, and conference speaker.
 
+## Sponsoring
+
+If you want to support me, I would be thrilled to see you as a sponsor on GitHub ❤️<br>
+You can find the `Sponsor` button on the top right of the [GitHub project page](https://github.com/toddeTV/todde.tv).<br>
+Thank you for the support <3
+
+It also helps me a lot if you follow me on social media and stay up to date with my latest projects! ❤️
+
+- [GitHub](https://github.com/toddeTV/)
+- [X (Twitter)](https://x.com/toddeTV)
+- [Bluesky](https://bsky.app/profile/todde.tv)
+- [LinkedIn](https://www.linkedin.com/in/toddetv/)
+
 ## Contribution & Attribution
 
 ### Project Contributors
