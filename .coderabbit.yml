@@ -5,7 +5,8 @@ language: en-US
 enable_free_tier: false
 
 reviews:
-  # "assertive" emits a broad range of issues including nitpicks and improvements. "chill" only reports critical issues.
+  # "assertive" emits a broad range of issues including nitpicks and improvements.
+  # "chill" provides lighter feedback with fewer non-critical comments.
   profile: assertive
 
   # If true, CodeRabbit will request changes on the PR if there are issues. If false, it will only comment.
@@ -37,6 +38,7 @@ reviews:
   changed_files_summary: true
 
   # Generate sequence diagrams to visualize control flow.
+  # Very useful for understanding logic in Nuxt server routes or complex composables.
   sequence_diagrams: true
 
   # Estimate the effort required to review the PR.
@@ -98,7 +100,7 @@ reviews:
         - `app/components/layout/` - Site-wide layout (header, footer)
         - `app/components/content/` - Domain content components (cards, carousel)
         - `app/components/OgImage/` - Satori-rendered OG image templates
-        - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/
+        - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/, socials/
         - `public/` - Static assets
         - `scripts/` - Maintenance scripts
 
@@ -131,7 +133,7 @@ reviews:
         - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
 
         ### Content Model (@nuxt/content)
-        - Collections: talks (Page, `talks/*.md`), projects (Page, `projects/*.md`), clients (Page, `clients/*.md`), publications (Data, `publications/*.yml`).
+        - Collections: talks (Page, `talks/*.md`), projects (Page, `projects/*.md`), clients (Page, `clients/*.md`), publications (Data, `publications/*.yml`), socials (Data, `socials/*.yml`).
         - Schemas defined in `content.config.ts` using Zod.
         - Talk filenames: `YYYY-MM-DD-event-slug.md`. Slugs derived from filenames (kebab-case).
         - Testimonials embedded as frontmatter arrays in talk/project/client files.
