@@ -31,6 +31,26 @@ export default defineNuxtConfig({
         { name: 'application-name', content: 'todde.tv' },
         { name: 'author', content: 'Thorsten Seyschab' },
 
+        // Ignored by Google since 2009, but some minor search engines (Yandex, Baidu) still
+        // consider it. Harmless to include.
+        {
+          name: 'keywords',
+          content: [
+            'Thorsten Seyschab',
+            'toddeTV',
+            'todde.tv',
+            'IT consultant',
+            'full-stack developer',
+            'conference speaker',
+            'web engineer',
+            'open source',
+            'portfolio',
+            'Vue',
+            'Nuxt',
+            'TypeScript',
+          ].join(', '),
+        },
+
         // Dark-only site: inform browser about color scheme and mobile chrome color.
         { name: 'color-scheme', content: 'dark' },
         { name: 'theme-color', content: '#0a0a0b' },
