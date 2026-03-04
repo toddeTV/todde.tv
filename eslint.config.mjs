@@ -94,8 +94,8 @@ export default withNuxt(
     rules: {
       '@stylistic/max-len': ['error', {
         code: 120,
-        // Ignore packageManager/description in package.json and SVG path d attributes
-        ignorePattern: String.raw`^\s*("(packageManager|description)":\s*["']|d=")`,
+        // Ignore SVG path d attributes in Vue templates
+        ignorePattern: String.raw`^\s*d="`,
       }],
     },
   },
