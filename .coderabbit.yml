@@ -71,10 +71,10 @@ reviews:
 
   # Only run on these paths. Omit to run on all.
   path_filters:
-    - "!pnpm-lock.yaml"
     - "!.nuxt/**"
     - "!.output/**"
     - "!dist/**"
+    - "!pnpm-lock.yaml"
 
   # Path-specific instructions for code review.
   path_instructions:
@@ -174,18 +174,16 @@ reviews:
     # ignore_title_keywords:
     #   -
     # labels:
-    #   -
+    #   - "!autorelease: pending" # Exclude release-please bot PRs that are waiting for release.
     # base_branches:
     #   -
     # ignore_usernames:
     #   -
 
   finishing_touches:
-    # Not available in the lite plan.
+    # Disable AI generation of docstrings/tests as we prefer manual control or existing suites.
     docstrings:
       enabled: false
-
-    # Not available in the lite plan.
     unit_tests:
       enabled: false
 
@@ -204,6 +202,8 @@ knowledge_base:
 
     # Index documentation to understand project conventions.
     filePatterns:
-      - "README.md"
+      - "docs/**/*.md"
+      - "content.config.ts"
       - "CONTRIBUTING.md"
-      - "docs/**"
+      - "nuxt.config.ts"
+      - "README.md"
