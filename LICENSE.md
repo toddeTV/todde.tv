@@ -47,4 +47,4 @@ You are **not** granted any rights to:
 - Create derivative works from these materials.
 - Use these materials for commercial or non-commercial purposes.
 
-Cloning or forking this repository does not grant you any license or *Nutzungsrechte* (usage rights) under German copyright law (UrhG) or international law to use the content and assets in these directories. You must obtain explicit written permission from Thorsten Seyschab to use these materials. Third-party assets retain their own original licenses.
+Cloning or forking this repository does not grant you any license or _Nutzungsrechte_ (usage rights) under German copyright law (UrhG) or international law to use the content and assets in these directories. You must obtain explicit written permission from Thorsten Seyschab to use these materials. Third-party assets retain their own original licenses.
