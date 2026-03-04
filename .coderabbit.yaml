@@ -1,0 +1,209 @@
+# Language of the review.
+language: en-US
+
+# Opt-in to the free tier limits if no paid subscription is detected.
+enable_free_tier: false
+
+reviews:
+  # "assertive" emits a broad range of issues including nitpicks and improvements. "chill" only reports critical issues.
+  profile: assertive
+
+  # If true, CodeRabbit will request changes on the PR if there are issues. If false, it will only comment.
+  request_changes_workflow: false
+
+  # Edit the PR description with a generated summary.
+  high_level_summary: true
+  high_level_summary_placeholder: "@coderabbitai summary"
+  # high_level_summary_instructions:
+  # high_level_summary_in_walkthrough: false
+
+  # Generate the PR title if this is the title.
+  auto_title_placeholder: "@coderabbitai"
+  # auto_title_instructions:
+
+  # Print info about the review.
+  review_status: true
+
+  # Mark the commit as pending during review.
+  commit_status: true
+
+  # Do NOT mark the commit as failed if the review failed (due to any reason).
+  fail_commit_status: false
+
+  # Hide the walkthrough by default to save vertical space.
+  collapse_walkthrough: true
+
+  # Include a summary of changed files in the walkthrough.
+  changed_files_summary: true
+
+  # Generate sequence diagrams to visualize control flow.
+  sequence_diagrams: true
+
+  # Estimate the effort required to review the PR.
+  estimate_code_review_effort: true
+
+  # Assess how well the changes address linked issues.
+  assess_linked_issues: true
+
+  # Find and list related issues.
+  related_issues: true
+
+  # Find and list related pull requests.
+  related_prs: true
+
+  # We don't have/use labels so don't suggest any.
+  suggested_labels: false
+  # auto_apply_labels: false
+  # labeling_instructions:
+  #   - label:
+  #     instructions:
+
+  # We are a small team and everything should be reviewed by the other. So disable this.
+  suggested_reviewers: false
+  # auto_assign_reviewers: false
+
+  # Disable "fun" content like fortunes and poems in the review summary.
+  in_progress_fortune: false
+  poem: false
+
+  # Include a "Prompt for AI Agents" section in review comments with instructions for other AI tools to implement the suggestion.
+  enable_prompt_for_ai_agents: true
+
+  # Only run on these paths. Omit to run on all.
+  path_filters:
+    - "!pnpm-lock.yaml"
+    - "!.nuxt/**"
+    - "!.output/**"
+    - "!dist/**"
+
+  # Project-level instructions applied to all reviewed files.
+  instructions: |
+    ## Project: todde.tv
+
+    Personal portfolio website for Thorsten Seyschab (username: toddeTV).
+    Live at https://todde.tv.
+
+    ### Tech Stack
+    Nuxt 4, TypeScript (strict, no `any`), Vue 3 Composition API, Tailwind CSS v4, `@nuxtjs/seo`, `@nuxt/content` (file-based CMS with Zod schemas), `@nuxt/image`, `@nuxt/fonts`.
+    Package manager: pnpm (never npm/yarn/bun).
+    No linter configured. No runtime env vars. Static site generation (`pnpm generate`).
+
+    ### Directory Layout
+    - `app/` - Frontend (components, composables, layouts, pages)
+    - `app/components/ui/` - Reusable UI primitives (App* prefix)
+    - `app/components/layout/` - Site-wide layout (header, footer)
+    - `app/components/content/` - Domain content components (cards, carousel)
+    - `app/components/OgImage/` - Satori-rendered OG image templates
+    - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/
+    - `public/` - Static assets
+    - `scripts/` - Maintenance scripts
+
+    ### Code Conventions
+    - File size target ~100 lines, hard limit 200 (exceptions: config files, dev scripts).
+    - Brief JSDoc on all functions.
+    - Vue components: PascalCase filenames. TS/JS files: kebab-case. Composables: `use` prefix.
+    - Prefer auto-imports. Use `import type` for types. Prefer `~/` paths.
+    - Always specify `.vue`, `.json`, `.mjs`, `.css` extensions in imports. Never specify `.ts`, `.js`.
+    - All code, comments, and docs in English.
+    - All dates in ISO 8601 format (YYYY-MM-DD).
+
+    ### Vue SFC Conventions
+    - Block order: `<script setup lang="ts">` -> `<template>` -> `<i18n lang="yaml">` -> `<style scoped>`.
+    - Use `<NuxtLink>` for ALL links (internal and external), never raw `<a>` tags.
+    - Use `<NuxtImg>` for ALL images (from `@nuxt/image`), never raw `<img>` tags.
+      Exception: `app/components/OgImage/` must use `<img>` (Satori limitation).
+    - Never nest `<a>` inside `<a>` (or `<NuxtLink>` inside a linked `AppCard`). Use the stretched-link pattern instead.
+    - Icons: `<Icon name="collection:name" :size="N" />`.
+
+    ### Styling
+    - Dark-only theme. No light mode. No theme toggle.
+    - Tailwind CSS v4 utility classes.
+    - All colors must come from defined palettes (primary/green, secondary/magenta, neutral/grays) or semantic aliases.
+    - Never use raw Tailwind grays (gray-*, slate-*, zinc-*, stone-*) or arbitrary hex values.
+    - Semantic aliases: bg, surface, surface-hover, border, text, text-muted, text-dim, accent, accent-hover, accent-dim.
+    - Font families: `--font-sans` (Inter) for body/headings, `--font-mono` (JetBrains Mono) for tags/dates/metadata.
+    - No underlines on links. No italics in the design system.
+    - No `<hr>` elements - use `border-t border-border` on section divs.
+    - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
+
+    ### Content Model (@nuxt/content)
+    - Collections: talks (Page, `talks/*.md`), projects (Page, `projects/*.md`), clients (Page, `clients/*.md`), publications (Data, `publications/*.yml`).
+    - Schemas defined in `content.config.ts` using Zod.
+    - Talk filenames: `YYYY-MM-DD-event-slug.md`. Slugs derived from filenames (kebab-case).
+    - Testimonials embedded as frontmatter arrays in talk/project/client files.
+
+    ### Nuxt Config
+    - Module-driven architecture. Check module docs before modifying module options.
+
+  # Path-specific reminders (details covered in project-level instructions above).
+  path_instructions:
+    - path: "**/*.vue"
+      instructions: |
+        Verify: SFC block order, `<NuxtLink>` instead of `<a>`, `<NuxtImg>` instead of `<img>`, no nested links (stretched-link pattern).
+
+    - path: "**/*.{ts,mjs}"
+      instructions: |
+        Verify: strict types (no `any`), `import type` for type-only imports, correct file extension rules.
+
+    - path: "content/**"
+      instructions: |
+        Verify: filename conventions (talks: `YYYY-MM-DD-event-slug.md`), kebab-case slugs, schemas match `content.config.ts`.
+
+    - path: "app/assets/css/**"
+      instructions: |
+        Verify: only palette tokens or semantic aliases used, no raw Tailwind grays or arbitrary hex values.
+
+    - path: "nuxt.config.ts"
+      instructions: |
+        Verify: module options match upstream docs. Static site generation target.
+
+  # Abort in-progress review on close/merge.
+  abort_on_close: true
+
+  auto_review:
+    # We want automatic reviews.
+    enabled: true
+
+    # And also incremental ones.
+    auto_incremental_review: true
+
+    # Review draft PRs.
+    drafts: false
+
+    # More ways to filter when to run automatic reviews.
+    # ignore_title_keywords:
+    #   -
+    # labels:
+    #   -
+    # base_branches:
+    #   -
+    # ignore_usernames:
+    #   -
+
+  finishing_touches:
+    # Not available in the lite plan.
+    docstrings:
+      enabled: false
+
+    # Not available in the lite plan.
+    unit_tests:
+      enabled: false
+
+  # Do not download the repo for each review.
+  disable_cache: false
+
+# Configure knowledge base features to let the AI learn from your project's documentation and past reviews.
+knowledge_base:
+  learnings:
+    # "auto" allows the AI to automatically learn from PR feedback and apply it to future reviews.
+    scope: "auto"
+
+  code_guidelines:
+    # Enable the AI to read and apply project-specific documentation.
+    enabled: true
+
+    # Index documentation to understand project conventions.
+    filePatterns:
+      - "README.md"
+      - "CONTRIBUTING.md"
+      - "docs/**"
