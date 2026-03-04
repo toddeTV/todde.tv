@@ -70,6 +70,7 @@
     "@nuxt/fonts": "~0.14.0",
     "@nuxt/icon": "~2.2.1",
     "@nuxt/image": "~2.0.0",
+    "@nuxtjs/seo": "~3.4.0",
     "better-sqlite3": "~12.6.2",
     "cross-env": "~10.1.0",
     "eslint": "~10.0.2",
