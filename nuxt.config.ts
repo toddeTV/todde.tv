@@ -1,6 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2026-03-04',
+  modules: [
+    '@nuxt/content',
+    '@nuxt/eslint',
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxt/image',
+  ],
+
+  ssr: true,
+
+  devtools: {
+    enabled: true,
+  },
 
   app: {
     head: {
@@ -25,30 +37,21 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxt/content',
-    '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/icon',
-    '@nuxt/image',
-  ],
-
-  runtimeConfig: {
-    public: {
-    },
-  },
-
-  ssr: true,
-
   // nitro: {
   // },
 
   css: [
   ],
 
-  devtools: {
-    enabled: true,
+  content: { // for `@nuxt/content`
   },
+
+  runtimeConfig: {
+    public: {
+    },
+  },
+
+  compatibilityDate: '2026-03-04',
 
   typescript: { // for TypeScript, see https://nuxt.com/docs/guide/concepts/typescript
     // Customize app/server TypeScript config
@@ -64,9 +67,6 @@ export default defineNuxtConfig({
         strict: true,
       },
     },
-  },
-
-  content: { // for `@nuxt/content`
   },
 
   eslint: { // for `@nuxt/eslint`

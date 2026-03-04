@@ -153,7 +153,7 @@ reviews:
       instructions: |
         Verify: only palette tokens or semantic aliases used, no raw Tailwind grays or arbitrary hex values.
 
-    - path: "nuxt.config.ts"
+    - path: nuxt.config.ts
       instructions: |
         Verify: module options match upstream docs. Static site generation target.
 
@@ -194,7 +194,7 @@ reviews:
 knowledge_base:
   learnings:
     # "auto" allows the AI to automatically learn from PR feedback and apply it to future reviews.
-    scope: "auto"
+    scope: auto
 
   code_guidelines:
     # Enable the AI to read and apply project-specific documentation.
@@ -203,7 +203,7 @@ knowledge_base:
     # Index documentation to understand project conventions.
     filePatterns:
       - "docs/**/*.md"
-      - "content.config.ts"
-      - "CONTRIBUTING.md"
-      - "nuxt.config.ts"
-      - "README.md"
+      - content.config.ts
+      - CONTRIBUTING.md
+      - nuxt.config.ts
+      - README.md
