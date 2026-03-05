@@ -75,6 +75,7 @@ export default defineNuxtConfig({
   // },
 
   css: [
+    '~/assets/css/main.css',
   ],
 
   site: { // for `@nuxtjs/seo` - shared site config used by all SEO sub-modules (like `ogImage`, `schemaOrg`, etc.)

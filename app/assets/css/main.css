@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ===== Color Palettes ===== */
+
+  /* Primary (green — brand accent) */
+  --color-primary-50: #edfff7;
+  --color-primary-100: #d6ffed;
+  --color-primary-200: #b0ffdb;
+  --color-primary-300: #7affc3;
+  --color-primary-400: #3df5a2;
+  --color-primary-500: #00dc82;
+  --color-primary-600: #00c474;
+  --color-primary-700: #009a5c;
+  --color-primary-800: #007a49;
+  --color-primary-900: #00613a;
+  --color-primary-950: #003d24;
+
+  /* Secondary (magenta — complementary to primary, hue ≈ 336°) */
+  --color-secondary-50: #fff1f3;
+  --color-secondary-100: #ffe4ea;
+  --color-secondary-200: #ffced9;
+  --color-secondary-300: #ffa1b8;
+  --color-secondary-400: #fb7193;
+  --color-secondary-500: #db005a;
+  --color-secondary-600: #c2004f;
+  --color-secondary-700: #99003e;
+  --color-secondary-800: #7a0032;
+  --color-secondary-900: #610027;
+  --color-secondary-950: #3d0019;
+
+  /* Neutral (grays — surfaces, text, borders) */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-850: #1c1c1f;
+  --color-neutral-900: #141416;
+  --color-neutral-950: #09090b;
+
+  /* ===== Semantic Aliases (must map to palette values) ===== */
+
+  /* Background — exception, not derived from palette */
+  --color-bg: #0a0a0b;
+
+  /* Surfaces → neutral */
+  --color-surface: var(--color-neutral-900);
+  --color-surface-hover: var(--color-neutral-850);
+
+  /* Borders → neutral */
+  --color-border: var(--color-neutral-800);
+
+  /* Text → neutral */
+  --color-text: var(--color-neutral-50);
+  --color-text-muted: var(--color-neutral-400);
+  --color-text-dim: var(--color-neutral-500);
+
+  /* Accent → primary */
+  --color-accent: var(--color-primary-500);
+  --color-accent-hover: var(--color-primary-600);
+  --color-accent-dim: rgba(0, 220, 130, 0.1); /* primary-500 at 10% opacity */
+}
+
+/* ----- Base reset & typography ----- */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply bg-bg text-text font-sans text-base leading-relaxed;
+}
+
+/* Headings — sans-serif, tight tracking, no margin by default (pages set margin via utility classes) */
+h1 {
+  @apply font-sans text-4xl font-bold tracking-tight text-text;
+}
+h2 {
+  @apply font-sans text-2xl font-semibold tracking-tight text-text;
+}
+h3 {
+  @apply font-sans text-lg font-semibold text-text;
+}
+h4 {
+  @apply font-sans text-base font-semibold text-text;
+}
+
+/* Paragraphs */
+p {
+  @apply text-text-muted;
+}
+
+/* Links */
+a {
+  @apply text-accent no-underline transition-colors duration-200;
+}
+a:hover {
+  @apply text-accent-hover;
+}
+
+/* Inline code */
+code {
+  @apply font-mono text-sm text-accent bg-accent-dim px-1.5 py-0.5 rounded;
+}
+
+/* Preformatted / code blocks */
+pre {
+  @apply font-mono text-sm bg-surface border border-border rounded-lg p-4 overflow-x-auto;
+}
+pre code {
+  @apply bg-transparent p-0;
+}
+
+/* Strong emphasis — stands out within muted text */
+strong {
+  @apply font-semibold text-text;
+}
+
+/* Lists (inside content areas) */
+ul, ol {
+  @apply text-text-muted pl-6;
+}
+li {
+  @apply mb-1;
+}
+
+/* Blockquotes */
+blockquote {
+  @apply border-l-3 border-accent pl-4 text-text-muted italic;
+}
+
+/* Images */
+img {
+  @apply max-w-full h-auto;
+}
+
+/* Horizontal rule — avoid using, prefer border-t on section containers */
+hr {
+  @apply border-t border-border my-8;
+}
