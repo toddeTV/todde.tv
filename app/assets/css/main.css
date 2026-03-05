@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
   /* ===== Color Palettes ===== */
 
@@ -126,7 +126,8 @@ strong {
 }
 
 /* Lists (inside content areas) */
-ul, ol {
+ul,
+ol {
   @apply text-text-muted pl-6;
 }
 li {
