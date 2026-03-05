@@ -148,7 +148,7 @@ img {
   @apply max-w-full h-auto;
 }
 
-/* Horizontal rule — avoid using, prefer border-t on section containers */
+/* Horizontal rule */
 hr {
   @apply border-t border-border my-8;
 }
