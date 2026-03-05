@@ -66,7 +66,11 @@
   /* Accent → primary */
   --color-accent: var(--color-primary-500);
   --color-accent-hover: var(--color-primary-600);
-  --color-accent-dim: color-mix(in oklch, var(--color-primary-500) 10%, transparent); /* primary-500 at 10% opacity */
+  --color-accent-dim: color-mix(
+    in oklch,
+    var(--color-primary-500) 10%,
+    transparent
+  ); /* primary-500 at 10% opacity */
 }
 
 /* ----- Base reset & typography ----- */
