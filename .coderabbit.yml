@@ -105,6 +105,7 @@ reviews:
         - `scripts/` - Maintenance scripts
 
         ### Code Conventions
+        - No duplication: extract repeated logic, markup patterns, or style combinations into reusable components, composables, or utilities. Refactor existing duplicates on sight.
         - File size target ~100 lines, hard limit 200 (exceptions: config files, dev scripts).
         - Brief JSDoc on all functions.
         - Vue components: PascalCase filenames. TS/JS files: kebab-case. Composables: `use` prefix.
@@ -129,7 +130,8 @@ reviews:
         - Semantic aliases: bg, surface, surface-hover, border, text, text-muted, text-dim, accent, accent-hover, accent-dim.
         - Font families: `--font-sans` (Inter) for body/headings, `--font-mono` (JetBrains Mono) for tags/dates/metadata.
         - No underlines at all, also not on links.
-        - Use `<hr>` elements instead of `border-t border-border` on section divs.
+        - Every `<style scoped>` block must start with `@reference "~/assets/css/main.css";` as its first line. This makes all Tailwind utilities and custom theme tokens available for `@apply`.
+        - Use `<AppSeparator />` for section separators. Never apply `border-t border-border` directly on section divs. `AppSeparator` renders a semantic `<hr>` inside a max-width container.
         - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
 
         ### Content Model (@nuxt/content)
