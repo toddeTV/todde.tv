@@ -128,8 +128,8 @@ reviews:
         - Never use raw Tailwind grays (gray-*, slate-*, zinc-*, stone-*) or arbitrary hex values.
         - Semantic aliases: bg, surface, surface-hover, border, text, text-muted, text-dim, accent, accent-hover, accent-dim.
         - Font families: `--font-sans` (Inter) for body/headings, `--font-mono` (JetBrains Mono) for tags/dates/metadata.
-        - No underlines on links. No italics in the design system.
-        - No `<hr>` elements - use `border-t border-border` on section divs.
+        - No underlines at all, also not on links.
+        - Use `<hr>` elements instead of `border-t border-border` on section divs.
         - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
 
         ### Content Model (@nuxt/content)

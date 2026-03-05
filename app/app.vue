@@ -17,5 +17,11 @@ if (socials.value?.length) {
 
 <template>
   <NuxtRouteAnnouncer />
-  <NuxtPage />
+  <!-- <NuxtPage /> -->
+  <div class="bg-[var(--color-accent-dim)]">
+    hallo
+  </div>
+  <div class="bg-[var(--color-accent-dim2)]">
+    hallo
+  </div>
 </template>
