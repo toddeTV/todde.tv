@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -74,6 +75,7 @@ export default defineNuxtConfig({
   // },
 
   css: [
+    '~/assets/css/main.css',
   ],
 
   site: { // for `@nuxtjs/seo` - shared site config used by all SEO sub-modules (like `ogImage`, `schemaOrg`, etc.)
@@ -94,6 +96,13 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2026-03-04',
+
+  vite: {
+    plugins: [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      tailwindcss() as any,
+    ],
+  },
 
   typescript: { // for TypeScript, see https://nuxt.com/docs/guide/concepts/typescript
     // Customize app/server TypeScript config
