@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -197,5 +198,11 @@ export default defineNuxtConfig({
       // logo: '/favicon.svg', // not a standard Schema.org property for Person, but some tools check for it.
       // sameAs: [], // is populated at runtime from the `socials` content collection (see `app.vue`).
     },
+  },
+
+  vite: {
+    plugins: [
+      tailwindcss() as any,
+    ],
   },
 })
