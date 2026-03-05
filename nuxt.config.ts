@@ -97,6 +97,12 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2026-03-04',
 
+  vite: {
+    plugins: [
+      tailwindcss() as any,
+    ],
+  },
+
   typescript: { // for TypeScript, see https://nuxt.com/docs/guide/concepts/typescript
     // Customize app/server TypeScript config
     tsConfig: {
@@ -199,11 +205,5 @@ export default defineNuxtConfig({
       // logo: '/favicon.svg', // not a standard Schema.org property for Person, but some tools check for it.
       // sameAs: [], // is populated at runtime from the `socials` content collection (see `app.vue`).
     },
-  },
-
-  vite: {
-    plugins: [
-      tailwindcss() as any,
-    ],
   },
 })
