@@ -27,6 +27,8 @@ export default defineContentConfig({
       schema: z.object({
         /** Whether the social platform is active. */
         active: z.boolean().default(false),
+        /** Whether the social is featured (e.g. shown in the footer). */
+        featured: z.boolean().default(false),
         /** Controls display order (ascending). */
         sortOrder: z.number().default(99),
         /** Display name of the social platform (e.g. "GitHub"). */
