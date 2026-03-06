@@ -1,11 +1,11 @@
 <script setup lang="ts">
 /**
- * Page section wrapper with consistent container, optional top border and heading.
+ * Page section wrapper with consistent container and optional heading.
  */
 defineProps<{
   /** Section heading text (renders as H2) */
   heading?: string
-  /** Padding size: 'lg' = py-16 (default), 'md' = py-10, 'bottom' = pb-16 only */
+  /** Padding size: 'lg' = py-10 sm:py-16 (default), 'md' = py-6 sm:py-10, 'bottom' = pb-10 sm:pb-16 only */
   spacing?: 'lg' | 'md' | 'bottom'
 }>()
 </script>
