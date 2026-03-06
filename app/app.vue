@@ -4,7 +4,7 @@
  * via `sameAs`.
  */
 const { data: socials } = await useAsyncData('socials', () =>
-  queryCollection('socials').order('sortOrder', 'ASC').all(),
+  queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
 )
 if (socials.value?.length) {
   useSchemaOrg([
