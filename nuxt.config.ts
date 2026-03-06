@@ -59,7 +59,7 @@ export default defineNuxtConfig({
         // Although not a standard OG tag, some tools check for it.
         // Standard OG images are handled by `nuxt-og-image` module.
         // Standard Schema.org logos are handled by `nuxt-schema-org` module.
-        { property: 'og:logo', content: 'favicon.ico' },
+        { property: 'og:logo', content: '/favicon.svg' },
       ],
       htmlAttrs: {
         'lang': 'en',
