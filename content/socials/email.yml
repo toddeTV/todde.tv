@@ -1,6 +1,6 @@
 active: true
 featured: true
-sortOrder: 6
+sortOrder: 1
 name: Email
 icon: ph:envelope-simple
 url: mailto:hello@todde.tv

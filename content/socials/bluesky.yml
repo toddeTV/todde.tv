@@ -1,6 +1,6 @@
 active: true
-featured: true
-sortOrder: 3
+featured: false
+sortOrder: 5
 name: Bluesky
 # icon: simple-icons:bluesky
 icon: ph:butterfly

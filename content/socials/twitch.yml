@@ -1,6 +1,6 @@
 active: true
-featured: true
-sortOrder: 5
+featured: false
+sortOrder: 6
 name: Twitch
 # icon: simple-icons:twitch
 icon: ph:twitch-logo
