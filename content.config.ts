@@ -7,6 +7,12 @@ import { defineContentConfig, defineCollection } from '@nuxt/content'
 import { asSeoCollection } from '@nuxtjs/seo/content'
 import { z } from 'zod'
 
+const testimonialSchema = z.object({
+  quote: z.string(),
+  author: z.string(),
+  role: z.string(),
+})
+
 export default defineContentConfig({
   collections: {
     content: defineCollection(
@@ -52,6 +58,7 @@ export default defineContentConfig({
         slidesUrl: z.string().optional(),
         videoUrl: z.string().optional(),
         repoUrl: z.string().optional(),
+        testimonials: z.array(testimonialSchema).optional(),
       }),
     }),
   },
