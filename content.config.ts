@@ -59,12 +59,12 @@ export default defineContentConfig({
         event: z.string(),
         /** Location of the event (e.g. "Online" or city name). */
         location: z.string(),
+        /** URL to the companion source code repository. */
+        repoUrl: z.string().optional(),
         /** URL to the published slides. */
         slidesUrl: z.string().optional(),
         /** URL to the recorded video. */
         videoUrl: z.string().optional(),
-        /** URL to the companion source code repository. */
-        repoUrl: z.string().optional(),
         /** Audience or organizer testimonials for this talk. */
         testimonials: z.array(testimonialSchema).optional(),
       }),
