@@ -22,10 +22,8 @@ export default defineContentConfig({
       asSeoCollection({
         type: 'page',
         source: {
-          include: '**',
-          exclude: [
-            'socials/**',
-          ],
+          include: 'pages/**',
+          prefix: '/',
         },
       }),
     ),
