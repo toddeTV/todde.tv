@@ -49,6 +49,7 @@
   /* ===== Semantic Aliases (must map to palette values) ===== */
 
   /* Background — exception, not derived from palette */
+  /* (Close to neutral-950, but slightly changed, not noticeable by humans, just to be better searchable in code.) */
   --color-bg: #0a0a0b;
 
   /* Surfaces → neutral */
