@@ -17,7 +17,7 @@ defineProps<{
       <h1 class="mb-3 sm:mb-4">
         {{ title }}
       </h1>
-      <p v-if="description" class="text-lg max-w-xl">
+      <p v-if="description" class="max-w-xl text-lg">
         {{ description }}
       </p>
     </AppContainer>

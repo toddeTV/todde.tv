@@ -21,7 +21,7 @@ const yearSpan = computed(() =>
 <template>
   <footer class="mt-8">
     <AppSeparator />
-    <AppContainer class="py-8 flex flex-col items-center gap-4">
+    <AppContainer class="flex flex-col items-center gap-4 py-8">
       <div class="flex items-center gap-4">
         <NuxtLink
           v-for="social in socials"
@@ -35,19 +35,19 @@ const yearSpan = computed(() =>
         </NuxtLink>
         <NuxtLink
           aria-label="All socials"
-          class="flex items-center text-sm font-mono ml-2"
+          class="ml-2 flex items-center font-mono text-sm"
           to="/#connect"
         >
-          <span class="tracking-[-0.5em] mr-1.5">...</span> more
+          <span class="mr-1.5 tracking-[-0.5em]">...</span> more
         </NuxtLink>
       </div>
 
-      <p class="text-xs text-text-dim text-center">
+      <p class="text-center text-xs text-text-dim">
         Created with <Icon class="inline-block" name="ph:heart" :size="12" /> by
         Thorsten Seyschab, &copy; {{ yearSpan }}, All Rights Reserved.
       </p>
 
-      <p class="text-xs text-text-dim text-center">
+      <p class="text-center text-xs text-text-dim">
         Source on
         <NuxtLink
           class="text-xs"

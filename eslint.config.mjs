@@ -1,9 +1,15 @@
 // @ts-check
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import pluginFormat from 'eslint-plugin-format'
 import * as pluginJsonc from 'eslint-plugin-jsonc'
+import pluginTailwindCSS from 'eslint-plugin-tailwindcss'
 import * as pluginYml from 'eslint-plugin-yml'
 
 import withNuxt from './.nuxt/eslint.config.mjs'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default withNuxt(
   // ── Global ignores ──────────────────────────────────────────────────────────
@@ -21,7 +27,10 @@ export default withNuxt(
   // ── JSON / JSONC support ────────────────────────────────────────────────────
   ...pluginJsonc.configs['flat/recommended-with-jsonc'],
   {
-    files: ['**/*.json', '**/*.jsonc'],
+    files: [
+      '**/*.json',
+      '**/*.jsonc',
+    ],
     rules: {
       'jsonc/sort-keys': 'error',
     },
@@ -43,7 +52,9 @@ export default withNuxt(
 
   // ── Prettier formatting for CSS ─────────────────────────────────────────────
   {
-    files: ['**/*.css'],
+    files: [
+      '**/*.css',
+    ],
     languageOptions: {
       parser: pluginFormat.parserPlain,
     },
@@ -57,7 +68,9 @@ export default withNuxt(
 
   // ── Prettier formatting for HTML ────────────────────────────────────────────
   {
-    files: ['**/*.html'],
+    files: [
+      '**/*.html',
+    ],
     languageOptions: {
       parser: pluginFormat.parserPlain,
     },
@@ -71,7 +84,9 @@ export default withNuxt(
 
   // ── Prettier formatting for Markdown ────────────────────────────────────────
   {
-    files: ['**/*.md'],
+    files: [
+      '**/*.md',
+    ],
     languageOptions: {
       parser: pluginFormat.parserPlain,
     },
@@ -102,7 +117,9 @@ export default withNuxt(
 
   // ── Vue rules ───────────────────────────────────────────────────────────────
   {
-    files: ['**/*.vue'],
+    files: [
+      '**/*.vue',
+    ],
     rules: {
       'vue/attributes-order': ['error', {
         alphabetical: true,
@@ -111,6 +128,25 @@ export default withNuxt(
         multiline: 1,
         singleline: 3,
       }],
+    },
+  },
+
+  // ── Tailwind CSS class sorting ──────────────────────────────────────────────
+  {
+    files: [
+      '**/*.{js,mjs,ts,vue}',
+    ],
+    plugins: {
+      tailwindcss: pluginTailwindCSS,
+    },
+    rules: {
+      'tailwindcss/classnames-order': 'error',
+      'tailwindcss/no-custom-classname': 'off',
+    },
+    settings: {
+      tailwindcss: {
+        config: resolve(__dirname, 'app/assets/css/main.css'),
+      },
     },
   },
 

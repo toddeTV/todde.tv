@@ -28,7 +28,7 @@ if (page.value.ogImage) {
     >
       {{ page.title }}
     </h1>
-    <div class="text-text-muted text-lg leading-relaxed">
+    <div class="text-lg leading-relaxed text-text-muted">
       <ContentRenderer :value="page" />
     </div>
   </AppSection>
