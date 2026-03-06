@@ -1,0 +1,7 @@
+active: true
+featured: true
+sortOrder: 1
+name: Email
+icon: ph:envelope-simple
+url: mailto:hello@todde.tv
+handle: hello@todde.tv

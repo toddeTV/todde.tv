@@ -1,4 +1,8 @@
+active: true
+featured: false
+sortOrder: 5
 name: Bluesky
+# icon: simple-icons:bluesky
+icon: ph:butterfly
 url: https://bsky.app/profile/todde.tv
-icon: simple-icons:bluesky
-sortOrder: 3
+handle: "@todde.tv"

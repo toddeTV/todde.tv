@@ -1,4 +1,8 @@
+active: true
+featured: true
+sortOrder: 4
 name: X (Twitter)
+# icon: simple-icons:x
+icon: ph:x-logo
 url: https://x.com/toddeTV
-icon: simple-icons:x
-sortOrder: 2
+handle: "@toddeTV"
