@@ -26,7 +26,6 @@ jobs:
   run-checks:
     name: ${{ matrix.name }}
     runs-on: ubuntu-24.04
-    needs: validate-pr
     # The matrix strategy allows running different test configurations in parallel to run all, even if one fails
     strategy:
       fail-fast: false

@@ -4,11 +4,11 @@
   "type": "module",
   "packageManager": "pnpm@10.30.3",
   "description": "Personal portfolio website for Thorsten Seyschab - IT consultant, senior full-stack developer, and conference speaker.",
-  "author": "Thorsten Seyschab <business@todde.tv> (https://todde.tv/)",
+  "author": "Thorsten Seyschab <hello@todde.tv> (https://todde.tv/)",
   "contributors": [
     {
       "name": "Thorsten Seyschab",
-      "email": "business@todde.tv",
+      "email": "hello@todde.tv",
       "url": "https://todde.tv/"
     }
   ],
@@ -65,6 +65,9 @@
     "vue": "~3.5.29"
   },
   "devDependencies": {
+    "@iconify-json/noto": "~1.2.7",
+    "@iconify-json/ph": "~1.2.2",
+    "@iconify-json/simple-icons": "~1.2.72",
     "@nuxt/content": "~3.12.0",
     "@nuxt/eslint": "~1.15.2",
     "@nuxt/fonts": "~0.14.0",

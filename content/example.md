@@ -15,10 +15,10 @@ seo:
   twitterTitle: todde.tv - Thorsten Seyschab # REDUNDANT - auto-derived from title
   twitterDescription: Personal portfolio of Thorsten Seyschab - IT consultant, senior full-stack developer, and conference speaker. # REDUNDANT - auto-derived from description
 ogImage:
-  component: OgImageHome # REDUNDANT - already the default in nuxt.config.ts ogImage.defaults
-  props:
-    title: Thorsten Seyschab # OPTIONAL - in OgImageHome withDefaults() there is a default
-    description: IT consultant, senior full-stack developer, and conference speaker. # OPTIONAL - in OgImageHome withDefaults() there is a default
+  component: Home # REQUIRED - the ogImage template to use
+  props: # REQUIRED - depending on the ogImage component
+    title: Thorsten Seyschab
+    description: IT consultant, senior full-stack developer, and conference speaker.
 sitemap:
   lastmod: 2026-03-04 # USEFUL - Google uses this for crawl scheduling
   changefreq: monthly # IGNORED - Google ignores changefreq since ~2023

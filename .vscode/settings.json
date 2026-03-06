@@ -61,6 +61,7 @@
 
   // search
   "search.exclude": {
+    "**/.claude/skills": true,
     "**/.nuxt": true,
     "**/.output": true,
     "**/.pnp.*": true,
