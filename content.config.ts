@@ -41,5 +41,18 @@ export default defineContentConfig({
         handle: z.string(),
       }),
     }),
+
+    talks: defineCollection({
+      type: 'page',
+      source: 'talks/**',
+      schema: z.object({
+        date: z.string(),
+        event: z.string(),
+        location: z.string(),
+        slidesUrl: z.string().optional(),
+        videoUrl: z.string().optional(),
+        repoUrl: z.string().optional(),
+      }),
+    }),
   },
 })
