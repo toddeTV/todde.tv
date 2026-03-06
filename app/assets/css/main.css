@@ -77,6 +77,11 @@
 /* ----- Base reset & typography ----- */
 
 html {
+  /* Preserve scrollbar space to prevent layout shift when toggling between pages with/without scrollbar */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+
+  /* Font smoothing for better legibility */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
