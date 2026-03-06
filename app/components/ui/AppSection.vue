@@ -21,7 +21,7 @@ defineProps<{
     <AppContainer>
       <h2
         v-if="heading"
-        class="text-2xl font-semibold tracking-tight mb-4 sm:mb-6"
+        class="mb-4 sm:mb-6"
       >
         {{ heading }}
       </h2>

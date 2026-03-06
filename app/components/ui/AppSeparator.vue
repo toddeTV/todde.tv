@@ -13,7 +13,6 @@ defineProps<{
   <AppContainer>
     <hr
       :class="[
-        'border-t border-border',
         { 'my-4 sm:my-6': spacing === 'lg',
           'my-2 sm:my-4': spacing === 'md',
           'my-1 sm:my-2': spacing === 'sm',

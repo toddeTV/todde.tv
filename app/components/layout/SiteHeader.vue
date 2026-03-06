@@ -17,7 +17,7 @@ watch(() => route.path, () => {
 <template>
   <header class="sticky top-0 z-50 bg-bg/85 backdrop-blur-md border-b border-border">
     <AppContainer class="flex items-center justify-between h-16">
-      <NuxtLink class="text-xl font-bold text-text no-underline" to="/">
+      <NuxtLink class="text-xl font-bold text-text" to="/">
         todde<span class="text-accent">.</span><span class="text-text-muted">tv</span>
       </NuxtLink>
 
@@ -25,7 +25,7 @@ watch(() => route.path, () => {
         <NuxtLink
           v-for="link in links"
           :key="link.to"
-          class="relative text-sm font-medium text-text-muted no-underline transition-colors hover:text-text"
+          class="relative text-sm font-medium text-text-muted hover:text-text"
           :class="{
             ['text-text! after:absolute after:-bottom-1'
               + ' after:left-0 after:right-0 after:h-0.5'
@@ -65,7 +65,7 @@ watch(() => route.path, () => {
         <NuxtLink
           v-for="link in links"
           :key="link.to"
-          class="text-sm font-medium text-text-muted no-underline transition-colors hover:text-text"
+          class="text-sm font-medium text-text-muted hover:text-text"
           :class="{ 'text-text!': link.to === '/' ? route.path === '/' : route.path.startsWith(link.to) }"
           :to="link.to"
         >

@@ -24,7 +24,7 @@ if (page.value.ogImage) {
   <AppSection v-if="page">
     <h1
       v-if="page.title"
-      class="text-3xl sm:text-4xl font-bold tracking-tight mb-6"
+      class="mb-6"
     >
       {{ page.title }}
     </h1>

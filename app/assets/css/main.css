@@ -87,10 +87,10 @@ body {
 
 /* Headings — sans-serif, tight tracking, no margin by default (pages set margin via utility classes) */
 h1 {
-  @apply font-sans text-4xl font-bold tracking-tight text-text;
+  @apply font-sans text-3xl sm:text-4xl font-bold tracking-tight text-text;
 }
 h2 {
-  @apply font-sans text-2xl font-semibold tracking-tight text-text;
+  @apply font-sans text-xl sm:text-2xl font-semibold tracking-tight text-text;
 }
 h3 {
   @apply font-sans text-lg font-semibold text-text;
@@ -119,7 +119,7 @@ code {
 
 /* Preformatted / code blocks */
 pre {
-  @apply font-mono text-sm bg-surface border border-border rounded-lg p-4 overflow-x-auto;
+  @apply font-mono text-sm bg-surface border border-border rounded-lg p-3 sm:p-4 overflow-x-auto;
 }
 pre code {
   @apply bg-transparent p-0;
@@ -133,7 +133,7 @@ strong {
 /* Lists (inside content areas) */
 ul,
 ol {
-  @apply text-text-muted pl-6;
+  @apply text-text-muted pl-4 sm:pl-6;
 }
 li {
   @apply mb-1;
@@ -151,5 +151,5 @@ img {
 
 /* Horizontal rule */
 hr {
-  @apply border-t border-border my-8;
+  @apply border-t border-border my-6 sm:my-8;
 }

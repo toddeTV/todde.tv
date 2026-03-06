@@ -20,7 +20,7 @@ const year = computed(() => Number(today.value.slice(0, 4)))
           v-for="social in socials"
           :key="social.url"
           :aria-label="social.name"
-          class="text-text-dim hover:text-accent transition-colors flex items-center"
+          class="text-text-dim hover:text-accent flex items-center"
           target="_blank"
           :to="social.url"
         >
@@ -28,7 +28,7 @@ const year = computed(() => Number(today.value.slice(0, 4)))
         </NuxtLink>
         <NuxtLink
           aria-label="All socials"
-          class="text-text-dim hover:text-accent transition-colors flex items-center text-sm font-mono ml-2"
+          class="text-text-dim hover:text-accent flex items-center text-sm font-mono ml-2"
           to="/#connect"
         >
           <span class="tracking-[-0.5em] mr-1.5">...</span> more
