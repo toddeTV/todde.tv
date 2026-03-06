@@ -18,19 +18,19 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-bg/85 backdrop-blur-md border-b border-border">
-    <AppContainer class="flex items-center justify-between h-16">
+  <header class="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md">
+    <AppContainer class="flex h-16 items-center justify-between">
       <!-- desktop: Left logo -->
-      <NuxtLink class="flex items-center h-full text-xl font-bold text-text" to="/">
+      <NuxtLink class="flex h-full items-center text-xl font-bold text-text" to="/">
         todde<span class="text-accent">.</span><span class="text-text-muted">tv</span>
       </NuxtLink>
 
       <!-- desktop: right menu -->
-      <nav aria-label="Main navigation" class="hidden sm:flex h-full">
+      <nav aria-label="Main navigation" class="hidden h-full sm:flex">
         <NuxtLink
           v-for="link in links"
           :key="link.to"
-          class="relative flex items-center h-full px-4 text-sm font-medium text-text-muted hover:text-text"
+          class="relative flex h-full items-center px-4 text-sm font-medium text-text-muted hover:text-text"
           :class="{
             ['text-text! after:absolute after:bottom-0'
               + ' after:left-0 after:right-0 after:h-0.5'
@@ -45,7 +45,7 @@ watch(() => route.path, () => {
       <button
         :aria-expanded="mobileOpen"
         aria-label="Toggle navigation"
-        class="sm:hidden text-text bg-transparent border-none cursor-pointer p-1"
+        class="cursor-pointer border-none bg-transparent p-1 text-text sm:hidden"
         @click="mobileOpen = !mobileOpen"
       >
         <Icon v-if="!mobileOpen" name="ph:list-bold" :size="24" />
@@ -62,7 +62,7 @@ watch(() => route.path, () => {
       <nav
         v-if="mobileOpen"
         aria-label="Mobile navigation"
-        class="sm:hidden flex flex-col px-6 pb-4 pt-2 border-t border-border"
+        class="flex flex-col border-t border-border px-6 pt-2 pb-4 sm:hidden"
       >
         <NuxtLink
           v-for="link in links"

@@ -13,8 +13,8 @@ defineProps<{
 
 <template>
   <NuxtLink
-    class="inline-flex items-center gap-1.5 text-sm font-medium text-text-muted no-underline
-           transition-colors hover:text-accent mb-6 sm:mb-8"
+    class="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-text-muted
+           no-underline transition-colors hover:text-accent sm:mb-8"
     :to="to"
   >
     <Icon name="ph:arrow-left" :size="16" />
