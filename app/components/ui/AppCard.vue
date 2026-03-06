@@ -12,6 +12,8 @@ defineProps<{
   gap?: '2' | '3'
   /** Force full height (for grid/carousel layouts) */
   fullHeight?: boolean
+  /** Enable hover styling on a static (non-link) card. Used with the stretched link pattern. */
+  interactive?: boolean
 }>()
 </script>
 
@@ -35,8 +37,12 @@ defineProps<{
   </NuxtLink>
   <div
     v-else
-    class="app-card-static p-4 sm:p-6"
-    :class="[`gap-${gap ?? '3'}`, { 'h-full': fullHeight }]"
+    class="p-4 sm:p-6"
+    :class="[
+      interactive ? 'app-card-interactive' : 'app-card-static',
+      `gap-${gap ?? '3'}`,
+      { 'h-full': fullHeight },
+    ]"
   >
     <slot />
   </div>
@@ -52,5 +58,10 @@ defineProps<{
 
 .app-card-static {
   @apply bg-surface border border-border rounded-lg flex flex-col;
+}
+
+.app-card-interactive {
+  @apply bg-surface border border-border rounded-lg flex flex-col;
+  @apply transition-colors hover:border-accent hover:bg-surface-hover;
 }
 </style>

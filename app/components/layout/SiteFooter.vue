@@ -27,7 +27,7 @@ const yearSpan = computed(() =>
           v-for="social in socials"
           :key="social.url"
           :aria-label="social.name"
-          class="text-text-dim hover:text-accent flex items-center"
+          class="flex items-center"
           target="_blank"
           :to="social.url"
         >
@@ -35,7 +35,7 @@ const yearSpan = computed(() =>
         </NuxtLink>
         <NuxtLink
           aria-label="All socials"
-          class="text-text-dim hover:text-accent flex items-center text-sm font-mono ml-2"
+          class="flex items-center text-sm font-mono ml-2"
           to="/#connect"
         >
           <span class="tracking-[-0.5em] mr-1.5">...</span> more
@@ -50,7 +50,7 @@ const yearSpan = computed(() =>
       <p class="text-xs text-text-dim text-center">
         Source on
         <NuxtLink
-          class="text-xs text-text-dim hover:text-accent"
+          class="text-xs"
           target="_blank"
           to="https://github.com/toddeTV/todde.tv"
         >
