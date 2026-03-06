@@ -8,8 +8,11 @@ import { asSeoCollection } from '@nuxtjs/seo/content'
 import { z } from 'zod'
 
 const testimonialSchema = z.object({
+  /** The testimonial text. */
   quote: z.string(),
+  /** Name of the person who gave the testimonial. */
   author: z.string(),
+  /** Role or affiliation of the author (e.g. "Project Lead / Company"). */
   role: z.string(),
 })
 
@@ -52,12 +55,19 @@ export default defineContentConfig({
       type: 'page',
       source: 'talks/**',
       schema: z.object({
+        /** Date of the talk in ISO 8601 format (e.g. "2024-11-12"). */
         date: z.string(),
+        /** Name of the event or conference (e.g. "NuxtNation 2024"). */
         event: z.string(),
+        /** Location of the event (e.g. "Online" or city name). */
         location: z.string(),
+        /** URL to the published slides. */
         slidesUrl: z.string().optional(),
+        /** URL to the recorded video. */
         videoUrl: z.string().optional(),
+        /** URL to the companion source code repository. */
         repoUrl: z.string().optional(),
+        /** Audience or organizer testimonials for this talk. */
         testimonials: z.array(testimonialSchema).optional(),
       }),
     }),
