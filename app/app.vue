@@ -18,6 +18,12 @@ if (socials.value?.length) {
 </script>
 
 <template>
-  <NuxtRouteAnnouncer />
-  <NuxtPage />
+  <div>
+    <NuxtLoadingIndicator color="var(--ui-primary)" />
+    <NuxtRouteAnnouncer />
+
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
