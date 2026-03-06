@@ -1,9 +1,9 @@
 <script setup lang="ts">
 /**
  * Reusable surface card with border and hover state.
- * Renders as a NuxtLink when `to` is provided, otherwise a plain div.
+ * Renders as a NuxtLink when `to` or `href` is provided, otherwise a plain div.
  */
-defineProps<{
+const props = defineProps<{
   /** Internal route path — makes card a clickable link */
   to?: string
   /** External URL — makes card an anchor link */
@@ -15,23 +15,27 @@ defineProps<{
   /** Enable hover styling on a static (non-link) card. Used with the stretched link pattern. */
   interactive?: boolean
 }>()
+
+/** Resolved link destination for NuxtLink. */
+const linkTarget = computed(() => props.to ?? props.href)
+
+/** Extra attributes applied only for external links. */
+const linkAttrs = computed(() => (props.href && !props.to ? { target: '_blank' } : {}))
+
+/** Maps gap prop to static Tailwind class literals. */
+const gapClass = computed(() => {
+  const map: Record<string, string> = { 2: 'gap-2', 3: 'gap-3' }
+  return map[props.gap ?? '3']
+})
 </script>
 
 <template>
   <NuxtLink
-    v-if="to"
+    v-if="to || href"
     class="app-card p-4 sm:p-6"
-    :class="[`gap-${gap ?? '3'}`, { 'h-full': fullHeight }]"
-    :to="to"
-  >
-    <slot />
-  </NuxtLink>
-  <NuxtLink
-    v-else-if="href"
-    class="app-card p-4 sm:p-6"
-    :class="[`gap-${gap ?? '3'}`, { 'h-full': fullHeight }]"
-    target="_blank"
-    :to="href"
+    :class="[gapClass, { 'h-full': fullHeight }]"
+    :to="linkTarget"
+    v-bind="linkAttrs"
   >
     <slot />
   </NuxtLink>
@@ -40,7 +44,7 @@ defineProps<{
     class="p-4 sm:p-6"
     :class="[
       interactive ? 'app-card-interactive' : 'app-card-static',
-      `gap-${gap ?? '3'}`,
+      gapClass,
       { 'h-full': fullHeight },
     ]"
   >

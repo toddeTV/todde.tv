@@ -9,6 +9,9 @@ const links = [
 const mobileOpen = ref(false)
 const route = useRoute()
 
+const isActiveLink = (to: string): boolean =>
+  to === '/' ? route.path === '/' : route.path === to || route.path.startsWith(to + '/')
+
 watch(() => route.path, () => {
   mobileOpen.value = false
 })
@@ -31,10 +34,7 @@ watch(() => route.path, () => {
           :class="{
             ['text-text! after:absolute after:bottom-0'
               + ' after:left-0 after:right-0 after:h-0.5'
-              + ' after:bg-accent after:rounded-sm']:
-              link.to === '/'
-                ? route.path === '/'
-                : route.path.startsWith(link.to),
+              + ' after:bg-accent after:rounded-sm']: isActiveLink(link.to),
           }"
           :to="link.to"
         >
@@ -68,7 +68,7 @@ watch(() => route.path, () => {
           v-for="link in links"
           :key="link.to"
           class="py-2 text-sm font-medium text-text-muted hover:text-text"
-          :class="{ 'text-text!': link.to === '/' ? route.path === '/' : route.path.startsWith(link.to) }"
+          :class="{ 'text-text!': isActiveLink(link.to) }"
           :to="link.to"
         >
           {{ link.label }}
