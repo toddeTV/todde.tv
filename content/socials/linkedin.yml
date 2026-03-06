@@ -1,4 +1,7 @@
-name: LinkedIn
-url: https://www.linkedin.com/in/toddetv/
-icon: simple-icons:linkedin
+active: true
 sortOrder: 4
+name: LinkedIn
+# icon: simple-icons:linkedin
+icon: ph:linkedin-logo
+url: https://www.linkedin.com/in/toddetv/
+handle: in/toddetv

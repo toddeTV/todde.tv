@@ -1,4 +1,7 @@
-name: X (Twitter)
-url: https://x.com/toddeTV
-icon: simple-icons:x
+active: true
 sortOrder: 2
+name: X (Twitter)
+# icon: simple-icons:x
+icon: ph:x-logo
+url: https://x.com/toddeTV
+handle: "@toddeTV"

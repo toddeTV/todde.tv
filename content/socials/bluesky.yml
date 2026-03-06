@@ -1,4 +1,7 @@
-name: Bluesky
-url: https://bsky.app/profile/todde.tv
-icon: simple-icons:bluesky
+active: true
 sortOrder: 3
+name: Bluesky
+# icon: simple-icons:bluesky
+icon: ph:butterfly
+url: https://bsky.app/profile/todde.tv
+handle: "@todde.tv"
