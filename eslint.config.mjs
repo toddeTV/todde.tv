@@ -27,7 +27,10 @@ export default withNuxt(
   // ── JSON / JSONC support ────────────────────────────────────────────────────
   ...pluginJsonc.configs['flat/recommended-with-jsonc'],
   {
-    files: ['**/*.json', '**/*.jsonc'],
+    files: [
+      '**/*.json',
+      '**/*.jsonc',
+    ],
     rules: {
       'jsonc/sort-keys': 'error',
     },
@@ -49,7 +52,9 @@ export default withNuxt(
 
   // ── Prettier formatting for CSS ─────────────────────────────────────────────
   {
-    files: ['**/*.css'],
+    files: [
+      '**/*.css',
+    ],
     languageOptions: {
       parser: pluginFormat.parserPlain,
     },
@@ -63,7 +68,9 @@ export default withNuxt(
 
   // ── Prettier formatting for HTML ────────────────────────────────────────────
   {
-    files: ['**/*.html'],
+    files: [
+      '**/*.html',
+    ],
     languageOptions: {
       parser: pluginFormat.parserPlain,
     },
@@ -77,7 +84,9 @@ export default withNuxt(
 
   // ── Prettier formatting for Markdown ────────────────────────────────────────
   {
-    files: ['**/*.md'],
+    files: [
+      '**/*.md',
+    ],
     languageOptions: {
       parser: pluginFormat.parserPlain,
     },
@@ -108,7 +117,9 @@ export default withNuxt(
 
   // ── Vue rules ───────────────────────────────────────────────────────────────
   {
-    files: ['**/*.vue'],
+    files: [
+      '**/*.vue',
+    ],
     rules: {
       'vue/attributes-order': ['error', {
         alphabetical: true,
@@ -121,8 +132,13 @@ export default withNuxt(
   },
 
   // ── Tailwind CSS class sorting ──────────────────────────────────────────────
-  ...pluginTailwindCSS.configs['flat/recommended'],
   {
+    files: [
+      '**/*.{js,mjs,ts,vue}',
+    ],
+    plugins: {
+      tailwindcss: pluginTailwindCSS,
+    },
     rules: {
       'tailwindcss/classnames-order': 'error',
       'tailwindcss/no-custom-classname': 'off',
