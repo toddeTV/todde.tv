@@ -7,8 +7,15 @@ const { data: socials } = await useAsyncData('socials-only-featured', () =>
     .all(),
 )
 
+const START_YEAR = 2026
+
 const today = useTodayDate()
-const year = computed(() => Number(today.value.slice(0, 4)))
+const currentYear = computed(() => Number(today.value.slice(0, 4)))
+
+/** Returns "2026" if current year equals start year, otherwise "2026-{currentYear}". */
+const yearSpan = computed(() =>
+  currentYear.value === START_YEAR ? `${START_YEAR}` : `${START_YEAR}-${currentYear.value}`,
+)
 </script>
 
 <template>
@@ -34,9 +41,22 @@ const year = computed(() => Number(today.value.slice(0, 4)))
           <span class="tracking-[-0.5em] mr-1.5">...</span> more
         </NuxtLink>
       </div>
-      <p class="text-xs text-text-dim">
-        &copy; {{ year }} Thorsten Seyschab. Built with
-        <NuxtLink target="_blank" to="https://nuxt.com">Nuxt</NuxtLink>.
+
+      <p class="text-xs text-text-dim text-center">
+        Created with <Icon class="inline-block" name="ph:heart" :size="12" /> by
+        Thorsten Seyschab, &copy; {{ yearSpan }}, All Rights Reserved.
+      </p>
+
+      <p class="text-xs text-text-dim text-center">
+        Source on
+        <NuxtLink
+          class="text-xs text-text-dim hover:text-accent"
+          target="_blank"
+          to="https://github.com/toddeTV/todde.tv"
+        >
+          GitHub
+        </NuxtLink>
+        .
       </p>
     </AppContainer>
   </footer>
