@@ -25,14 +25,18 @@ export default defineContentConfig({
       type: 'data',
       source: 'socials/*.yml',
       schema: z.object({
-        /** Display name of the social platform (e.g. "GitHub"). */
-        name: z.string(),
-        /** Full profile URL. */
-        url: z.url(),
-        /** Iconify icon identifier (e.g. "simple-icons:github"). */
-        icon: z.string(),
+        /** Whether the social platform is active. */
+        active: z.boolean().default(false),
         /** Controls display order (ascending). */
         sortOrder: z.number().default(99),
+        /** Display name of the social platform (e.g. "GitHub"). */
+        name: z.string(),
+        /** Iconify icon identifier (e.g. "simple-icons:github"). */
+        icon: z.string(),
+        /** Full profile URL. */
+        url: z.url(),
+        /** Handle or username on the platform (e.g. "@toddeTV"). */
+        handle: z.string(),
       }),
     }),
   },
