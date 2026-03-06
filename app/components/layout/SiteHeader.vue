@@ -17,17 +17,19 @@ watch(() => route.path, () => {
 <template>
   <header class="sticky top-0 z-50 bg-bg/85 backdrop-blur-md border-b border-border">
     <AppContainer class="flex items-center justify-between h-16">
-      <NuxtLink class="text-xl font-bold text-text" to="/">
+      <!-- desktop: Left logo -->
+      <NuxtLink class="flex items-center h-full text-xl font-bold text-text" to="/">
         todde<span class="text-accent">.</span><span class="text-text-muted">tv</span>
       </NuxtLink>
 
-      <nav aria-label="Main navigation" class="hidden sm:flex gap-8">
+      <!-- desktop: right menu -->
+      <nav aria-label="Main navigation" class="hidden sm:flex h-full">
         <NuxtLink
           v-for="link in links"
           :key="link.to"
-          class="relative text-sm font-medium text-text-muted hover:text-text"
+          class="relative flex items-center h-full px-4 text-sm font-medium text-text-muted hover:text-text"
           :class="{
-            ['text-text! after:absolute after:-bottom-1'
+            ['text-text! after:absolute after:bottom-0'
               + ' after:left-0 after:right-0 after:h-0.5'
               + ' after:bg-accent after:rounded-sm']:
               link.to === '/'
@@ -60,12 +62,12 @@ watch(() => route.path, () => {
       <nav
         v-if="mobileOpen"
         aria-label="Mobile navigation"
-        class="sm:hidden flex flex-col gap-4 px-6 pb-6 pt-4 border-t border-border"
+        class="sm:hidden flex flex-col px-6 pb-4 pt-2 border-t border-border"
       >
         <NuxtLink
           v-for="link in links"
           :key="link.to"
-          class="text-sm font-medium text-text-muted hover:text-text"
+          class="py-2 text-sm font-medium text-text-muted hover:text-text"
           :class="{ 'text-text!': link.to === '/' ? route.path === '/' : route.path.startsWith(link.to) }"
           :to="link.to"
         >
