@@ -115,7 +115,7 @@ withDefaults(defineProps<{
     >
       <img
         alt="Thorsten Seyschab"
-        src="/avatar.jpg"
+        src="/avatar-thorsten-seyschab.webp"
         :style="{
           width: '340px',
           height: '340px',
