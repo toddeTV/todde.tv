@@ -3,7 +3,7 @@
  * Load social links from the `socials` content collection and injects them into the Schema.org Person identity
  * via `sameAs`.
  */
-const { data: socials } = await useAsyncData('socials', () =>
+const { data: socials } = await useAsyncData('socials-all', () =>
   queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
 )
 if (socials.value?.length) {
