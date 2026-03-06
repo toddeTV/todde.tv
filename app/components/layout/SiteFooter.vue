@@ -7,13 +7,8 @@ const { data: socials } = await useAsyncData('socials-only-featured', () =>
     .all(),
 )
 
-const year = useState('footer-year', () => new Date().getFullYear())
-
-if (import.meta.client) {
-  onMounted(() => {
-    year.value = new Date().getFullYear()
-  })
-}
+const today = useTodayDate()
+const year = computed(() => Number(today.value.slice(0, 4)))
 </script>
 
 <template>
