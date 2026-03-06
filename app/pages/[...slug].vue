@@ -21,8 +21,15 @@ if (page.value.ogImage) {
 </script>
 
 <template>
-  <ContentRenderer
-    v-if="page"
-    :value="page"
-  />
+  <AppSection v-if="page">
+    <h1
+      v-if="page.title"
+      class="mb-6"
+    >
+      {{ page.title }}
+    </h1>
+    <div class="text-text-muted text-lg leading-relaxed">
+      <ContentRenderer :value="page" />
+    </div>
+  </AppSection>
 </template>

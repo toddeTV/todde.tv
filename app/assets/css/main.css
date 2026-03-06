@@ -49,6 +49,7 @@
   /* ===== Semantic Aliases (must map to palette values) ===== */
 
   /* Background — exception, not derived from palette */
+  /* (Close to neutral-950, but slightly changed, not noticeable by humans, just to be better searchable in code.) */
   --color-bg: #0a0a0b;
 
   /* Surfaces → neutral */
@@ -75,80 +76,87 @@
 
 /* ----- Base reset & typography ----- */
 
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer base {
+  html {
+    /* Preserve scrollbar space to prevent layout shift when toggling between pages with/without scrollbar */
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
 
-body {
-  @apply bg-bg text-text font-sans text-base leading-relaxed;
-}
+    /* Font smoothing for better legibility */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-/* Headings — sans-serif, tight tracking, no margin by default (pages set margin via utility classes) */
-h1 {
-  @apply font-sans text-4xl font-bold tracking-tight text-text;
-}
-h2 {
-  @apply font-sans text-2xl font-semibold tracking-tight text-text;
-}
-h3 {
-  @apply font-sans text-lg font-semibold text-text;
-}
-h4 {
-  @apply font-sans text-base font-semibold text-text;
-}
+  body {
+    @apply bg-bg text-text font-sans text-base leading-relaxed;
+  }
 
-/* Paragraphs */
-p {
-  @apply text-text-muted;
-}
+  /* Headings — sans-serif, tight tracking, no margin by default (pages set margin via utility classes) */
+  h1 {
+    @apply font-sans text-3xl sm:text-4xl font-bold tracking-tight text-text;
+  }
+  h2 {
+    @apply font-sans text-xl sm:text-2xl font-semibold tracking-tight text-text;
+  }
+  h3 {
+    @apply font-sans text-lg font-semibold text-text;
+  }
+  h4 {
+    @apply font-sans text-base font-semibold text-text;
+  }
 
-/* Links */
-a {
-  @apply text-accent no-underline transition-colors duration-200;
-}
-a:hover {
-  @apply text-accent-hover;
-}
+  /* Paragraphs */
+  p {
+    @apply text-text-muted;
+  }
 
-/* Inline code */
-code {
-  @apply font-mono text-sm text-accent bg-accent-dim px-1.5 py-0.5 rounded;
-}
+  /* Links */
+  a {
+    @apply text-accent no-underline transition-colors duration-200;
+  }
+  a:hover {
+    @apply text-accent-hover;
+  }
 
-/* Preformatted / code blocks */
-pre {
-  @apply font-mono text-sm bg-surface border border-border rounded-lg p-4 overflow-x-auto;
-}
-pre code {
-  @apply bg-transparent p-0;
-}
+  /* Inline code */
+  code {
+    @apply font-mono text-sm text-accent bg-accent-dim px-1.5 py-0.5 rounded;
+  }
 
-/* Strong emphasis — stands out within muted text */
-strong {
-  @apply font-semibold text-text;
-}
+  /* Preformatted / code blocks */
+  pre {
+    @apply font-mono text-sm bg-surface border border-border rounded-lg p-3 sm:p-4 overflow-x-auto;
+  }
+  pre code {
+    @apply bg-transparent p-0;
+  }
 
-/* Lists (inside content areas) */
-ul,
-ol {
-  @apply text-text-muted pl-6;
-}
-li {
-  @apply mb-1;
-}
+  /* Strong emphasis — stands out within muted text */
+  strong {
+    @apply font-semibold text-text;
+  }
 
-/* Blockquotes */
-blockquote {
-  @apply border-l-3 border-accent pl-4 text-text-muted italic;
-}
+  /* Lists (inside content areas) */
+  ul,
+  ol {
+    @apply text-text-muted pl-4 sm:pl-6;
+  }
+  li {
+    @apply mb-1;
+  }
 
-/* Images */
-img {
-  @apply max-w-full h-auto;
-}
+  /* Blockquotes */
+  blockquote {
+    @apply border-l-3 border-accent pl-4 text-text-muted italic;
+  }
 
-/* Horizontal rule */
-hr {
-  @apply border-t border-border my-8;
+  /* Images */
+  img {
+    @apply max-w-full h-auto;
+  }
+
+  /* Horizontal rule */
+  hr {
+    @apply border-t border-border my-6 sm:my-8;
+  }
 }

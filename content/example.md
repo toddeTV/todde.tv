@@ -25,6 +25,4 @@ sitemap:
   priority: 1.0 # IGNORED - Google ignores priority; only relative within your own sitemap
 ---
 
-# todde.tv
-
 Welcome.
