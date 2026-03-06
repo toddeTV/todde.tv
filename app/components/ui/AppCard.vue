@@ -55,17 +55,25 @@ const gapClass = computed(() => {
 <style scoped>
 @reference "~/assets/css/main.css";
 
-.app-card {
-  @apply bg-surface border border-border rounded-lg flex flex-col no-underline text-inherit;
+.app-card-base {
+  @apply bg-surface border border-border rounded-lg flex flex-col;
+}
+
+.app-card-hover {
   @apply transition-colors hover:border-accent hover:bg-surface-hover;
+}
+
+/* --- */
+
+.app-card {
+  @apply app-card-base app-card-hover no-underline text-inherit;
 }
 
 .app-card-static {
-  @apply bg-surface border border-border rounded-lg flex flex-col;
+  @apply app-card-base;
 }
 
 .app-card-interactive {
-  @apply bg-surface border border-border rounded-lg flex flex-col;
-  @apply transition-colors hover:border-accent hover:bg-surface-hover;
+  @apply app-card-base app-card-hover;
 }
 </style>
