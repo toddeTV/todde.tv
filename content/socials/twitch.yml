@@ -1,0 +1,7 @@
+active: true
+sortOrder: 5
+name: Twitch
+# icon: simple-icons:twitch
+icon: ph:twitch-logo
+url: https://twitch.tv/toddeTV
+handle: "@toddeTV"
