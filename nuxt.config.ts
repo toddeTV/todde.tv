@@ -138,6 +138,22 @@ export default defineNuxtConfig({
     },
   },
 
+  hooks: {
+    'vite:extendConfig'(config) {
+      /**
+       * Only needed in SSG project:
+       * Remove `@nuxtjs/mdc` client-side optimizeDeps entries - markdown
+       * rendering happens server-side in this SSG project. These entries
+       * cause warnings with pnpm's strict dependency hoisting.
+       */
+      if (config.optimizeDeps?.include) {
+        config.optimizeDeps.include = config.optimizeDeps.include.filter(
+          (dep: string) => !dep.startsWith('@nuxtjs/mdc >'),
+        )
+      }
+    },
+  },
+
   eslint: { // for `@nuxt/eslint`
     config: {
       stylistic: {
