@@ -11,11 +11,10 @@ defineOgImageComponent('Home', {
 })
 
 const skills = [
-  'Vue.js', 'Nuxt', 'TypeScript', 'Node.js',
-  'Vite', 'Vitest', 'Rollup',
-  'Three.js', 'TresJS', 'WebGL',
-  'PostgreSQL', 'MySQL',
-  'Full-Stack', '3D on the Web',
+  'Full-Stack Web Development', 'Frontend Architecture', 'Backend & APIs',
+  'Database Design', 'DevOps & CI/CD', 'Build Tooling',
+  '3D on the Web', 'App Development', 'Game Development',
+  'Technical Consulting', 'Open Source',
 ]
 
 const [
@@ -118,8 +117,11 @@ const [
     </AppSection>
 
     <!-- Skills -->
-    <!-- <AppSeparator />
-    <AppSection heading="Tech Stack">
+    <AppSeparator />
+    <AppSection heading="What I Work With">
+      <p class="-mt-2 mb-4 text-sm text-text-dim sm:-mt-4">
+        A selection of areas I frequently work in - not a complete list.
+      </p>
       <div class="flex flex-wrap gap-2">
         <AppTag
           v-for="skill in skills"
@@ -128,7 +130,7 @@ const [
           size="md"
         />
       </div>
-    </AppSection> -->
+    </AppSection>
 
     <!-- Testimonials -->
     <AppSeparator v-if="testimonials?.length" />
