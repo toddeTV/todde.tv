@@ -3,7 +3,8 @@ const links = [
   { to: '/', label: 'About' },
   { to: '/talks', label: 'Talks' },
   { to: '/projects', label: 'Open Source' },
-  { to: '/clients', label: 'Client Work' },
+  // { to: '/clients', label: 'Client Work' },
+  // { to: '/publications', label: 'Publications' },
 ]
 
 const mobileOpen = ref(false)
