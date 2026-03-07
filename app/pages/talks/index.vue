@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Talks - Thorsten Seyschab',
+  title: 'Talks',
   description: 'Conference talks and speaking engagements by Thorsten Seyschab (toddeTV) on '
     + 'tech and life topics - from Vue.js, Nuxt, and Vite plugins to 3D on the web.',
 })
