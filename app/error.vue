@@ -24,7 +24,7 @@ function handleBack() {
       <AppContainer class="flex flex-col items-center gap-6 text-center">
         <span class="font-mono text-8xl font-bold text-accent">{{ statusCode }}</span>
         <h1>
-          Page Not Found
+          {{ statusCode === 404 ? 'Page Not Found' : 'An Unexpected Error Occurred' }}
         </h1>
         <p class="max-w-md text-lg">
           {{ statusMessage }}
