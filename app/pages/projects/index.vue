@@ -12,10 +12,23 @@ defineOgImageComponent('Project', {
 const { data: openSourceProjects } = await useAsyncData('projects', async () => {
   const projects = await queryCollection('projects').all()
   return projects.sort((a, b) => {
-    // Ongoing projects (no endDate) sort to top, then by endDate descending
-    const endA = a.endDate ?? '9999-12-31'
-    const endB = b.endDate ?? '9999-12-31'
-    return endB.localeCompare(endA)
+    // 1. Ongoing (no endDate) before completed
+    const aOngoing = a.endDate == null
+    const bOngoing = b.endDate == null
+    if (aOngoing !== bOngoing) return aOngoing ? -1 : 1
+
+    // 2. Within completed: newest endDate first
+    if (!aOngoing && !bOngoing) {
+      const endCmp = b.endDate!.localeCompare(a.endDate!)
+      if (endCmp !== 0) return endCmp
+    }
+
+    // 3. Newest startDate first
+    const startCmp = b.startDate.localeCompare(a.startDate)
+    if (startCmp !== 0) return startCmp
+
+    // 4. More stars first
+    return (b.repoStars ?? 0) - (a.repoStars ?? 0)
   })
 })
 </script>
