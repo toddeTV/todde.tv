@@ -4,9 +4,9 @@
  * Renders as a NuxtLink when `to` or `href` is provided, otherwise a plain div.
  */
 const props = defineProps<{
-  /** Internal route path — makes card a clickable link */
+  /** Internal route path - makes card a clickable link */
   to?: string
-  /** External URL — makes card an anchor link */
+  /** External URL - makes card an anchor link */
   href?: string
   /** Vertical gap between card children. Default: '3' */
   gap?: '2' | '3'
@@ -43,7 +43,7 @@ const gapClass = computed(() => {
     v-else
     class="app-card-base p-4 sm:p-6"
     :class="[
-      interactive ? 'app-card-interactive app-card-hover' : '',
+      interactive ? 'app-card-hover' : '',
       gapClass,
       { 'h-full': fullHeight },
     ]"

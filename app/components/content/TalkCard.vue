@@ -85,9 +85,4 @@ const isUpcoming = computed(() => props.talk.date >= today.value)
   @apply absolute inset-0;
   content: '';
 }
-
-.card-link::after {
-  @apply absolute inset-0;
-  content: '';
-}
 </style>

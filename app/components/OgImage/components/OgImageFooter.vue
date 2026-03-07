@@ -17,14 +17,16 @@
   >
     <!-- Author name and site URL -->
     <div
+      class="flex-row"
       :style="{
         display: 'flex',
+        flexDirection: 'row',
         flexWrap: 'nowrap',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
       }"
     >
-      <div
+      <span
         :style="{
           fontSize: '24px',
           fontWeight: 600,
@@ -32,8 +34,8 @@
         }"
       >
         Thorsten Seyschab
-      </div>
-      <div
+      </span>
+      <span
         :style="{
           fontSize: '22px',
           fontWeight: 400,
@@ -41,7 +43,7 @@
         }"
       >
         todde.tv
-      </div>
+      </span>
     </div>
 
     <!-- Bottom gradient accent line -->

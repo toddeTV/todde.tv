@@ -54,17 +54,17 @@ export default defineContentConfig({
       source: 'talks/**',
       schema: z.object({
         /** Date of the talk in ISO 8601 format (e.g. "2024-11-12"). */
-        date: z.string(),
+        date: z.iso.date(),
         /** Name of the event or conference (e.g. "NuxtNation 2024"). */
         event: z.string(),
         /** Location of the event (e.g. "Online" or city name). */
         location: z.string(),
         /** URL to the companion source code repository. */
-        repoUrl: z.string().optional(),
+        repoUrl: z.url().optional(),
         /** URL to the published slides. */
-        slidesUrl: z.string().optional(),
+        slidesUrl: z.url().optional(),
         /** URL to the recorded video. */
-        videoUrl: z.string().optional(),
+        videoUrl: z.url().optional(),
         /** Audience or organizer testimonials for this talk. */
         testimonials: z.array(testimonialSchema).optional(),
       }),
