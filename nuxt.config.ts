@@ -144,7 +144,7 @@ export default defineNuxtConfig({
       // 'OgImageTemplate',
     ],
     defaults: {
-      component: 'OgImageHome',
+      component: 'Default',
     },
   },
 
