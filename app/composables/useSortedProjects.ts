@@ -8,7 +8,7 @@ export function useSortedProjects(limit?: number) {
 
   return useAsyncData(key, async () => {
     const projects = await queryCollection('projects').all()
-    const sorted = projects.sort((a, b) => {
+    const sorted = [...projects].sort((a, b) => {
       // 1. Ongoing (no endDate) before completed
       const aOngoing = a.endDate == null
       const bOngoing = b.endDate == null
