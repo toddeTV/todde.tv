@@ -42,10 +42,9 @@ const years = computed(() => {
           Nuxt, and Vite plugins to 3D on the web and beyond. Here's a chronological list of my talks."
       title="Talks"
     >
-      <p class="mt-3 text-xs text-text-dim italic">
-        This is a curated selection. Some engagements are not listed due to NDAs or other
-        confidentiality agreements.
-      </p>
+      <template #hint>
+        This is a curated selection. Some engagements are not listed due to NDAs or other confidentiality agreements.
+      </template>
     </AppPageHeader>
 
     <AppSeparator v-if="upcomingTalks.length" />

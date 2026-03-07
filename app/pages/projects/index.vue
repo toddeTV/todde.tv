@@ -40,10 +40,9 @@ const { data: projects } = await useAsyncData('projects', async () => {
           tooling and the Vue/Nuxt ecosystem to 3D on the web and beyond."
       title="Projects"
     >
-      <p class="mt-3 text-xs text-text-dim italic">
-        This is a curated selection. Some work is not listed due to NDAs or other confidentiality
-        agreements.
-      </p>
+      <template #hint>
+        This is a curated selection. Some work is not listed due to NDAs or other confidentiality agreements.
+      </template>
     </AppPageHeader>
 
     <AppSeparator />
