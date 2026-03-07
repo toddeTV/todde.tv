@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Page header with H1 title, optional description, and optional default slot for extra content.
+ * Page header with H1 title, optional description, and optional `#hint` slot for extra content.
  * Used on list pages (talks, projects, clients).
  */
 defineProps<{
