@@ -69,5 +69,30 @@ export default defineContentConfig({
         testimonials: z.array(testimonialSchema).optional(),
       }),
     }),
+
+    projects: defineCollection({
+      type: 'page',
+      source: 'projects/**',
+      schema: z.object({
+        /** Display name of the project (e.g. "quick-conf"). */
+        name: z.string(),
+        /** Start date of the project in ISO 8601 format (e.g. "2024-01-15"). */
+        startDate: z.iso.date(),
+        /** End date of the project in ISO 8601 format. Omit for ongoing projects. */
+        endDate: z.iso.date().optional(),
+        /** Path to a representative image in `public/`. */
+        image: z.string().optional(),
+        /** URL to the live deployment or demo. */
+        liveUrl: z.url().optional(),
+        /** URL to the source code repository. */
+        repoUrl: z.url().optional(),
+        /** GitHub star count, updated by `scripts/fetch-github-data.ts`. */
+        repoStars: z.number().optional(),
+        /** Technology or topic tags (e.g. ["Nuxt", "Vue", "Tailwind CSS"]). */
+        tags: z.array(z.string()),
+        /** User or community testimonials for this project. */
+        testimonials: z.array(testimonialSchema).optional(),
+      }),
+    }),
   },
 })
