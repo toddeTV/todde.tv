@@ -69,5 +69,26 @@ export default defineContentConfig({
         testimonials: z.array(testimonialSchema).optional(),
       }),
     }),
+
+    projects: defineCollection({
+      type: 'page',
+      source: 'projects/**',
+      schema: z.object({
+        /** Display name of the project (e.g. "quick-conf"). */
+        name: z.string(),
+        /** Path to a representative image in `public/`. */
+        image: z.string().optional(),
+        /** URL to the live deployment or demo. */
+        liveUrl: z.url().optional(),
+        /** URL to the source code repository. */
+        repoUrl: z.url().optional(),
+        /** GitHub star count, updated by `scripts/fetch-github-data.ts`. */
+        repoStars: z.number().optional(),
+        /** Technology or topic tags (e.g. ["Nuxt", "Vue", "Tailwind CSS"]). */
+        tags: z.array(z.string()),
+        /** User or community testimonials for this project. */
+        testimonials: z.array(testimonialSchema).optional(),
+      }),
+    }),
   },
 })
