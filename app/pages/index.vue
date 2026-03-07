@@ -43,14 +43,14 @@ const [
   { data: recentTalks },
   { data: recentProjects },
 ] = await Promise.all([
-  await useAsyncData('index-socials-all', () =>
+  useAsyncData('index-socials-all', () =>
     queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
   ),
-  await useAllTestimonials(),
-  await useAsyncData('recent-talks', () =>
+  useAllTestimonials(),
+  useAsyncData('recent-talks', () =>
     queryCollection('talks').order('date', 'DESC').limit(3).all(),
   ),
-  await useSortedProjects(2),
+  useSortedProjects(2),
 ])
 </script>
 
