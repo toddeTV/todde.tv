@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       // titleTemplate, description, og:site_name, and htmlAttrs.lang are handled by `@nuxtjs/seo` via `site`
-      // config — do not duplicate here.
+      // config - do not duplicate here.
       meta: [
         { name: 'application-name', content: 'todde.tv' },
         { name: 'author', content: 'Thorsten Seyschab' },

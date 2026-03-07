@@ -6,7 +6,7 @@
 
   /* ===== Color Palettes ===== */
 
-  /* Primary (green — brand accent) */
+  /* Primary (green - brand accent) */
   --color-primary-50: #edfff7;
   --color-primary-100: #d6ffed;
   --color-primary-200: #b0ffdb;
@@ -19,7 +19,7 @@
   --color-primary-900: #00613a;
   --color-primary-950: #003d24;
 
-  /* Secondary (magenta — complementary to primary, hue ≈ 336°) */
+  /* Secondary (magenta - complementary to primary, hue ≈ 336°) */
   --color-secondary-50: #fff1f3;
   --color-secondary-100: #ffe4ea;
   --color-secondary-200: #ffced9;
@@ -32,7 +32,7 @@
   --color-secondary-900: #610027;
   --color-secondary-950: #3d0019;
 
-  /* Neutral (grays — surfaces, text, borders) */
+  /* Neutral (grays - surfaces, text, borders) */
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f4f4f5;
   --color-neutral-200: #e4e4e7;
@@ -48,7 +48,7 @@
 
   /* ===== Semantic Aliases (must map to palette values) ===== */
 
-  /* Background — exception, not derived from palette */
+  /* Background - exception, not derived from palette */
   /* (Close to neutral-950, but slightly changed, not noticeable by humans, just to be better searchable in code.) */
   --color-bg: #0a0a0b;
 
@@ -91,7 +91,7 @@
     @apply bg-bg text-text font-sans text-base leading-relaxed;
   }
 
-  /* Headings — sans-serif, tight tracking, no margin by default (pages set margin via utility classes) */
+  /* Headings - sans-serif, tight tracking, no margin by default (pages set margin via utility classes) */
   h1 {
     @apply font-sans text-3xl sm:text-4xl font-bold tracking-tight text-text;
   }
@@ -131,7 +131,7 @@
     @apply bg-transparent p-0;
   }
 
-  /* Strong emphasis — stands out within muted text */
+  /* Strong emphasis - stands out within muted text */
   strong {
     @apply font-semibold text-text;
   }
