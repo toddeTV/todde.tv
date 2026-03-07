@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Projects - Thorsten Seyschab',
+  title: 'Projects',
   description: 'Projects by Thorsten Seyschab (toddeTV).',
 })
 

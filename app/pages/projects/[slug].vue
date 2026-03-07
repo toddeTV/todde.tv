@@ -23,7 +23,7 @@ const displayPeriod = computed(() => {
 })
 
 useSeoMeta({
-  title: `${project.value.name} - Thorsten Seyschab`,
+  title: project.value.name,
   description: project.value.description,
 })
 

@@ -13,7 +13,7 @@ const today = useTodayDate()
 const isUpcoming = computed(() => talk.value!.date >= today.value)
 
 useSeoMeta({
-  title: `${talk.value.title} - Thorsten Seyschab`,
+  title: talk.value.title,
   description: talk.value.description || `${talk.value.title} at ${talk.value.event} in ${talk.value.location}.`,
 })
 

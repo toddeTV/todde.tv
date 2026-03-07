@@ -1,6 +1,12 @@
 <script setup lang="ts">
+// Override the default titleTemplate (`%s %separator %siteName`) from `@nuxtjs/seo` so the home
+// page title is rendered as-is without appending `| Thorsten Seyschab`.
+useHead({
+  titleTemplate: '%s',
+})
+
 useSeoMeta({
-  title: 'Thorsten Seyschab - toddeTV',
+  title: 'Thorsten Seyschab - @toddeTV',
   description: 'IT consultant, senior full-stack developer, and conference speaker. Specializing in Vue.js, '
     + 'Nuxt, 3D on the web, and full-stack development.',
 })
