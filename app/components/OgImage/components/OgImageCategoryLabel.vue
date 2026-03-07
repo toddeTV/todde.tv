@@ -1,10 +1,10 @@
 <script setup lang="ts">
 /**
- * Green uppercase category label for OG images (e.g. "Open Source", "Talk", "Client Project").
+ * Green uppercase category label for OG images (e.g. "Project", "Talk", "Client Project").
  * Satori constraints: inline styles only, no Tailwind, hardcoded colors.
  */
 defineProps<{
-  /** The category text to display (e.g. "Open Source", "Talk"). */
+  /** The category text to display (e.g. "Project", "Talk"). */
   text: string
 }>()
 </script>

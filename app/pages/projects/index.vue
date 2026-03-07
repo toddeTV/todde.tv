@@ -1,15 +1,15 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Open Source - Thorsten Seyschab',
-  description: 'Open source projects by Thorsten Seyschab (toddeTV).',
+  title: 'Projects - Thorsten Seyschab',
+  description: 'Projects by Thorsten Seyschab (toddeTV).',
 })
 
 defineOgImageComponent('Project', {
-  title: 'Open Source Projects',
+  title: 'Projects',
   description: 'Tools, experiments, and applications for 3D on the web, Vue/Nuxt, and developer tooling.',
 })
 
-const { data: openSourceProjects } = await useAsyncData('projects', async () => {
+const { data: projects } = await useAsyncData('projects', async () => {
   const projects = await queryCollection('projects').all()
   return projects.sort((a, b) => {
     // 1. Ongoing (no endDate) before completed
@@ -36,15 +36,15 @@ const { data: openSourceProjects } = await useAsyncData('projects', async () => 
 <template>
   <div>
     <AppPageHeader
-      description="Open source tools, experiments, and applications I've built - from developer
+      description="Tools, experiments, and applications I've built - from developer
           tooling and the Vue/Nuxt ecosystem to 3D on the web and beyond."
-      title="Open Source"
+      title="Projects"
     />
 
     <AppSeparator />
-    <AppSection heading="Open Source">
+    <AppSection heading="Projects">
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <ProjectCard v-for="project in openSourceProjects" :key="project.path" :project="project" />
+        <ProjectCard v-for="project in projects" :key="project.path" :project="project" />
       </div>
     </AppSection>
   </div>

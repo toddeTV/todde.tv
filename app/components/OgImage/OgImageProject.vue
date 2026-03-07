@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * OG image component for open source project pages.
+ * OG image component for project pages.
  * Rendered by Satori (not a browser) - must use inline styles, <img>, and hardcoded colors.
  */
 defineProps<{
@@ -38,7 +38,7 @@ defineProps<{
         maxWidth: '960px',
       }"
     >
-      <OgImageCategoryLabel text="Open Source" />
+      <OgImageCategoryLabel text="Project" />
 
       <!-- Project name with stars -->
       <div

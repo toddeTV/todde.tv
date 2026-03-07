@@ -2,7 +2,7 @@
 const links = [
   { to: '/', label: 'About' },
   { to: '/talks', label: 'Talks' },
-  { to: '/projects', label: 'Open Source' },
+  { to: '/projects', label: 'Projects' },
   // { to: '/clients', label: 'Client Work' },
   // { to: '/publications', label: 'Publications' },
 ]
