@@ -34,7 +34,7 @@ const displayPeriod = computed(() => {
         <Icon name="ph:calendar-blank" :size="14" />
         {{ displayPeriod }}
       </span>
-      <span v-if="project.repoStars" class="flex items-center gap-1 font-mono text-text-dim">
+      <span v-if="project.repoStars && project.repoStars > 0" class="flex items-center gap-1 font-mono text-text-dim">
         <Icon name="ph:star" :size="14" />
         {{ project.repoStars }}
       </span>
