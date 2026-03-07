@@ -1,45 +1,74 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   project: {
     path: string
     name: string
     description: string
+    startDate: string
+    endDate?: string
     liveUrl?: string
+    repoUrl?: string
     repoStars?: number
     tags: string[]
   }
 }>()
+
+/**
+ * Formats a year or year span for display.
+ * - Ongoing (no endDate): "2024 - present"
+ * - Same year: "2024"
+ * - Different years: "2023 - 2025"
+ */
+const displayPeriod = computed(() => {
+  const startYear = props.project.startDate.slice(0, 4)
+  if (!props.project.endDate) return `${startYear} - present`
+  const endYear = props.project.endDate.slice(0, 4)
+  return startYear === endYear ? startYear : `${startYear} - ${endYear}`
+})
 </script>
 
 <template>
-  <AppCard class="relative cursor-pointer" interactive>
-    <div class="flex items-center justify-between">
-      <h3 class="text-base">
-        <NuxtLink class="card-link flex items-center gap-2" :to="project.path">
-          <Icon name="ph:folder-open" :size="18" />
-          {{ project.name }}
-        </NuxtLink>
-      </h3>
-      <span v-if="project.repoStars" class="flex items-center gap-1 font-mono text-xs text-text-dim">
+  <AppCard class="relative cursor-pointer" gap="2" interactive>
+    <div class="flex items-center gap-4 text-xs">
+      <span class="flex items-center gap-1 font-mono text-text-dim">
+        <Icon name="ph:calendar-blank" :size="14" />
+        {{ displayPeriod }}
+      </span>
+      <span v-if="project.repoStars" class="flex items-center gap-1 font-mono text-text-dim">
         <Icon name="ph:star" :size="14" />
         {{ project.repoStars }}
       </span>
     </div>
+    <h3>
+      <NuxtLink class="card-link flex items-center gap-2" :to="project.path">
+        <Icon class="shrink-0" name="ph:folder-open" :size="18" />
+        {{ project.name }}
+      </NuxtLink>
+    </h3>
+    <div v-if="project.tags.length" class="flex flex-wrap gap-1.5">
+      <AppTag v-for="tag in project.tags" :key="tag" :label="tag" />
+    </div>
     <p class="text-sm">
       {{ project.description }}
     </p>
-    <div class="flex flex-wrap items-center justify-between gap-3">
-      <div class="flex flex-wrap gap-1.5">
-        <AppTag v-for="tag in project.tags" :key="tag" :label="tag" />
-      </div>
+    <div v-if="project.liveUrl || project.repoUrl" class="relative z-10 mt-1 flex gap-4">
       <NuxtLink
         v-if="project.liveUrl"
-        class="relative z-10 flex items-center gap-1 text-xs font-medium text-accent hover:text-accent-hover"
+        class="flex items-center gap-1.5 text-xs font-medium text-accent hover:text-accent-hover"
         target="_blank"
         :to="project.liveUrl"
       >
-        <Icon name="ph:arrow-square-out" :size="14" />
+        <Icon name="ph:arrow-square-out" :size="16" />
         Live
+      </NuxtLink>
+      <NuxtLink
+        v-if="project.repoUrl"
+        class="flex items-center gap-1.5 text-xs font-medium text-accent hover:text-accent-hover"
+        target="_blank"
+        :to="project.repoUrl"
+      >
+        <Icon name="ph:github-logo" :size="16" />
+        Repo
       </NuxtLink>
     </div>
   </AppCard>

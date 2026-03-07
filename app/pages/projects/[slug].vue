@@ -9,6 +9,19 @@ if (!project.value) {
   throw createError({ statusCode: 404, statusMessage: 'Project not found' })
 }
 
+/**
+ * Formats a year or year span for display.
+ * - Ongoing (no endDate): "2024 - present"
+ * - Same year: "2024"
+ * - Different years: "2023 - 2025"
+ */
+const displayPeriod = computed(() => {
+  const startYear = project.value!.startDate.slice(0, 4)
+  if (!project.value!.endDate) return `${startYear} - present`
+  const endYear = project.value!.endDate.slice(0, 4)
+  return startYear === endYear ? startYear : `${startYear} - ${endYear}`
+})
+
 useSeoMeta({
   title: `${project.value.name} - Thorsten Seyschab`,
   description: project.value.description,
@@ -27,28 +40,32 @@ defineOgImageComponent('Project', {
     <AppSection>
       <AppBackLink label="All Projects" to="/projects" />
 
-      <div class="mb-4 flex items-center gap-3">
-        <Icon class="text-accent" name="ph:folder-open" :size="24" />
-        <h1>
-          {{ project.name }}
-        </h1>
-        <span v-if="project.repoStars" class="flex items-center gap-1 font-mono text-sm text-text-dim">
-          <Icon name="ph:star" :size="16" />
+      <div class="mb-4 flex items-center gap-4 text-sm text-text-dim">
+        <span class="flex items-center gap-1 font-mono">
+          <Icon name="ph:calendar-blank" :size="14" />
+          {{ displayPeriod }}
+        </span>
+        <span v-if="project.repoStars" class="flex items-center gap-1 font-mono">
+          <Icon name="ph:star" :size="14" />
           {{ project.repoStars }}
         </span>
       </div>
 
-      <div class="mb-8 text-lg leading-relaxed text-text-muted">
-        <ContentRenderer :value="project" />
-      </div>
+      <h1 class="mb-3">
+        {{ project.name }}
+      </h1>
 
-      <div class="mb-8 flex flex-wrap gap-1.5">
+      <div class="mb-6 flex flex-wrap gap-1.5">
         <AppTag
           v-for="tag in project.tags"
           :key="tag"
           :label="tag"
           size="md"
         />
+      </div>
+
+      <div class="mb-8 text-lg leading-relaxed text-text-muted">
+        <ContentRenderer :value="project" />
       </div>
 
       <NuxtImg
