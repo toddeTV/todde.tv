@@ -10,11 +10,31 @@ defineOgImageComponent('Home', {
   description: 'IT consultant, senior full-stack developer, and conference speaker.',
 })
 
+/**
+ * High-level skill areas displayed on the landing page.
+ * Order: consulting & leadership → core engineering → data & infrastructure →
+ * quality & process → tooling & community → creative / specialty.
+ */
 const skills = [
-  'Full-Stack Web Development', 'Frontend Architecture', 'Backend & APIs',
-  'Database Design', 'DevOps & CI/CD', 'Build Tooling',
-  '3D on the Web', 'App Development', 'Game Development',
-  'Technical Consulting', 'Open Source',
+  'Technical Consulting',
+  'System Architecture',
+  'Code Reviews & Mentoring',
+  'Full-Stack Web Development',
+  'Frontend Architecture',
+  'Backend & APIs',
+  'Database Design',
+  'Cloud Infrastructure',
+  'DevOps & CI/CD',
+  'Testing & Quality Assurance',
+  'Performance Optimization',
+  'Migration & Refactoring',
+  'Agile & Scrum',
+  'Build Tooling',
+  'Technical Writing',
+  'Open Source',
+  '3D on the Web',
+  'App Development',
+  'Game Development',
 ]
 
 const [
@@ -92,6 +112,22 @@ const [
       </p>
     </AppSection>
 
+    <!-- Skills -->
+    <AppSeparator />
+    <AppSection heading="What I Work With">
+      <p class="-mt-2 mb-4 text-sm text-text-dim sm:-mt-4">
+        A selection of areas I frequently work in - not a complete list.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <AppTag
+          v-for="skill in skills"
+          :key="skill"
+          :label="skill"
+          size="md"
+        />
+      </div>
+    </AppSection>
+
     <!-- Connect -->
     <AppSeparator />
     <AppSection id="connect" heading="Connect">
@@ -113,22 +149,6 @@ const [
             </div>
           </div>
         </AppCard>
-      </div>
-    </AppSection>
-
-    <!-- Skills -->
-    <AppSeparator />
-    <AppSection heading="What I Work With">
-      <p class="-mt-2 mb-4 text-sm text-text-dim sm:-mt-4">
-        A selection of areas I frequently work in - not a complete list.
-      </p>
-      <div class="flex flex-wrap gap-2">
-        <AppTag
-          v-for="skill in skills"
-          :key="skill"
-          :label="skill"
-          size="md"
-        />
       </div>
     </AppSection>
 
