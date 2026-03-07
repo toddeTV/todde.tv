@@ -143,6 +143,15 @@ reviews:
         ### Nuxt Config
         - Module-driven architecture. Check module docs before modifying module options.
 
+    - path: "app/components/OgImage/**/*.vue"
+      instructions: |
+        OG image components are rendered by Satori (not a browser). Special rules:
+        - Use inline styles only (no Tailwind, no `<style>` blocks). Hardcode hex colors.
+        - Use `<img>` for photos, inline `<svg>` for icons (never `<Icon>`, `<NuxtImg>`, or data URI `<img>`).
+        - Set icon `width`/`height` both as HTML attributes AND in `:style`.
+        - CRITICAL: nuxt-og-image's flex plugin overrides `flexDirection` to `column` on any `<div>` whose children include block elements (div, p, ul, ol, li, blockquote, pre, hr, table, dl). To preserve `flexDirection: 'row'`, add `class="flex-row"` (any class containing "flex-") to the container. Use `<span>` instead of `<div>` for text inside row containers.
+        - The flex plugin also forces `flexWrap: 'wrap'` and `gap: '0.2em'` on elements without a class containing "flex-".
+
     - path: "**/*.vue"
       instructions: |
         Verify: SFC block order, `<NuxtLink>` instead of `<a>`, `<NuxtImg>` instead of `<img>`, no nested links (stretched-link pattern).

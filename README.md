@@ -51,7 +51,7 @@ _(excluding those listed in `./package.json`)_
 **Assets & Materials Used:**<br>
 _(including images & 3D models; mostly only those requiring attribution)_
 
-- Image `avatar-thorsten-seyschab.webp` by [Franziska Kestel](https://franziskakestel.de/).
+- Image `avatar-thorsten-seyschab.jpg` by [Franziska Kestel](https://franziskakestel.de/).
 
 ## License
 

@@ -29,31 +29,8 @@ withDefaults(defineProps<{
       overflow: 'hidden',
     }"
   >
-    <!-- Radial accent glow (top-right, behind avatar) -->
-    <div
-      :style="{
-        position: 'absolute',
-        top: '-80px',
-        right: '100px',
-        width: '700px',
-        height: '700px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0,220,130,0.25) 0%, transparent 65%)',
-      }"
-    />
-
-    <!-- Secondary glow (bottom-left) -->
-    <div
-      :style="{
-        position: 'absolute',
-        bottom: '-200px',
-        left: '-100px',
-        width: '500px',
-        height: '500px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0,220,130,0.18) 0%, transparent 65%)',
-      }"
-    />
+    <!-- Ambient glow effects -->
+    <OgImageGlow />
 
     <!-- Subtle horizontal rule -->
     <div
@@ -111,11 +88,12 @@ withDefaults(defineProps<{
         borderRadius: '50%',
         background: 'linear-gradient(135deg, #00dc82, #00c474)',
         padding: '5px',
+        flexWrap: 'nowrap',
       }"
     >
       <img
         alt="Thorsten Seyschab"
-        src="/avatar-thorsten-seyschab.webp"
+        src="/avatar-thorsten-seyschab.jpg"
         :style="{
           width: '340px',
           height: '340px',
@@ -125,16 +103,7 @@ withDefaults(defineProps<{
       >
     </div>
 
-    <!-- Footer (absolute to stay at bottom despite centered content) -->
-    <div
-      :style="{
-        position: 'absolute',
-        bottom: '60px',
-        left: '60px',
-        right: '60px',
-      }"
-    >
-      <OgImageFooter />
-    </div>
+    <!-- Footer -->
+    <OgImageFooter />
   </div>
 </template>

@@ -202,7 +202,7 @@ export default defineNuxtConfig({
       type: 'Person',
       name: 'Thorsten Seyschab',
       url: 'https://todde.tv',
-      image: '/avatar-thorsten-seyschab.webp',
+      image: '/avatar-thorsten-seyschab.jpg',
       // logo: '/favicon.svg', // not a standard Schema.org property for Person, but some tools check for it.
       // `sameAs` and `email` are populated at runtime from the `socials` content collection (see `app.vue`).
     },
