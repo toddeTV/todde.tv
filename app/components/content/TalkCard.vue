@@ -19,7 +19,7 @@ const isUpcoming = computed(() => props.talk.date >= today.value)
 <template>
   <AppCard class="relative cursor-pointer" gap="2" interactive>
     <div class="flex items-center gap-4 text-xs">
-      <time class="flex items-center gap-1 font-mono text-text-dim">
+      <time class="flex items-center gap-1 font-mono text-text-dim" :datetime="talk.date">
         <Icon name="ph:calendar-blank" :size="14" />
         {{ talk.date }}
       </time>
