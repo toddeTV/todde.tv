@@ -76,6 +76,10 @@ export default defineContentConfig({
       schema: z.object({
         /** Display name of the project (e.g. "quick-conf"). */
         name: z.string(),
+        /** Start date of the project in ISO 8601 format (e.g. "2024-01-15"). */
+        startDate: z.iso.date(),
+        /** End date of the project in ISO 8601 format. Omit for ongoing projects. */
+        endDate: z.iso.date().optional(),
         /** Path to a representative image in `public/`. */
         image: z.string().optional(),
         /** URL to the live deployment or demo. */
