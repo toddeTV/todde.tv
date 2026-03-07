@@ -23,7 +23,9 @@ watch(() => route.path, () => {
     <AppContainer class="flex h-16 items-center justify-between">
       <!-- desktop: Left logo -->
       <NuxtLink class="flex h-full items-center text-xl font-bold text-text" to="/">
-        todde<span class="text-accent">.</span><span class="text-text-muted">tv</span>
+        <span>todde</span>
+        <span class="inline-block translate-y-[-0.11em] text-3xl leading-0 text-accent">.</span>
+        <span class="text-text-muted">tv</span>
       </NuxtLink>
 
       <!-- desktop: right menu -->
@@ -31,7 +33,7 @@ watch(() => route.path, () => {
         <NuxtLink
           v-for="link in links"
           :key="link.to"
-          class="relative flex h-full items-center px-4 text-sm font-medium text-text-muted hover:text-text"
+          class="relative flex h-full items-center px-4 text-base font-medium text-text-muted hover:text-text"
           :class="{
             ['text-text! after:absolute after:bottom-0'
               + ' after:left-0 after:right-0 after:h-0.5'
@@ -68,7 +70,7 @@ watch(() => route.path, () => {
         <NuxtLink
           v-for="link in links"
           :key="link.to"
-          class="py-2 text-sm font-medium text-text-muted hover:text-text"
+          class="py-2 text-base font-medium text-text-muted hover:text-text"
           :class="{ 'text-text!': isActiveLink(link.to) }"
           :to="link.to"
         >
