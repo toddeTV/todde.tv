@@ -11,15 +11,15 @@ if (!project.value) {
 
 /**
  * Formats a year or year span for display.
- * - Ongoing (no endDate): "2024 - present"
+ * - Ongoing (no endDate): "2024-present"
  * - Same year: "2024"
- * - Different years: "2023 - 2025"
+ * - Different years: "2023-2025"
  */
 const displayPeriod = computed(() => {
   const startYear = project.value!.startDate.slice(0, 4)
-  if (!project.value!.endDate) return `${startYear} - present`
+  if (!project.value!.endDate) return `${startYear}-present`
   const endYear = project.value!.endDate.slice(0, 4)
-  return startYear === endYear ? startYear : `${startYear} - ${endYear}`
+  return startYear === endYear ? startYear : `${startYear}-${endYear}`
 })
 
 useSeoMeta({

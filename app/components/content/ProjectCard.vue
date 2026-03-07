@@ -15,15 +15,15 @@ const props = defineProps<{
 
 /**
  * Formats a year or year span for display.
- * - Ongoing (no endDate): "2024 - present"
+ * - Ongoing (no endDate): "2024-present"
  * - Same year: "2024"
- * - Different years: "2023 - 2025"
+ * - Different years: "2023-2025"
  */
 const displayPeriod = computed(() => {
   const startYear = props.project.startDate.slice(0, 4)
-  if (!props.project.endDate) return `${startYear} - present`
+  if (!props.project.endDate) return `${startYear}-present`
   const endYear = props.project.endDate.slice(0, 4)
-  return startYear === endYear ? startYear : `${startYear} - ${endYear}`
+  return startYear === endYear ? startYear : `${startYear}-${endYear}`
 })
 </script>
 
