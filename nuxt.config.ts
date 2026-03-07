@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
   ],
 
-  ssr: true,
+  ssr: true, // needed for `SSR` and `SSG` (`@nuxt/content` markdown rendering happens server-side)
 
   components: [
     {
