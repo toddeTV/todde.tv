@@ -20,12 +20,14 @@ const skills = [
 
 const [
   { data: recentTalks },
+  { data: recentProjects },
   { data: featuredTestimonials },
   { data: socials },
 ] = await Promise.all([
   await useAsyncData('recent-talks', () =>
     queryCollection('talks').order('date', 'DESC').limit(3).all(),
   ),
+  await useSortedProjects(2),
   await useAllTestimonials(),
   await useAsyncData('index-socials-all', () =>
     queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
@@ -91,8 +93,32 @@ const [
       </p>
     </AppSection>
 
-    <!-- Skills -->
+    <!-- Connect -->
     <AppSeparator />
+    <AppSection id="connect" heading="Connect">
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <AppCard
+          v-for="social in socials"
+          :key="social.url"
+          :href="social.url"
+        >
+          <div class="flex items-center gap-3">
+            <Icon :name="social.icon" :size="24" />
+            <div>
+              <div class="text-sm font-medium">
+                {{ social.name }}
+              </div>
+              <div class="font-mono text-xs text-text-dim">
+                {{ social.handle }}
+              </div>
+            </div>
+          </div>
+        </AppCard>
+      </div>
+    </AppSection>
+
+    <!-- Skills -->
+    <!-- <AppSeparator />
     <AppSection heading="Tech Stack">
       <div class="flex flex-wrap gap-2">
         <AppTag
@@ -102,7 +128,7 @@ const [
           size="md"
         />
       </div>
-    </AppSection>
+    </AppSection> -->
 
     <!-- Testimonials -->
     <AppSeparator v-if="featuredTestimonials?.length" />
@@ -130,27 +156,23 @@ const [
       </div>
     </AppSection>
 
-    <!-- Connect -->
-    <AppSeparator />
-    <AppSection id="connect" heading="Connect">
-      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <AppCard
-          v-for="social in socials"
-          :key="social.url"
-          :href="social.url"
+    <!-- Recent Projects -->
+    <AppSeparator v-if="recentProjects?.length" />
+    <AppSection v-if="recentProjects?.length">
+      <div class="mb-6 flex items-center justify-between">
+        <h2>
+          Recent Projects
+        </h2>
+        <NuxtLink
+          class="flex items-center gap-1.5 text-sm font-medium whitespace-nowrap"
+          to="/projects"
         >
-          <div class="flex items-center gap-3">
-            <Icon :name="social.icon" :size="24" />
-            <div>
-              <div class="text-sm font-medium">
-                {{ social.name }}
-              </div>
-              <div class="font-mono text-xs text-text-dim">
-                {{ social.handle }}
-              </div>
-            </div>
-          </div>
-        </AppCard>
+          View all projects
+          <Icon name="ph:arrow-right" :size="16" />
+        </NuxtLink>
+      </div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <ProjectCard v-for="project in recentProjects" :key="project.path" :project="project" />
       </div>
     </AppSection>
   </div>
