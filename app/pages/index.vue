@@ -19,19 +19,19 @@ const skills = [
 ]
 
 const [
+  { data: socials },
+  { data: testimonials },
   { data: recentTalks },
   { data: recentProjects },
-  { data: featuredTestimonials },
-  { data: socials },
 ] = await Promise.all([
+  await useAsyncData('index-socials-all', () =>
+    queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
+  ),
+  await useAllTestimonials(),
   await useAsyncData('recent-talks', () =>
     queryCollection('talks').order('date', 'DESC').limit(3).all(),
   ),
   await useSortedProjects(2),
-  await useAllTestimonials(),
-  await useAsyncData('index-socials-all', () =>
-    queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
-  ),
 ])
 </script>
 
@@ -131,9 +131,9 @@ const [
     </AppSection> -->
 
     <!-- Testimonials -->
-    <AppSeparator v-if="featuredTestimonials?.length" />
-    <AppSection v-if="featuredTestimonials?.length" heading="What People Say">
-      <TestimonialCarousel :testimonials="featuredTestimonials.slice(0, 3)" />
+    <AppSeparator v-if="testimonials?.length" />
+    <AppSection v-if="testimonials?.length" heading="What People Say">
+      <TestimonialCarousel :testimonials="testimonials.slice(0, 3)" />
     </AppSection>
 
     <!-- Recent Talks -->
