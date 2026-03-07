@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
   ],
 
-  ssr: true,
+  ssr: true, // needed for `SSR` and `SSG` (`@nuxt/content` markdown rendering happens server-side)
 
   components: [
     {
@@ -41,10 +41,28 @@ export default defineNuxtConfig({
             'toddeTV',
             'todde.tv',
             'IT consultant',
+            'IT-consultant',
             'full-stack developer',
+            'full stack developer',
             'conference speaker',
+            'computer science',
+            'computer scientist',
+            'M.Sc. Computer Science',
+            'M.Sc.',
+            'master',
+            'master degree',
+            'masters degree',
+            'TUD Dresden University of Technology',
+            'Dresden',
+            'Dresden, Germany',
+            'Dresden, Deutschland',
+            'Germany',
+            'Deutschland',
             'web engineer',
             'open source',
+            'open-source',
+            'OpenSource',
+            'projects',
             'portfolio',
             'Vue',
             'Nuxt',
@@ -117,6 +135,22 @@ export default defineNuxtConfig({
       compilerOptions: {
         strict: true,
       },
+    },
+  },
+
+  hooks: {
+    'vite:extendConfig'(config) {
+      /**
+       * Only needed in SSG project:
+       * Remove `@nuxtjs/mdc` client-side optimizeDeps entries - markdown
+       * rendering happens server-side in this SSG project. These entries
+       * cause warnings with pnpm's strict dependency hoisting.
+       */
+      if (config.optimizeDeps?.include) {
+        config.optimizeDeps.include = config.optimizeDeps.include.filter(
+          (dep: string) => !dep.startsWith('@nuxtjs/mdc >'),
+        )
+      }
     },
   },
 

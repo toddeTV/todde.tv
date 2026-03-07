@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Page header with H1 title and optional description paragraph.
+ * Page header with H1 title, optional description, and optional `#hint` slot for extra content.
  * Used on list pages (talks, projects, clients).
  */
 defineProps<{
@@ -20,6 +20,9 @@ defineProps<{
       <p v-if="description" class="max-w-xl text-lg">
         {{ description }}
       </p>
+      <div v-if="$slots.hint" class="mt-3 text-xs text-text-dim italic">
+        <slot name="hint" />
+      </div>
     </AppContainer>
   </section>
 </template>

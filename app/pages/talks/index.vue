@@ -41,9 +41,14 @@ const years = computed(() => {
       description="I speak at conferences and meetups about tech and non-tech topics - from Vue.js,
           Nuxt, and Vite plugins to 3D on the web and beyond. Here's a chronological list of my talks."
       title="Talks"
-    />
+    >
+      <template #hint>
+        This is a curated selection. Some engagements are not listed due to NDAs or other confidentiality agreements.
+      </template>
+    </AppPageHeader>
 
     <AppSeparator v-if="upcomingTalks.length" />
+
     <AppSection v-if="upcomingTalks.length" spacing="md">
       <h2 class="mb-6 font-mono text-lg font-medium text-accent">
         Upcoming
