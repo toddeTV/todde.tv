@@ -18,6 +18,9 @@ if (page.value.head) {
 if (page.value.ogImage) {
   defineOgImage(page.value.ogImage)
 }
+else {
+  defineOgImageComponent('Default')
+}
 </script>
 
 <template>

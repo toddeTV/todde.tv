@@ -9,8 +9,6 @@ defineProps<{
   date?: string
   location?: string
 }>()
-
-const iconColor = '#71717a'
 </script>
 
 <template>
@@ -28,10 +26,7 @@ const iconColor = '#71717a'
       overflow: 'hidden',
     }"
   >
-    <!-- Ambient glow effects -->
     <OgImageGlow />
-
-    <!-- Avatar - top right -->
     <OgImageAvatar />
 
     <!-- Main content -->
@@ -43,46 +38,11 @@ const iconColor = '#71717a'
         maxWidth: '960px',
       }"
     >
-      <!-- Category label -->
-      <div
-        :style="{
-          fontSize: '16px',
-          fontWeight: 600,
-          color: '#00dc82',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          marginBottom: '20px',
-        }"
-      >
-        Talk
-      </div>
+      <OgImageCategoryLabel text="Talk" />
 
-      <!-- Title -->
-      <div
-        :style="{
-          fontSize: '64px',
-          fontWeight: 800,
-          color: '#fafafa',
-          lineHeight: 1.05,
-          letterSpacing: '-0.03em',
-          marginBottom: '24px',
-        }"
-      >
-        {{ title || 'Conference Talk' }}
-      </div>
+      <OgImageTitle size="md" :text="title || 'Conference Talk'" />
 
-      <!-- Event name -->
-      <div
-        v-if="event"
-        :style="{
-          fontSize: '26px',
-          fontWeight: 500,
-          color: '#a1a1aa',
-          lineHeight: 1.3,
-        }"
-      >
-        {{ event }}
-      </div>
+      <OgImageDescription v-if="event" :text="event" />
 
       <!-- Date and location row -->
       <!--
@@ -113,7 +73,7 @@ const iconColor = '#71717a'
         >
           <path
             d="M208 32h-24v-8a8 8 0 0 0-16 0v8H88v-8a8 8 0 0 0-16 0v8H48a16 16 0 0 0-16 16v160a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16M72 48v8a8 8 0 0 0 16 0v-8h80v8a8 8 0 0 0 16 0v-8h24v32H48V48Zm136 160H48V96h160z"
-            :fill="iconColor"
+            fill="#71717a"
           />
         </svg>
         <span
@@ -138,7 +98,7 @@ const iconColor = '#71717a'
         >
           <path
             d="M128 64a40 40 0 1 0 40 40a40 40 0 0 0-40-40m0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24m0-112a88.1 88.1 0 0 0-88 88c0 31.4 14.51 64.68 42 96.25a254.2 254.2 0 0 0 41.45 38.3a8 8 0 0 0 9.18 0a254.2 254.2 0 0 0 41.37-38.3c27.45-31.57 42-64.85 42-96.25a88.1 88.1 0 0 0-88-88m0 206c-16.53-13-72-60.75-72-118a72 72 0 0 1 144 0c0 57.23-55.47 105-72 118"
-            :fill="iconColor"
+            fill="#71717a"
           />
         </svg>
         <span
@@ -153,7 +113,6 @@ const iconColor = '#71717a'
       </div>
     </div>
 
-    <!-- Footer -->
     <OgImageFooter />
   </div>
 </template>

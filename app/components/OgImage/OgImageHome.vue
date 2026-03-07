@@ -29,7 +29,6 @@ withDefaults(defineProps<{
       overflow: 'hidden',
     }"
   >
-    <!-- Ambient glow effects -->
     <OgImageGlow />
 
     <!-- Subtle horizontal rule -->
@@ -50,31 +49,11 @@ withDefaults(defineProps<{
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'nowrap',
-        gap: '20px',
         width: '670px',
       }"
     >
-      <div
-        :style="{
-          fontSize: '72px',
-          fontWeight: 700,
-          color: '#fafafa',
-          lineHeight: 1.1,
-          letterSpacing: '-0.02em',
-        }"
-      >
-        {{ title }}
-      </div>
-      <div
-        :style="{
-          fontSize: '30px',
-          fontWeight: 400,
-          color: '#a1a1aa',
-          lineHeight: 1.5,
-        }"
-      >
-        {{ description }}
-      </div>
+      <OgImageTitle :text="title" />
+      <OgImageDescription size="lg" :text="description" />
     </div>
 
     <!-- Avatar with accent gradient border (large, centered-right) -->
@@ -103,7 +82,6 @@ withDefaults(defineProps<{
       >
     </div>
 
-    <!-- Footer -->
     <OgImageFooter />
   </div>
 </template>
