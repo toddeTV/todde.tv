@@ -110,6 +110,12 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      // Legal page data - injected via GitHub Variables at build time.
+      // Not committed to Git. Set `NUXT_PUBLIC_LEGAL_*` env vars (see `.env.example`).
+      legalAddressStreet: '',
+      legalAddressCity: '',
+      legalAddressCountry: '',
+      legalVatId: '',
     },
   },
 
