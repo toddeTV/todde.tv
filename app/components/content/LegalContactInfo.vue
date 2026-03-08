@@ -28,5 +28,10 @@ const { data: social } = await useAsyncData(
 </script>
 
 <template>
-  <span v-if="social">{{ social.handle }}</span>
+  <NuxtLink
+    v-if="social"
+    :href="social.url"
+  >
+    {{ social.handle }}
+  </NuxtLink>
 </template>
