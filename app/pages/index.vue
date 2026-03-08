@@ -43,16 +43,6 @@ const skills = [
   'Game Development',
 ]
 
-/** Whether a social entry is an obfuscatable contact (email or phone). */
-function isContact(social: { url: string }): boolean {
-  return social.url.startsWith('mailto:') || social.url.startsWith('tel:')
-}
-
-/** Returns the contact type for obfuscation based on the URL protocol. */
-function contactType(social: { url: string }): 'email' | 'phone' {
-  return social.url.startsWith('mailto:') ? 'email' : 'phone'
-}
-
 const [
   { data: socials },
   { data: testimonials },
@@ -151,9 +141,7 @@ const [
         <AppCard
           v-for="social in socials"
           :key="social.name"
-          :class="{ 'relative cursor-pointer': isContact(social) }"
-          :href="isContact(social) ? undefined : social.url"
-          :interactive="isContact(social)"
+          :href="social.url"
         >
           <div class="flex items-center gap-3">
             <Icon :name="social.icon" :size="24" />
@@ -162,14 +150,7 @@ const [
                 {{ social.name }}
               </div>
               <div class="font-mono text-xs text-text-dim">
-                <AppObfuscatedContact
-                  v-if="isContact(social)"
-                  class="card-link"
-                  :type="contactType(social)"
-                />
-                <template v-else>
-                  {{ social.handle }}
-                </template>
+                {{ social.handle }}
               </div>
             </div>
           </div>
@@ -224,16 +205,3 @@ const [
     </AppSection>
   </div>
 </template>
-
-<style scoped>
-@reference "~/assets/css/main.css";
-
-.card-link {
-  @apply text-inherit no-underline;
-}
-
-.card-link::after {
-  @apply absolute inset-0;
-  content: '';
-}
-</style>
