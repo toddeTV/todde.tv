@@ -75,11 +75,11 @@ All fonts and icons used on this website are **bundled locally** at build time a
 
 ## 6. Contact via Email (_Kontaktaufnahme per E-Mail_)
 
-If you contact us by email, the personal data you provide (at a minimum your email address, and any other information contained in your message) will be stored and processed for the purpose of handling your inquiry. These data will not be shared with third parties without your consent.
+If you contact us by email, the personal data you provide (at a minimum your email address, and any other information contained in your message) will be stored and processed for the purpose of handling your inquiry. These data will not be shared with third parties, except with service providers that process data on our behalf under a Data Processing Agreement (_Auftragsverarbeitungsvertrag_), as described below.
 
 The processing is based on Art. 6 (1) (b) GDPR (_Art. 6 Abs. 1 lit. b DSGVO_) if your inquiry relates to a contractual relationship, or on Art. 6 (1) (f) GDPR (_Art. 6 Abs. 1 lit. f DSGVO_) based on our legitimate interest in responding to your inquiry.
 
-Emails are processed and stored by **dogado GmbH**, Antonio-Segni-Strasse 11, 44263 Dortmund, Germany (address as of 2026-03-08). dogado acts as a data processor (_Auftragsverarbeiter_) on our behalf. A Data Processing Agreement (_Auftragsverarbeitungsvertrag_) is in place pursuant to Art. 28 GDPR (_Art. 28 DSGVO_).
+Emails are processed and stored by **dogado GmbH**, Antonio-Segni-Strasse 11, 44263 Dortmund, Germany (address as of 2026-03-08). dogado acts as a data processor (_Auftragsverarbeiter_) on our behalf pursuant to Art. 28 GDPR (_Art. 28 DSGVO_).
 
 The data will be deleted once the purpose for which it was collected has been fulfilled, unless retention is required by law.
 
