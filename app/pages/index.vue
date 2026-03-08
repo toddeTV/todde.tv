@@ -140,7 +140,7 @@ const [
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <AppCard
           v-for="social in socials"
-          :key="social.name"
+          :key="social.url"
           :href="social.url"
         >
           <div class="flex items-center gap-3">
