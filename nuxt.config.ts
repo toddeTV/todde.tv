@@ -120,12 +120,17 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    // Redirect common alternative paths for the `legal-notice` page.
+    // Redirect paths. In production (Cloudflare Pages), the `public/_redirects` file handles
+    // these as proper HTTP 301 at the CDN edge. These routeRules serve as fallback for
+    // local preview (`nuxt preview`) and as authoritative documentation.
+    // Keep both in sync.
+
+    // Legal Notice alternative paths
     '/imprint': { redirect: { to: '/legal-notice', statusCode: 301 } },
     '/impressum': { redirect: { to: '/legal-notice', statusCode: 301 } },
     '/legal': { redirect: { to: '/legal-notice', statusCode: 301 } },
 
-    // Redirect common alternative paths for the `privacy-policy` page.
+    // Privacy Policy alternative paths
     '/privacy': { redirect: { to: '/privacy-policy', statusCode: 301 } },
     '/datenschutz': { redirect: { to: '/privacy-policy', statusCode: 301 } },
   },
