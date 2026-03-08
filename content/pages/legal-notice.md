@@ -11,7 +11,7 @@ _Impressum gemäß § 5 DDG (Digitale-Dienste-Gesetz)_
 
 _Angaben gemäß § 5 DDG_
 
-Thorsten Seyschab
+Thorsten Seyschab<br>
 Freelance IT Consultant (_Freiberuflicher IT-Berater_)
 
 ::legal-address
@@ -28,6 +28,15 @@ Freelance IT Consultant (_Freiberuflicher IT-Berater_)
 _Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG_
 
 ::legal-vat-id
+::
+
+## Responsible for Editorial Content
+
+_Verantwortlich für journalistisch-redaktionelle Inhalte gem. § 18 Abs. 2 MStV (Medienstaatsvertrag)_
+
+Thorsten Seyschab
+
+::legal-address
 ::
 
 ## Dispute Resolution (_Streitbeilegung_)
