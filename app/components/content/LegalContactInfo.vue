@@ -34,4 +34,7 @@ const { data: social } = await useAsyncData(
   >
     {{ social.handle }}
   </NuxtLink>
+  <span v-else class="text-text-dim italic">
+    [{{ type === 'email' ? 'Email' : 'Phone' }} not configured - add a matching social entry]
+  </span>
 </template>
