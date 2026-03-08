@@ -30,6 +30,15 @@ _Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG_
 ::legal-vat-id
 ::
 
+## Responsible for Editorial Content
+
+_Verantwortlich für journalistisch-redaktionelle Inhalte gem. § 18 Abs. 2 MStV (Medienstaatsvertrag)_
+
+Thorsten Seyschab
+
+::legal-address
+::
+
 ## Dispute Resolution (_Streitbeilegung_)
 
 _Hinweis gemäß § 36 VSBG (Verbraucherstreitbeilegungsgesetz)_

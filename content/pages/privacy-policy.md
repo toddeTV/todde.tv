@@ -32,7 +32,7 @@ Data processing related to website visits occurs through the hosting infrastruct
 
 ### Provider
 
-This website is hosted on **Cloudflare Pages**, a service provided by **Cloudflare, Inc.**, 101 Townsend St, San Francisco, CA 94107, USA.
+This website is hosted on **Cloudflare Pages**, a service provided by **Cloudflare, Inc.**, 101 Townsend St, San Francisco, CA 94107, USA (address as of 2026-03-08).
 
 When you visit this website, Cloudflare automatically processes certain data required for the technical delivery of the web pages. This may include:
 
@@ -79,6 +79,8 @@ If you contact us by email, the personal data you provide (at a minimum your ema
 
 The processing is based on Art. 6 (1) (b) GDPR (_Art. 6 Abs. 1 lit. b DSGVO_) if your inquiry relates to a contractual relationship, or on Art. 6 (1) (f) GDPR (_Art. 6 Abs. 1 lit. f DSGVO_) based on our legitimate interest in responding to your inquiry.
 
+Emails are processed and stored by **dogado GmbH**, Antonio-Segni-Strasse 11, 44263 Dortmund, Germany (address as of 2026-03-08). dogado acts as a data processor (_Auftragsverarbeiter_) on our behalf. A Data Processing Agreement (_Auftragsverarbeitungsvertrag_) is in place pursuant to Art. 28 GDPR (_Art. 28 DSGVO_).
+
 The data will be deleted once the purpose for which it was collected has been fulfilled, unless retention is required by law.
 
 ## 7. External Links (_Externe Links_)
@@ -109,6 +111,7 @@ The supervisory authority responsible for us is:
 Devrientstraße 5
 01067 Dresden
 Germany
+(address as of 2026-03-08)
 
 Website: [https://www.datenschutz.sachsen.de](https://www.datenschutz.sachsen.de)
 
