@@ -119,6 +119,17 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules: {
+    // Redirect common alternative paths for the `legal-notice` page.
+    '/imprint': { redirect: { to: '/legal-notice', statusCode: 301 } },
+    '/impressum': { redirect: { to: '/legal-notice', statusCode: 301 } },
+    '/legal': { redirect: { to: '/legal-notice', statusCode: 301 } },
+
+    // Redirect common alternative paths for the `privacy-policy` page.
+    '/privacy': { redirect: { to: '/privacy-policy', statusCode: 301 } },
+    '/datenschutz': { redirect: { to: '/privacy-policy', statusCode: 301 } },
+  },
+
   compatibilityDate: '2026-03-04',
 
   vite: {
