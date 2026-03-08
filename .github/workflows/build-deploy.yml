@@ -1,0 +1,65 @@
+name: Build & Deploy
+
+# Build the static site and deploy to Cloudflare Pages.
+# Triggers: push to main (PR merge), scheduled cron, manual dispatch.
+# See `docs/cloudflare-hosting.md` for context.
+#
+# Required GitHub Actions secrets:
+#   CLOUDFLARE_API_TOKEN   - Cloudflare API token with "Cloudflare Pages: Edit" permission
+#   CLOUDFLARE_ACCOUNT_ID  - Cloudflare account ID (found in dashboard sidebar)
+#
+# Required GitHub Actions variables (Settings > Variables > Actions):
+#   NUXT_PUBLIC_LEGAL_ADDRESS_STREET   - Street and house number for legal notice (e.g. "Musterstrasse 1")
+#   NUXT_PUBLIC_LEGAL_ADDRESS_CITY     - Postal code and city (e.g. "01234 Dresden")
+#   NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY  - Country (e.g. "Germany")
+#   NUXT_PUBLIC_LEGAL_VAT_ID           - VAT identification number / USt-IdNr. (e.g. "DE123456789")
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Twice a week: Monday 03:00 UTC and Thursday 03:00 UTC
+    - cron: "0 3 * * 1"
+    - cron: "0 3 * * 4"
+  workflow_dispatch: {} # Allow manual trigger from GitHub UI
+
+# Cancel in-progress runs when a newer run is triggered (e.g. two PRs merged quickly).
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  rebuild:
+    name: Rebuild & Deploy
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout the Codebase
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile --prefer-offline
+
+      - name: Generate static site
+        run: pnpm generate
+        env:
+          NUXT_PUBLIC_LEGAL_ADDRESS_STREET: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_STREET }}
+          NUXT_PUBLIC_LEGAL_ADDRESS_CITY: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_CITY }}
+          NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY }}
+          NUXT_PUBLIC_LEGAL_VAT_ID: ${{ vars.NUXT_PUBLIC_LEGAL_VAT_ID }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .output/public --project-name=todde-tv
