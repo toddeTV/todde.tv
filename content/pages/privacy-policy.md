@@ -106,11 +106,11 @@ Without prejudice to any other administrative or judicial remedy, you have the r
 
 The supervisory authority responsible for us is:
 
-**Sächsischer Datenschutz- und Transparenzbeauftragter**
-(_Saxon Data Protection and Transparency Commissioner_)
-Devrientstraße 5
-01067 Dresden
-Germany
+**Sächsischer Datenschutz- und Transparenzbeauftragter**<br>
+(_Saxon Data Protection and Transparency Commissioner_)<br>
+Devrientstraße 5<br>
+01067 Dresden<br>
+Germany<br>
 (address as of 2026-03-08)
 
 Website: [https://www.datenschutz.sachsen.de](https://www.datenschutz.sachsen.de)

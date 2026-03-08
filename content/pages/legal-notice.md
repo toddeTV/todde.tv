@@ -11,7 +11,7 @@ _Impressum gemäß § 5 DDG (Digitale-Dienste-Gesetz)_
 
 _Angaben gemäß § 5 DDG_
 
-Thorsten Seyschab
+Thorsten Seyschab<br>
 Freelance IT Consultant (_Freiberuflicher IT-Berater_)
 
 ::legal-address
