@@ -10,7 +10,10 @@ if (socials.value?.length) {
   const emailEntry = socials.value.find(s => s.url.startsWith('mailto:'))
   useSchemaOrg([
     definePerson({
-      sameAs: socials.value.filter(s => !s.url.startsWith('mailto:')).map(s => s.url),
+      // sameAs expects profile URLs; exclude mailto: and tel: schemes.
+      sameAs: socials.value
+        .filter(s => !s.url.startsWith('mailto:') && !s.url.startsWith('tel:'))
+        .map(s => s.url),
       ...(emailEntry ? { email: emailEntry.url.replace('mailto:', '') } : {}),
     }),
   ])
