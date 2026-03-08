@@ -173,6 +173,11 @@ export default defineNuxtConfig({
   },
 
   icon: { // for `@nuxt/icon`
+    // Disable runtime fallback to the external Iconify API (api.iconify.design).
+    // Without this, missing icons would trigger client-side requests to a third-party
+    // server, transmitting visitor IP addresses - a GDPR/DSGVO concern.
+    // All used icons are bundled at build time; missing ones simply won't render - but this should not happen.
+    fallbackToApi: false,
   },
 
   image: { // for `@nuxt/image`
