@@ -1,0 +1,11 @@
+# Cloudflare Pages edge-level redirects (proper HTTP 301).
+# Keep in sync with routeRules in nuxt.config.ts.
+
+# Legal Notice alternative paths
+/imprint    /legal-notice    301
+/impressum  /legal-notice    301
+/legal      /legal-notice    301
+
+# Privacy Policy alternative paths
+/privacy      /privacy-policy  301
+/datenschutz  /privacy-policy  301

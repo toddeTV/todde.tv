@@ -48,6 +48,14 @@ const yearSpan = computed(() =>
       </p>
 
       <p class="text-center text-xs text-text-dim">
+        <NuxtLink class="text-xs text-text-dim hover:text-text" to="/legal-notice">
+          Legal Notice
+        </NuxtLink>
+        <span class="mx-1.5">·</span>
+        <NuxtLink class="text-xs text-text-dim hover:text-text" to="/privacy-policy">
+          Privacy Policy
+        </NuxtLink>
+        <span class="mx-1.5">·</span>
         Source on
         <NuxtLink
           class="text-xs"
@@ -56,7 +64,6 @@ const yearSpan = computed(() =>
         >
           GitHub
         </NuxtLink>
-        .
       </p>
     </AppContainer>
   </footer>

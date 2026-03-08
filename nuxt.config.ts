@@ -110,7 +110,29 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      // Legal page data - injected via GitHub Variables at build time.
+      // Not committed to Git. Set `NUXT_PUBLIC_LEGAL_*` env vars (see `.env.example`).
+      legalAddressStreet: '',
+      legalAddressCity: '',
+      legalAddressCountry: '',
+      legalVatId: '',
     },
+  },
+
+  routeRules: {
+    // Redirect paths. In production (Cloudflare Pages), the `public/_redirects` file handles
+    // these as proper HTTP 301 at the CDN edge. These routeRules serve as fallback for
+    // local preview (`nuxt preview`) and as authoritative documentation.
+    // Keep both in sync.
+
+    // Legal Notice alternative paths
+    '/imprint': { redirect: { to: '/legal-notice', statusCode: 301 } },
+    '/impressum': { redirect: { to: '/legal-notice', statusCode: 301 } },
+    '/legal': { redirect: { to: '/legal-notice', statusCode: 301 } },
+
+    // Privacy Policy alternative paths
+    '/privacy': { redirect: { to: '/privacy-policy', statusCode: 301 } },
+    '/datenschutz': { redirect: { to: '/privacy-policy', statusCode: 301 } },
   },
 
   compatibilityDate: '2026-03-04',
@@ -139,6 +161,32 @@ export default defineNuxtConfig({
   },
 
   hooks: {
+    'build:before'() {
+      /**
+       * Validate that all required legal env vars are set and non-empty.
+       * Prevents building a site with broken/incomplete legal pages.
+       * Only runs during `nuxt build` / `nuxt generate` - skipped during
+       * `nuxt prepare` (postinstall), `nuxt dev`, and `nuxt typecheck`.
+       */
+      const isBuildOrGenerate = process.argv.some(a => a === 'build' || a === 'generate')
+      if (!isBuildOrGenerate) return
+
+      const required = [
+        'NUXT_PUBLIC_LEGAL_ADDRESS_STREET',
+        'NUXT_PUBLIC_LEGAL_ADDRESS_CITY',
+        'NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY',
+        'NUXT_PUBLIC_LEGAL_VAT_ID',
+      ]
+      const missing = required.filter(key => !process.env[key]?.trim())
+      if (missing.length > 0) {
+        throw new Error(
+          `Build aborted: required legal env vars are missing or empty:\n`
+          + missing.map(k => `  - ${k}`).join('\n')
+          + `\nSet them in \`.env\` (local) or GitHub Variables (CI). See \`.env.example\`.`,
+        )
+      }
+    },
+
     'vite:extendConfig'(config) {
       /**
        * Only needed in SSG project:
@@ -167,6 +215,11 @@ export default defineNuxtConfig({
   },
 
   icon: { // for `@nuxt/icon`
+    // Disable runtime fallback to the external Iconify API (api.iconify.design).
+    // Without this, missing icons would trigger client-side requests to a third-party
+    // server, transmitting visitor IP addresses - a GDPR/DSGVO concern.
+    // All used icons are bundled at build time; missing ones simply won't render - but this should not happen.
+    fallbackToApi: false,
   },
 
   image: { // for `@nuxt/image`
