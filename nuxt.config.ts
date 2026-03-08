@@ -156,6 +156,30 @@ export default defineNuxtConfig({
   },
 
   hooks: {
+    'build:before'() {
+      /**
+       * Validate that all required legal env vars are set and non-empty.
+       * Prevents building a site with broken/incomplete legal pages.
+       * Skipped in dev mode so local development works without `.env`.
+       */
+      if (process.env.NODE_ENV === 'development') return
+
+      const required = [
+        'NUXT_PUBLIC_LEGAL_ADDRESS_STREET',
+        'NUXT_PUBLIC_LEGAL_ADDRESS_CITY',
+        'NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY',
+        'NUXT_PUBLIC_LEGAL_VAT_ID',
+      ]
+      const missing = required.filter(key => !process.env[key]?.trim())
+      if (missing.length > 0) {
+        throw new Error(
+          `Build aborted: required legal env vars are missing or empty:\n`
+          + missing.map(k => `  - ${k}`).join('\n')
+          + `\nSet them in \`.env\` (local) or GitHub Variables (CI). See \`.env.example\`.`,
+        )
+      }
+    },
+
     'vite:extendConfig'(config) {
       /**
        * Only needed in SSG project:
