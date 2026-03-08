@@ -92,6 +92,14 @@
   }
 
   /* Headings - sans-serif, tight tracking, no margin by default (pages set margin via utility classes) */
+  h1,
+  h2,
+  h3,
+  h4 {
+    /* Offset anchor scroll position so the sticky header (h-16 = 4rem) does not overlap */
+    @apply scroll-mt-20;
+  }
+
   h1 {
     @apply font-sans text-3xl sm:text-4xl font-bold tracking-tight text-text;
   }
@@ -158,5 +166,68 @@
   /* Horizontal rule */
   hr {
     @apply border-t border-border my-6 sm:my-8;
+  }
+}
+
+/* ----- Prose spacing for ContentRenderer markdown output ----- */
+
+@layer components {
+  /**
+   * Apply to the wrapper around `<ContentRenderer>` to get vertical rhythm.
+   * ContentRenderer wraps content in an intermediate <div>, so selectors
+   * use descendant combinators (not direct child >).
+   * Base typography (font, color, weight) stays in @layer base above;
+   * this class only adds spacing and list markers.
+   */
+  .content-prose p + p,
+  .content-prose address + p,
+  .content-prose p + address {
+    @apply mt-4;
+  }
+
+  .content-prose h2 {
+    @apply mt-10 mb-4;
+  }
+
+  .content-prose h3 {
+    @apply mt-8 mb-3;
+  }
+
+  .content-prose h4 {
+    @apply mt-6 mb-2;
+  }
+
+  .content-prose ul,
+  .content-prose ol {
+    @apply my-3;
+  }
+
+  .content-prose ul {
+    @apply list-disc;
+  }
+
+  .content-prose ol {
+    @apply list-decimal;
+  }
+
+  .content-prose li {
+    @apply mt-0;
+  }
+
+  .content-prose li > ul,
+  .content-prose li > ol {
+    @apply mt-1 mb-0;
+  }
+
+  .content-prose blockquote {
+    @apply my-6;
+  }
+
+  .content-prose hr {
+    @apply my-8 sm:my-10;
+  }
+
+  .content-prose pre {
+    @apply my-5;
   }
 }

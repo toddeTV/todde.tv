@@ -31,7 +31,7 @@ else {
     >
       {{ page.title }}
     </h1>
-    <div class="text-lg leading-relaxed text-text-muted">
+    <div class="content-prose text-lg leading-relaxed text-text-muted">
       <ContentRenderer :value="page" />
     </div>
   </AppSection>

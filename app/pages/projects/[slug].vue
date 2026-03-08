@@ -64,7 +64,7 @@ defineOgImageComponent('Project', {
         />
       </div>
 
-      <div class="mb-8 text-lg leading-relaxed text-text-muted">
+      <div class="content-prose mb-8 text-lg leading-relaxed text-text-muted">
         <ContentRenderer :value="project" />
       </div>
 

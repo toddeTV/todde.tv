@@ -133,6 +133,7 @@ reviews:
         - No underlines at all, also not on links.
         - Every `<style scoped>` block must start with `@reference "~/assets/css/main.css";` as its first line. This makes all Tailwind utilities and custom theme tokens available for `@apply`.
         - Use `<AppSeparator />` for section separators. Never apply `border-t border-border` directly on section divs. `AppSeparator` renders a semantic `<hr>` inside a max-width container.
+        - For rendered markdown content (`<ContentRenderer>`), wrap in a div with class `content-prose` to get vertical rhythm (defined in `@layer components` in `main.css`). Do not apply `content-prose` globally or on component-based layouts.
         - Borders: `rounded-lg` for cards/buttons/images, `rounded` for tags/badges, `rounded-full` for avatars.
 
         ### Content Model (@nuxt/content)
