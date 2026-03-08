@@ -54,7 +54,7 @@ defineOgImageComponent('Talk', {
         {{ talk.event }}
       </p>
 
-      <div v-if="talk.description" class="mb-8 text-lg leading-relaxed text-text-muted">
+      <div v-if="talk.description" class="content-prose mb-8 text-lg leading-relaxed text-text-muted">
         <ContentRenderer :value="talk" />
       </div>
 
