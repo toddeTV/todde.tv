@@ -160,9 +160,11 @@ export default defineNuxtConfig({
       /**
        * Validate that all required legal env vars are set and non-empty.
        * Prevents building a site with broken/incomplete legal pages.
-       * Skipped in dev mode so local development works without `.env`.
+       * Only runs during `nuxt build` / `nuxt generate` - skipped during
+       * `nuxt prepare` (postinstall), `nuxt dev`, and `nuxt typecheck`.
        */
-      if (process.env.NODE_ENV === 'development') return
+      const isBuildOrGenerate = process.argv.some(a => a === 'build' || a === 'generate')
+      if (!isBuildOrGenerate) return
 
       const required = [
         'NUXT_PUBLIC_LEGAL_ADDRESS_STREET',
