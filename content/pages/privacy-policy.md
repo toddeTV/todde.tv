@@ -24,7 +24,7 @@ Freelance IT Consultant (_Freiberuflicher IT-Berater_)
 
 ## 2. Overview of Data Processing (_Übersicht der Datenverarbeitung_)
 
-This website is a static portfolio site that does not collect, store, or process personal data on its own servers. There are no user accounts, no contact forms, no analytics, no tracking, and no advertising.
+This website is a static portfolio site that does not collect, store, or process personal data on its own servers. There are no user accounts, no contact forms, no first-party analytics or tracking, and no advertising. The hosting provider (Cloudflare) may collect aggregated, anonymized analytics data as described in section 3.
 
 Data processing occurs exclusively through the hosting infrastructure described below.
 
