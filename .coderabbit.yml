@@ -114,6 +114,7 @@ reviews:
         - Always specify `.vue`, `.json`, `.mjs`, `.css` extensions in imports. Never specify `.ts`, `.js`.
         - All code, comments, and docs in English.
         - All dates in ISO 8601 format (YYYY-MM-DD).
+        - Markdown line breaks within a block: use `<br>` at the end of the line. Never use trailing double spaces.
 
         ### Vue SFC Conventions
         - Block order: `<script setup lang="ts">` -> `<template>` -> `<i18n lang="yaml">` -> `<style scoped>`.
