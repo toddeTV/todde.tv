@@ -77,7 +77,7 @@ export function buildVCard(
     noteParts.push('IT consultant, senior full-stack developer, and conference speaker.')
   }
   if (noteParts.length > 0) {
-    lines.push(`NOTE:${noteParts.join(' - ')}`)
+    lines.push(`NOTE:${escapeVCardValue(noteParts.join(' - '))}`)
   }
 
   for (const email of emails) {
