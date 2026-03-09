@@ -1,0 +1,231 @@
+<script setup lang="ts">
+import QRCode from 'qrcode'
+
+useSeoMeta({
+  title: 'vCard',
+  description: 'Generate a QR code contact card for Thorsten Seyschab.',
+})
+
+// Personal utility page - exclude from search engine indexing and sitemap
+useRobotsRule(false)
+
+defineOgImageComponent('Default')
+
+const { data: socials } = await useAsyncData('vcard-socials', () =>
+  queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
+)
+
+/** Email entries extracted from socials (sorted by sortOrder). */
+const emailEntries = computed(() =>
+  (socials.value ?? []).filter(s => s.url.startsWith('mailto:')),
+)
+
+/** Phone entries extracted from socials (sorted by sortOrder). */
+const phoneEntries = computed(() =>
+  (socials.value ?? []).filter(s => s.url.startsWith('tel:')),
+)
+
+/** Social profile entries (excluding emails and phones). */
+const socialEntries = computed(() =>
+  (socials.value ?? []).filter(s => !s.url.startsWith('mailto:') && !s.url.startsWith('tel:')),
+)
+
+// --- Checkbox state ---
+
+const includeName = ref(true)
+const includeNickname = ref(true)
+const includeWebsite = ref(true)
+const includeBio = ref(true)
+
+/**
+ * Reactive map of communication/social entry id to checked state.
+ * First email and first phone are pre-selected; all others unchecked.
+ */
+const checked = ref<Record<string, boolean>>({})
+
+/** Initializes default checked state once socials data is available. */
+function initDefaults() {
+  const first = new Set<string>()
+  const firstEmail = emailEntries.value[0]
+  const firstPhone = phoneEntries.value[0]
+  if (firstEmail) first.add(firstEmail.id)
+  if (firstPhone) first.add(firstPhone.id)
+
+  const defaults: Record<string, boolean> = {}
+  for (const entry of socials.value ?? []) {
+    if (entry.url.startsWith('mailto:') || entry.url.startsWith('tel:')) {
+      defaults[entry.id] = first.has(entry.id)
+    }
+    else {
+      defaults[entry.id] = false
+    }
+  }
+  checked.value = defaults
+}
+
+// Set defaults once data is loaded (runs during SSR and on client).
+watchEffect(() => {
+  if (socials.value?.length && Object.keys(checked.value).length === 0) {
+    initDefaults()
+  }
+})
+
+/** Computed vCard string based on current checkbox state. */
+const vcardString = computed(() => {
+  const selectedEmails = emailEntries.value
+    .filter(s => checked.value[s.id])
+    .map(s => s.url.replace('mailto:', ''))
+
+  const selectedPhones = phoneEntries.value
+    .filter(s => checked.value[s.id])
+    .map(s => s.url.replace('tel:', ''))
+
+  const selectedSocials = socialEntries.value
+    .filter(s => checked.value[s.id])
+    .map(s => ({ name: s.name, url: s.url }))
+
+  return useVCardBuilder(
+    {
+      name: includeName.value,
+      nickname: includeNickname.value,
+      website: includeWebsite.value,
+      bio: includeBio.value,
+    },
+    selectedEmails,
+    selectedPhones,
+    selectedSocials,
+  )
+})
+
+// --- QR code generation (client-side only) ---
+
+const qrDataUrl = ref('')
+const isMounted = ref(false)
+
+/**
+ * Generates a QR code data URL from the current vCard string.
+ * Runs only on the client side after mount.
+ */
+async function generateQrCode() {
+  try {
+    qrDataUrl.value = await QRCode.toDataURL(vcardString.value, {
+      width: 400,
+      margin: 2,
+      color: {
+        dark: '#fafafa',
+        light: '#141416',
+      },
+      errorCorrectionLevel: 'M',
+    })
+  }
+  catch {
+    qrDataUrl.value = ''
+  }
+}
+
+onMounted(() => {
+  isMounted.value = true
+  generateQrCode()
+})
+
+watch(vcardString, () => {
+  if (isMounted.value) {
+    generateQrCode()
+  }
+})
+</script>
+
+<template>
+  <div>
+    <AppSection>
+      <h1 class="mb-2">
+        Contact Card - vcard
+      </h1>
+      <p class="mb-8 text-lg">
+        Scan the QR code to save the contact. Toggle the checkboxes to customize what gets included.
+      </p>
+
+      <!-- QR Code -->
+      <div class="mb-10 flex justify-center">
+        <div
+          class="flex h-70 w-70 items-center justify-center rounded-lg
+            border border-border bg-surface sm:h-80 sm:w-80"
+        >
+          <img
+            v-if="qrDataUrl"
+            alt="QR code encoding a vCard for Thorsten Seyschab"
+            class="h-full w-full rounded-lg"
+            :src="qrDataUrl"
+          >
+          <p v-else class="text-sm text-text-dim">
+            Generating QR code...
+          </p>
+        </div>
+      </div>
+
+      <!-- Checkbox groups -->
+      <div class="flex flex-col gap-8">
+        <!-- Fixed info -->
+        <fieldset>
+          <legend class="mb-3 font-mono text-sm text-accent">
+            Contact Info
+          </legend>
+          <div class="flex flex-col gap-3">
+            <VCardCheckbox
+              v-model="includeName"
+              icon="ph:user"
+              label="Name (Thorsten Seyschab)"
+            />
+            <VCardCheckbox
+              v-model="includeNickname"
+              icon="ph:at"
+              label="Handle (@toddeTV)"
+            />
+            <VCardCheckbox
+              v-model="includeWebsite"
+              icon="ph:globe"
+              label="Website (todde.tv)"
+            />
+            <VCardCheckbox
+              v-model="includeBio"
+              icon="ph:info"
+              label="Bio / Description"
+            />
+          </div>
+        </fieldset>
+
+        <!-- Communication -->
+        <fieldset v-if="emailEntries.length || phoneEntries.length">
+          <legend class="mb-3 font-mono text-sm text-accent">
+            Communication
+          </legend>
+          <div class="flex flex-col gap-3">
+            <VCardCheckbox
+              v-for="entry in [...emailEntries, ...phoneEntries]"
+              :key="entry.id"
+              v-model="checked[entry.id]"
+              :icon="entry.icon"
+              :label="`${entry.name} (${entry.handle})`"
+            />
+          </div>
+        </fieldset>
+
+        <!-- Social profiles -->
+        <fieldset v-if="socialEntries.length">
+          <legend class="mb-3 font-mono text-sm text-accent">
+            Social Profiles
+          </legend>
+          <div class="flex flex-col gap-3">
+            <VCardCheckbox
+              v-for="social in socialEntries"
+              :key="social.id"
+              v-model="checked[social.id]"
+              :icon="social.icon"
+              :label="`${social.name} (${social.handle})`"
+            />
+          </div>
+        </fieldset>
+      </div>
+    </AppSection>
+  </div>
+</template>
