@@ -6,7 +6,7 @@ useSeoMeta({
   description: 'Generate a QR code contact card for Thorsten Seyschab.',
 })
 
-// Personal utility page - exclude from search engine indexing and sitemap
+// Personal utility page - exclude from search engine indexing (robots file)
 useRobotsRule(false)
 
 defineOgImageComponent('Default')
