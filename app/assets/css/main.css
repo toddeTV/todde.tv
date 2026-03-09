@@ -231,3 +231,12 @@
     @apply my-5;
   }
 }
+
+/* ----- Reusable image utilities ----- */
+
+@layer components {
+  /** Green accent border for featured images. Apply to <img> / <NuxtImg>. */
+  .img-bordered {
+    @apply border-3 border-accent rounded-lg;
+  }
+}

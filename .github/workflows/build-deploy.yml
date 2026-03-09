@@ -32,8 +32,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  rebuild:
-    name: Rebuild & Deploy
+  build:
+    name: Build & Deploy
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
