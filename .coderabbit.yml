@@ -93,7 +93,7 @@ reviews:
         ESLint configured.
         No runtime env vars. Legal page data (address, VAT ID) is injected via `NUXT_PUBLIC_LEGAL_*` env vars at build time through GitHub Variables.
         Env var naming convention: GitHub Actions Variables and Secrets must be named exactly the same as in `.env.example`. The `env:` block in the workflow maps them into the build environment via `${{ vars.VAR_NAME }}` / `${{ secrets.SECRET_NAME }}`.
-        Static site generation (SSG) via `pnpm generate`. Hosted on Cloudflare Pages (static). Deployed via GitHub Actions on every push to `main` and on a twice-weekly scheduled cron.
+        Static site generation (SSG) via `pnpm run build:ssg`. Hosted on Cloudflare Pages (static). Deployed via GitHub Actions on every push to `main` and on a twice-weekly scheduled cron.
 
         ### SSG constraint (CRITICAL)
         This project uses static site generation only. No SSR runtime exists in production.

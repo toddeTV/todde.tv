@@ -165,10 +165,10 @@ export default defineNuxtConfig({
       /**
        * Validate that all required legal env vars are set and non-empty.
        * Prevents building a site with broken/incomplete legal pages.
-       * Only runs during `nuxt build` / `nuxt generate` - skipped during
+       * Only runs during `pnpm run build:ssr` / `pnpm run build:ssg` - skipped during
        * `nuxt prepare` (postinstall), `nuxt dev`, and `nuxt typecheck`.
        */
-      const isBuildOrGenerate = process.argv.some(a => a === 'build' || a === 'generate')
+      const isBuildOrGenerate = process.argv.some(a => a === 'build:ssr' || a === 'build:ssg')
       if (!isBuildOrGenerate) return
 
       const required = [
