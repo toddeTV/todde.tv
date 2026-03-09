@@ -11,7 +11,7 @@ I'm so glad you got your hands on one of these 3D-printed magnets or keychains! 
 Since you've made it all the way here, take a look around! Feel free to explore my portfolio, check out the projects I'm currently building, or just drop me a message to say hi. I'm always happy to connect with fellow tech enthusiasts!
 
 ::div{.mt-8}
-:nuxt-img{src="/g/banner.jpg" alt="A selection of 3D-printed magnets and keychains given away at tech conferences" loading="lazy" .img-bordered}
+:nuxt-img{src="/g/banner.jpg" alt="A selection of 3D-printed magnets and keychains given away at tech conferences" loading="lazy" .img-bordered .w-full}
 ::
 
 _Psst - this is just a sneak peek. The full collection is bigger, and my 3D printer has no plans to retire anytime soon._
