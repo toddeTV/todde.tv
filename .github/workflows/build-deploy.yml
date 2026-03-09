@@ -53,7 +53,7 @@ jobs:
         run: pnpm i --frozen-lockfile --prefer-offline
 
       - name: Generate static site
-        run: pnpm generate
+        run: pnpm run build:ssg
         env:
           NUXT_PUBLIC_LEGAL_ADDRESS_STREET: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_STREET }}
           NUXT_PUBLIC_LEGAL_ADDRESS_CITY: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_CITY }}
