@@ -1,8 +1,12 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const { data: page } = await useAsyncData('page-' + route.path, () => {
-  return queryCollection('content').path(route.path).first()
+// Strip trailing slash to prevent hydration key mismatches on CDNs that redirect
+// directory URLs (e.g. Cloudflare Pages: `/g` -> `/g/`).
+const path = route.path.replace(/\/$/, '') || '/'
+
+const { data: page } = await useAsyncData('page-' + path, () => {
+  return queryCollection('content').path(path).first()
 })
 
 if (!page.value) {
