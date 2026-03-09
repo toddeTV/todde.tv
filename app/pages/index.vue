@@ -83,7 +83,7 @@ const [
         <div>
           <NuxtImg
             alt="Thorsten Seyschab"
-            class="h-45 w-45 rounded-full border-3 border-accent object-cover max-sm:h-35 max-sm:w-35"
+            class="img-bordered h-45 w-45 rounded-full object-cover max-sm:h-35 max-sm:w-35"
             height="180"
             src="/avatar-thorsten-seyschab.jpg"
             width="180"
