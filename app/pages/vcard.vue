@@ -118,7 +118,7 @@ watch(vcardString, () => {
             class="h-full w-full rounded-lg"
             :src="qrDataUrl"
           >
-          <p v-else-if="qrError" class="text-sm text-secondary-400">
+          <p v-else-if="qrError" class="text-sm text-text-muted">
             Failed to generate QR code.
           </p>
           <p v-else class="text-sm text-text-dim">
