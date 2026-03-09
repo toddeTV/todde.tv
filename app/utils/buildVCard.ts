@@ -22,6 +22,20 @@ interface VCardSocialEntry {
 }
 
 /**
+ * Escapes special characters in vCard 3.0 property values.
+ * Backslash, semicolon, comma, and newlines must be escaped per RFC 2426.
+ * @param value - raw property value
+ * @returns escaped value safe for vCard embedding
+ */
+function escapeVCardValue(value: string): string {
+  return value
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\n/g, '\\n')
+}
+
+/**
  * Builds a vCard 3.0 string from the provided fields.
  * @param fixed - toggle flags for name, website, and bio
  * @param emails - array of selected email addresses (raw, without mailto: prefix)
@@ -67,16 +81,17 @@ export function buildVCard(
   }
 
   for (const email of emails) {
-    lines.push(`EMAIL:${email}`)
+    lines.push(`EMAIL:${escapeVCardValue(email)}`)
   }
 
   for (const phone of phones) {
-    lines.push(`TEL;TYPE=CELL:${phone}`)
+    lines.push(`TEL;TYPE=CELL:${escapeVCardValue(phone)}`)
   }
 
   // Social profiles as X-SOCIALPROFILE with TYPE labels.
+  // Only the TYPE parameter value is escaped; the URL is kept raw since colons are structural.
   for (const social of socials) {
-    lines.push(`X-SOCIALPROFILE;TYPE=${social.name}:${social.url}`)
+    lines.push(`X-SOCIALPROFILE;TYPE=${escapeVCardValue(social.name)}:${social.url}`)
   }
 
   lines.push('END:VCARD')
