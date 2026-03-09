@@ -23,6 +23,9 @@ on:
     - cron: "0 3 * * 4"
   workflow_dispatch: {} # Allow manual trigger from GitHub UI
 
+permissions:
+  contents: read
+
 # Cancel in-progress runs when a newer run is triggered (e.g. two PRs merged quickly).
 concurrency:
   group: deploy-production
