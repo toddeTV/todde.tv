@@ -95,6 +95,13 @@ reviews:
         Env var naming convention: GitHub Actions Variables and Secrets must be named exactly the same as in `.env.example`. The `env:` block in the workflow maps them into the build environment via `${{ vars.VAR_NAME }}` / `${{ secrets.SECRET_NAME }}`.
         Static site generation (SSG) via `pnpm generate`. Hosted on Cloudflare Pages (static). Deployed via GitHub Actions on every push to `main` and on a twice-weekly scheduled cron.
 
+        ### SSG constraint (CRITICAL)
+        This project uses static site generation only. No SSR runtime exists in production.
+        - Never approve code that depends on per-request server execution (server routes, server middleware, runtime server state, per-request cookies/headers, server-only composables like `useRequestHeaders`).
+        - All dynamic behavior must work client-side after hydration or be computed at build time.
+        - Known trade-off: values like "today's date" are frozen in pre-rendered HTML but corrected client-side via `onMounted`. This is acceptable because the site rebuilds twice a week.
+        - If a change requires SSR and no pure client-side or build-time alternative exists, flag it as a blocking issue in the review.
+
         ### Directory Layout
         - `app/` - Frontend (components, composables, layouts, pages)
         - `app/components/ui/` - Reusable UI primitives (App* prefix)
@@ -174,6 +181,7 @@ reviews:
     - path: nuxt.config.ts
       instructions: |
         Verify: module options match upstream docs. Static site generation target.
+        Reject any `nitro.preset` change that targets a server runtime. The production preset is `static` (default for `nuxt generate`).
 
   # Abort in-progress review on close/merge.
   abort_on_close: true
