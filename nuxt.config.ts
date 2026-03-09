@@ -302,4 +302,10 @@ export default defineNuxtConfig({
       // `sameAs` and `email` are populated at runtime from the `socials` content collection (see `app.vue`).
     },
   },
+
+  sitemap: { // for `nuxt-simple-sitemap` (via `@nuxtjs/seo`)
+    exclude: [
+      '/vcard',
+    ],
+  },
 })

@@ -109,8 +109,8 @@ export default withNuxt(
     rules: {
       '@stylistic/max-len': ['error', {
         code: 120,
-        // Ignore SVG path d attributes in Vue templates
-        ignorePattern: String.raw`^\s*d="`,
+        // Ignore SVG path d attributes and inline data-URI background images
+        ignorePattern: String.raw`^\s*d="|url\(["']data:image`,
       }],
     },
   },
