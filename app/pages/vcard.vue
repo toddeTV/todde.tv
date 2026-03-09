@@ -70,7 +70,7 @@ async function generateQrCode() {
       width: 400,
       margin: 2,
       // QR foreground/background must be raw hex (library requirement).
-      // dark = neutral-50 (#fafafa), light = neutral-900 (#141416) — update if palette changes.
+      // dark = neutral-50 (#fafafa), light = neutral-900 (#141416) - update if palette changes.
       color: {
         dark: '#fafafa',
         light: '#141416',

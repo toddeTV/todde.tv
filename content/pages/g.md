@@ -1,5 +1,5 @@
 ---
-# Giveaway page — `/g` stands for "gift" / "giveaway". No redirection.
+# Giveaway page - `/g` stands for "gift" / "giveaway". No redirection.
 title: You found the secret swag stash!
 description: Landing page for 3D-printed magnets and keychains given away as gifts at tech conferences.
 sitemap:

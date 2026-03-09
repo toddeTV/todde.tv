@@ -89,9 +89,6 @@ export default defineNuxtConfig({
     },
   },
 
-  // nitro: {
-  // },
-
   css: [
     '~/assets/css/main.css',
   ],
@@ -136,6 +133,16 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2026-03-04',
+
+  nitro: {
+    prerender: {
+      // Routes not discoverable by the crawler (e.g. not linked from any page).
+      routes: [
+        '/g',
+        '/vcard',
+      ],
+    },
+  },
 
   vite: {
     plugins: [
