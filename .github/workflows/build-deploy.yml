@@ -2,7 +2,6 @@ name: Build & Deploy
 
 # Build the static site and deploy to Cloudflare Pages.
 # Triggers: push to main (PR merge), scheduled cron, manual dispatch.
-# See `docs/cloudflare-hosting.md` for context.
 #
 # Required GitHub Actions secrets:
 #   CLOUDFLARE_API_TOKEN   - Cloudflare API token with "Cloudflare Pages: Edit" permission
@@ -33,6 +32,7 @@ jobs:
   rebuild:
     name: Rebuild & Deploy
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - name: Checkout the Codebase
         uses: actions/checkout@v6
