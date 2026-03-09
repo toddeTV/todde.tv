@@ -100,6 +100,7 @@ const vcardString = computed(() => {
 // --- QR code generation (client-side only) ---
 
 const qrDataUrl = ref('')
+const qrError = ref(false)
 const isMounted = ref(false)
 
 /**
@@ -108,6 +109,7 @@ const isMounted = ref(false)
  */
 async function generateQrCode() {
   try {
+    qrError.value = false
     qrDataUrl.value = await QRCode.toDataURL(vcardString.value, {
       width: 400,
       margin: 2,
@@ -120,6 +122,7 @@ async function generateQrCode() {
   }
   catch {
     qrDataUrl.value = ''
+    qrError.value = true
   }
 }
 
@@ -157,6 +160,9 @@ watch(vcardString, () => {
             class="h-full w-full rounded-lg"
             :src="qrDataUrl"
           >
+          <p v-else-if="qrError" class="text-sm text-secondary-400">
+            Failed to generate QR code.
+          </p>
           <p v-else class="text-sm text-text-dim">
             Generating QR code...
           </p>
