@@ -84,7 +84,7 @@ const vcardString = computed(() => {
     .filter(s => checked.value[s.id])
     .map(s => ({ name: s.name, url: s.url }))
 
-  return useVCardBuilder(
+  return buildVCard(
     {
       name: includeName.value,
       nickname: includeNickname.value,

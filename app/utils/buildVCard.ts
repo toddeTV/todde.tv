@@ -1,5 +1,5 @@
 /**
- * Composable that builds a vCard 3.0 string from selected contact fields.
+ * Builds a vCard 3.0 string from selected contact fields.
  * Used by the /vcard page to generate QR code content.
  */
 
@@ -29,7 +29,7 @@ interface VCardSocialEntry {
  * @param socials - array of selected social profile entries
  * @returns formatted vCard 3.0 string
  */
-export function useVCardBuilder(
+export function buildVCard(
   fixed: VCardFixedFields,
   emails: string[],
   phones: string[],
