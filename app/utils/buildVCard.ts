@@ -3,7 +3,7 @@
  * Used by the /vcard page to generate QR code content.
  */
 
-interface VCardFixedFields {
+export interface VCardFixedFields {
   /** Include full name (Thorsten Seyschab). */
   name: boolean
   /** Include nickname / handle (@toddeTV). */
@@ -14,7 +14,7 @@ interface VCardFixedFields {
   bio: boolean
 }
 
-interface VCardSocialEntry {
+export interface VCardSocialEntry {
   /** Social platform display name (e.g. "GitHub"). */
   name: string
   /** Full URL (profile URL, mailto:, or tel:). */
