@@ -16,16 +16,16 @@ logs
 # Misc
 .DS_Store
 .fleet
-.idea
 
 # Local env files
 .env
 .env.*
 !.env.example
 
-# no AI files (AI should only be used for reviewing code, not for generating it)
+# no IDE and LLM/AI settings
+AGENTS.md
 CLAUDE.md
 .claude
-.github/instructions
-.github/prompts
-.vscode/mcp.json
+.cursor
+.idea
+.vscode
