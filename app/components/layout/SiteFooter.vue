@@ -8,9 +8,12 @@ const { data: socials } = await useAsyncData('socials-only-featured', () =>
 )
 
 const START_YEAR = 2026
+const REPOSITORY_URL = 'https://github.com/toddeTV/todde.tv'
 
 const today = useTodayDate()
 const currentYear = computed(() => Number(today.value.slice(0, 4)))
+const runtimeConfig = useRuntimeConfig()
+const releaseLabel = runtimeConfig.public.build.releaseLabel
 
 /** Returns "2026" if current year equals start year, otherwise "2026-{currentYear}". */
 const yearSpan = computed(() =>
@@ -64,14 +67,15 @@ const yearSpan = computed(() =>
 
         <span class="mx-1.5">·</span>
 
-        Source on
+        <span>Version {{ releaseLabel }}</span>
 
         <NuxtLink
-          class="text-xs"
+          aria-label="GitHub repository"
+          class="ml-1 inline-flex align-middle text-xs"
           target="_blank"
-          to="https://github.com/toddeTV/todde.tv"
+          :to="REPOSITORY_URL"
         >
-          GitHub
+          <Icon name="simple-icons:github" :size="12" />
         </NuxtLink>
       </p>
     </AppContainer>
