@@ -48,10 +48,13 @@ const yearSpan = computed(() =>
       </p>
 
       <p class="text-center text-xs text-text-dim">
+        <!-- `link-checker/valid-sitemap-link` does not resolve content-backed catch-all pages here. -->
+        <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
         <NuxtLink class="text-xs text-text-dim hover:text-text" to="/legal-notice">
           Legal Notice
         </NuxtLink>
         <span class="mx-1.5">·</span>
+        <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
         <NuxtLink class="text-xs text-text-dim hover:text-text" to="/privacy-policy">
           Privacy Policy
         </NuxtLink>
