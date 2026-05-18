@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /**
  * Green uppercase category label for OG images (e.g. "Project", "Talk", "Client Project").
- * Satori constraints: inline styles only, no Tailwind, hardcoded colors.
  */
 defineProps<{
   /** The category text to display (e.g. "Project", "Talk"). */

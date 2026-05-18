@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /**
  * Description/subtitle text for OG images.
- * Satori constraints: inline styles only, no Tailwind, hardcoded colors.
  */
 withDefaults(defineProps<{
   /** Description text to display. */

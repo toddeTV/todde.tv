@@ -2,7 +2,6 @@
 /**
  * Shared footer for all OG image components.
  * Renders author name (left), site URL (right), and a bottom gradient accent line.
- * Satori constraints: inline styles only, no Tailwind, hardcoded colors.
  */
 </script>
 
@@ -17,11 +16,9 @@
   >
     <!-- Author name and site URL -->
     <div
-      class="flex-row"
       :style="{
         display: 'flex',
         flexDirection: 'row',
-        flexWrap: 'nowrap',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
       }"
