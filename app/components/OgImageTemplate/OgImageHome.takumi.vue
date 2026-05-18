@@ -31,17 +31,6 @@ withDefaults(defineProps<{
 
     <div
       :style="{
-        position: 'absolute',
-        top: '315px',
-        left: '60px',
-        width: '700px',
-        height: '1px',
-        background: 'linear-gradient(90deg, rgba(0,220,130,0.15), transparent)',
-      }"
-    />
-
-    <div
-      :style="{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
