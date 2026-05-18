@@ -1,8 +1,9 @@
 import tailwindcss from '@tailwindcss/vite'
-import projectConfig from './project.config.json'
 import { resolveBuildReleaseMetadata } from './server/utils/build-release-metadata'
+import { getProjectMetadataConfig } from './shared/utils/project-metadata'
 
 const buildReleaseMetadata = resolveBuildReleaseMetadata()
+const projectMetadataConfig = getProjectMetadataConfig()
 const staticMachineReadableTextRouteRule = {
   prerender: true,
   headers: {
@@ -39,8 +40,8 @@ export default defineNuxtConfig({
       // titleTemplate, description, og:site_name, and htmlAttrs.lang are handled by `@nuxtjs/seo` via `site`
       // config - do not duplicate here.
       meta: [
-        { name: 'application-name', content: projectConfig.projectName },
-        { name: 'author', content: projectConfig.author.name },
+        { name: 'application-name', content: projectMetadataConfig.projectName },
+        { name: 'author', content: projectMetadataConfig.author.name },
 
         // Ignored by Google since 2009, but some minor search engines (Yandex, Baidu) still
         // consider it. Harmless to include.
@@ -104,10 +105,10 @@ export default defineNuxtConfig({
   ],
 
   site: { // for `@nuxtjs/seo` - shared site config used by all SEO sub-modules (like `ogImage`, `schemaOrg`, etc.)
-    url: projectConfig.siteUrl,
+    url: projectMetadataConfig.siteUrl,
     // name: 'todde.tv',
-    name: projectConfig.author.name,
-    description: projectConfig.siteDescription,
+    name: projectMetadataConfig.author.name,
+    description: projectMetadataConfig.siteDescription,
     defaultLocale: 'en',
   },
 
@@ -137,13 +138,13 @@ export default defineNuxtConfig({
     // Keep both in sync.
 
     // Legal Notice alternative paths
-    '/imprint': { redirect: { to: projectConfig.legal.legalNoticePath, statusCode: 301 } },
-    '/impressum': { redirect: { to: projectConfig.legal.legalNoticePath, statusCode: 301 } },
-    '/legal': { redirect: { to: projectConfig.legal.legalNoticePath, statusCode: 301 } },
+    '/imprint': { redirect: { to: projectMetadataConfig.legal.legalNoticePath, statusCode: 301 } },
+    '/impressum': { redirect: { to: projectMetadataConfig.legal.legalNoticePath, statusCode: 301 } },
+    '/legal': { redirect: { to: projectMetadataConfig.legal.legalNoticePath, statusCode: 301 } },
 
     // Privacy Policy alternative paths
-    '/privacy': { redirect: { to: projectConfig.legal.privacyPolicyPath, statusCode: 301 } },
-    '/datenschutz': { redirect: { to: projectConfig.legal.privacyPolicyPath, statusCode: 301 } },
+    '/privacy': { redirect: { to: projectMetadataConfig.legal.privacyPolicyPath, statusCode: 301 } },
+    '/datenschutz': { redirect: { to: projectMetadataConfig.legal.privacyPolicyPath, statusCode: 301 } },
 
     // Machine-readable metadata alias
     '/security.txt': { redirect: { to: '/.well-known/security.txt', statusCode: 301 } },
@@ -327,11 +328,11 @@ export default defineNuxtConfig({
   schemaOrg: { // for `nuxt-schema-org` (via `@nuxtjs/seo`)
     identity: {
       type: 'Person',
-      name: projectConfig.author.name,
-      url: projectConfig.author.url,
+      name: projectMetadataConfig.author.name,
+      url: projectMetadataConfig.author.url,
       image: '/avatar-thorsten-seyschab.jpg',
       // logo: '/favicon.svg', // not a standard Schema.org property for Person, but some tools check for it.
-      // `sameAs` and `email` are populated at runtime from the `socials` content collection (see `app.vue`).
+      // `sameAs` and `email` are populated from the prepared project metadata at runtime.
     },
   },
 
