@@ -21,15 +21,10 @@ export default defineEventHandler((event) => {
     `  Name: ${author.name}`,
     `  Contact: ${author.contact}`,
     `  Website: ${author.url}`,
-    `  Location: ${author.location}`,
     '',
     '/* SOURCE CODE */',
     `  Repository: ${repository.url}`,
-    '',
-    '/* LEGAL DISCLAIMER */',
     `  License: ${repository.licenseUrl}`,
-    `  Legal Notice: ${legalNoticeUrl}`,
-    `  Privacy Policy: ${privacyPolicyUrl}`,
   ].join('\n')
 
   setResponseHeader(event, 'Content-Type', 'text/plain; charset=utf-8')
