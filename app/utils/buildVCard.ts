@@ -3,12 +3,14 @@
  * Used by the /vcard page to generate QR code content.
  */
 
+import projectConfig from '~~/project.config.json'
+
 export interface VCardFixedFields {
-  /** Include full name (Thorsten Seyschab). */
+  /** Include full name. */
   name: boolean
-  /** Include nickname / handle (@toddeTV). */
+  /** Include nickname / handle. */
   nickname: boolean
-  /** Include website URL (https://todde.tv). */
+  /** Include website URL. */
   website: boolean
   /** Include short bio/description. */
   bio: boolean
@@ -55,26 +57,26 @@ export function buildVCard(
   ]
 
   if (fixed.name) {
-    lines.push('N:Seyschab;Thorsten;;;')
-    lines.push('FN:Thorsten Seyschab')
+    lines.push(`N:${projectConfig.author.familyName};${projectConfig.author.givenName};;;`)
+    lines.push(`FN:${escapeVCardValue(projectConfig.author.name)}`)
   }
 
   if (fixed.nickname) {
     // NICKNAME is recognized by Apple Contacts but ignored on Android.
-    lines.push('NICKNAME:toddeTV')
+    lines.push(`NICKNAME:${escapeVCardValue(projectConfig.author.nickname)}`)
   }
 
   if (fixed.website) {
-    lines.push('URL:https://todde.tv')
+    lines.push(`URL:${projectConfig.siteUrl}`)
   }
 
   // Build NOTE from handle and/or bio (handle first, two blank lines between).
   const noteParts: string[] = []
   if (fixed.nickname) {
-    noteParts.push('@toddeTV')
+    noteParts.push(projectConfig.author.handle)
   }
   if (fixed.bio) {
-    noteParts.push('IT consultant, senior full-stack developer, and conference speaker.')
+    noteParts.push(projectConfig.author.roleSummary)
   }
   if (noteParts.length > 0) {
     lines.push(`NOTE:${escapeVCardValue(noteParts.join(' - '))}`)

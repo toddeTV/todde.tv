@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
 import QRCode from 'qrcode'
 
 useSeoMeta({
   title: 'vCard',
-  description: 'Generate a QR code contact card for Thorsten Seyschab.',
+  description: `Generate a QR code contact card for ${projectConfig.author.name}.`,
 })
 
 // Personal utility page - exclude from search engine indexing (robots file)
@@ -114,7 +115,7 @@ watch(vcardString, () => {
         >
           <img
             v-if="qrDataUrl"
-            alt="QR code encoding a vCard for Thorsten Seyschab"
+            :alt="`QR code encoding a vCard for ${projectConfig.author.name}`"
             class="h-full w-full rounded-lg"
             :src="qrDataUrl"
           >
@@ -138,17 +139,17 @@ watch(vcardString, () => {
             <VCardCheckbox
               v-model="includeName"
               icon="ph:user"
-              label="Name (Thorsten Seyschab)"
+              :label="`Name (${projectConfig.author.name})`"
             />
             <VCardCheckbox
               v-model="includeNickname"
               icon="ph:at"
-              label="Handle (@toddeTV)"
+              :label="`Handle (${projectConfig.author.handle})`"
             />
             <VCardCheckbox
               v-model="includeWebsite"
               icon="ph:globe"
-              label="Website (todde.tv)"
+              :label="`Website (${projectConfig.projectName})`"
             />
             <VCardCheckbox
               v-model="includeBio"
