@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /**
  * Default OG image component for the homepage.
- * Rendered by Satori (not a browser) - must use inline styles, <img>, and hardcoded colors.
  */
 withDefaults(defineProps<{
   /** Page title override. */
@@ -31,7 +30,6 @@ withDefaults(defineProps<{
   >
     <OgImageGlow />
 
-    <!-- Subtle horizontal rule -->
     <div
       :style="{
         position: 'absolute',
@@ -43,12 +41,10 @@ withDefaults(defineProps<{
       }"
     />
 
-    <!-- Title and description (vertically centered) -->
     <div
       :style="{
         display: 'flex',
         flexDirection: 'column',
-        flexWrap: 'nowrap',
         width: '670px',
       }"
     >
@@ -56,7 +52,6 @@ withDefaults(defineProps<{
       <OgImageDescription size="lg" :text="description" />
     </div>
 
-    <!-- Avatar with accent gradient border (large, centered-right) -->
     <div
       :style="{
         position: 'absolute',
@@ -64,22 +59,22 @@ withDefaults(defineProps<{
         right: '80px',
         width: '350px',
         height: '350px',
-        borderRadius: '50%',
+        borderRadius: '999px',
         background: 'linear-gradient(135deg, #00dc82, #00c474)',
         padding: '5px',
-        flexWrap: 'nowrap',
       }"
     >
-      <img
-        alt="Thorsten Seyschab"
+      <NuxtImg
+        height="340"
         src="/avatar-thorsten-seyschab.jpg"
         :style="{
           width: '340px',
           height: '340px',
-          borderRadius: '50%',
+          borderRadius: '999px',
           objectFit: 'cover',
         }"
-      >
+        width="340"
+      />
     </div>
 
     <OgImageFooter />
