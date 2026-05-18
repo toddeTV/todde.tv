@@ -16,8 +16,8 @@ if (!page.value) {
 if (page.value.seo) {
   useSeoMeta(page.value.seo)
 }
-if (page.value.head) {
-  useHead(page.value.head as Record<string, unknown>)
+if (page.value.schemaOrg) {
+  useSchemaOrg(page.value.schemaOrg)
 }
 if (page.value.ogImage) {
   defineOgImage(page.value.ogImage)
