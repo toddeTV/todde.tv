@@ -145,6 +145,13 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    optimizeDeps: {
+      include: [
+        '@unhead/schema-org/vue',
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+      ],
+    },
     plugins: [
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tailwindcss() as any,
