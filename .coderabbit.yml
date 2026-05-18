@@ -1,13 +1,13 @@
 # Language of the review.
 language: en-US
 
-# Opt-in to the free tier limits if no paid subscription is detected.
+# Controls whether free-tier limits apply when no paid subscription is detected.
 enable_free_tier: false
 
 reviews:
   # "assertive" emits a broad range of issues including nitpicks and improvements.
-  # "chill" provides lighter feedback with fewer non-critical comments.
-  profile: assertive
+  # "chill" keeps reviews focused on higher-value findings with fewer non-critical comments.
+  profile: chill
 
   # If true, CodeRabbit will request changes on the PR if there are issues. If false, it will only comment.
   request_changes_workflow: false
@@ -76,9 +76,12 @@ reviews:
     - "!.nuxt/**"
     - "!.output/**"
     - "!dist/**"
+    - "!node_modules/**"
     - "!pnpm-lock.yaml"
 
-  # Path-specific instructions for code review.
+  # Special instructions for certain code paths.
+  # CRITICAL: `path_instructions` play a primary role in defining project standards alongside documentation-based
+  #           guidance when `knowledge_base.code_guidelines.enabled` is true.
   path_instructions:
     - path: "**"
       instructions: |
@@ -201,6 +204,9 @@ reviews:
     # And also incremental ones.
     auto_incremental_review: true
 
+    # Disable commit-threshold auto-pause so reviews continue on every push.
+    auto_pause_after_reviewed_commits: 0
+
     # Review draft PRs.
     drafts: true
 
@@ -227,17 +233,24 @@ reviews:
 # Configure knowledge base features to let the AI learn from your project's documentation and past reviews.
 knowledge_base:
   learnings:
-    # "auto" allows the AI to automatically learn from PR feedback and apply it to future reviews.
-    scope: auto
+    # Scope for storing/reusing learned feedback from PR reviews.
+    # Possible values:
+    # - "local": learnings are scoped to this repository only.
+    # - "global": learnings are shared across the organization/workspace.
+    # - "auto": uses local for public repos, global for private repos.
+    scope: local
 
   code_guidelines:
-    # Enable the AI to read and apply project-specific documentation.
+    # Whether CodeRabbit should apply coding-guideline documents during review.
+    # Possible values:
+    # - true: enable reading and applying guideline files.
+    # - false: disable guideline-based review behavior.
     enabled: true
 
     # Index documentation to understand project conventions.
     filePatterns:
-      - "docs/**/*.md"
       - content.config.ts
       - CONTRIBUTING.md
+      - docs/**/*.md
       - nuxt.config.ts
       - README.md
