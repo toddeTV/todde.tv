@@ -137,13 +137,13 @@ export default defineNuxtConfig({
     // Keep both in sync.
 
     // Legal Notice alternative paths
-    '/imprint': { redirect: { to: '/legal-notice', statusCode: 301 } },
-    '/impressum': { redirect: { to: '/legal-notice', statusCode: 301 } },
-    '/legal': { redirect: { to: '/legal-notice', statusCode: 301 } },
+    '/imprint': { redirect: { to: projectConfig.legal.legalNoticePath, statusCode: 301 } },
+    '/impressum': { redirect: { to: projectConfig.legal.legalNoticePath, statusCode: 301 } },
+    '/legal': { redirect: { to: projectConfig.legal.legalNoticePath, statusCode: 301 } },
 
     // Privacy Policy alternative paths
-    '/privacy': { redirect: { to: '/privacy-policy', statusCode: 301 } },
-    '/datenschutz': { redirect: { to: '/privacy-policy', statusCode: 301 } },
+    '/privacy': { redirect: { to: projectConfig.legal.privacyPolicyPath, statusCode: 301 } },
+    '/datenschutz': { redirect: { to: projectConfig.legal.privacyPolicyPath, statusCode: 301 } },
 
     // Machine-readable metadata alias
     '/security.txt': { redirect: { to: '/.well-known/security.txt', statusCode: 301 } },
@@ -327,8 +327,8 @@ export default defineNuxtConfig({
   schemaOrg: { // for `nuxt-schema-org` (via `@nuxtjs/seo`)
     identity: {
       type: 'Person',
-      name: 'Thorsten Seyschab',
-      url: 'https://todde.tv',
+      name: projectConfig.author.name,
+      url: projectConfig.author.url,
       image: '/avatar-thorsten-seyschab.jpg',
       // logo: '/favicon.svg', // not a standard Schema.org property for Person, but some tools check for it.
       // `sameAs` and `email` are populated at runtime from the `socials` content collection (see `app.vue`).

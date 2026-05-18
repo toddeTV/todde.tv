@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
+
 const { data: socials } = await useAsyncData('socials-only-featured', () =>
   queryCollection('socials')
     .where('active', '=', true)
@@ -8,7 +10,7 @@ const { data: socials } = await useAsyncData('socials-only-featured', () =>
 )
 
 const START_YEAR = 2026
-const REPOSITORY_URL = 'https://github.com/toddeTV/todde.tv'
+const { author, legal, repository } = projectConfig
 
 const today = useTodayDate()
 const currentYear = computed(() => Number(today.value.slice(0, 4)))
@@ -47,14 +49,14 @@ const yearSpan = computed(() =>
 
       <p class="text-center text-xs text-text-dim">
         Created with <Icon class="inline-block" name="ph:heart" :size="12" /> by
-        Thorsten Seyschab, &copy; {{ yearSpan }}, All Rights Reserved.
+        {{ author.name }}, &copy; {{ yearSpan }}, All Rights Reserved.
       </p>
 
       <p class="flex flex-wrap items-center justify-center gap-y-1 text-center text-xs text-text-dim">
         <span class="inline-flex items-center whitespace-nowrap">
           <!-- `link-checker/valid-sitemap-link` does not resolve content-backed catch-all pages here, so we need: -->
           <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
-          <NuxtLink class="text-xs text-text-dim hover:text-text" to="/legal-notice">
+          <NuxtLink class="text-xs text-text-dim hover:text-text" :to="legal.legalNoticePath">
             Legal Notice
           </NuxtLink>
 
@@ -64,7 +66,7 @@ const yearSpan = computed(() =>
         <span class="inline-flex items-center whitespace-nowrap">
           <!-- `link-checker/valid-sitemap-link` does not resolve content-backed catch-all pages here, so we need: -->
           <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
-          <NuxtLink class="text-xs text-text-dim hover:text-text" to="/privacy-policy">
+          <NuxtLink class="text-xs text-text-dim hover:text-text" :to="legal.privacyPolicyPath">
             Privacy Policy
           </NuxtLink>
 
@@ -78,7 +80,7 @@ const yearSpan = computed(() =>
             aria-label="GitHub repository"
             class="relative -top-px ml-1.5 inline-flex items-center align-middle text-xs"
             target="_blank"
-            :to="REPOSITORY_URL"
+            :to="repository.url"
           >
             <Icon name="simple-icons:github" :size="14" />
           </NuxtLink>

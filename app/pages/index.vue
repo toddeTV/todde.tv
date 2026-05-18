@@ -1,19 +1,21 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
+
 // Override the default titleTemplate (`%s %separator %siteName`) from `@nuxtjs/seo` so the home
-// page title is rendered as-is without appending `| Thorsten Seyschab`.
+// page title is rendered as-is without appending the author name.
 useHead({
   titleTemplate: '%s',
 })
 
 useSeoMeta({
-  title: 'Thorsten Seyschab - @toddeTV',
-  description: 'IT consultant, senior full-stack developer, and conference speaker. Specializing in Vue.js, '
+  title: `${projectConfig.author.name} - ${projectConfig.author.handle}`,
+  description: `${projectConfig.author.roleSummary}. Specializing in Vue.js, `
     + 'Nuxt, 3D on the web, and full-stack development.',
 })
 
 defineOgImage('Home', {
-  title: 'Thorsten Seyschab',
-  description: 'IT consultant, senior full-stack developer, and conference speaker.',
+  title: projectConfig.author.name,
+  description: projectConfig.author.roleSummary,
 })
 
 /**
@@ -70,19 +72,19 @@ const [
             Hi, I'm
           </p>
           <h1 class="mb-3 text-4xl sm:text-5xl">
-            Thorsten Seyschab
+            {{ projectConfig.author.name }}
           </h1>
           <p class="mb-3 text-lg">
-            IT consultant, senior full-stack developer, and conference speaker
+            {{ projectConfig.author.roleSummary }}
           </p>
           <p class="flex items-center gap-1.5 text-sm text-text-dim max-sm:justify-center">
             <Icon name="ph:map-pin" :size="16" />
-            Dresden, Germany
+            {{ projectConfig.author.location }}
           </p>
         </div>
         <div>
           <NuxtImg
-            alt="Thorsten Seyschab"
+            :alt="projectConfig.author.name"
             class="img-bordered h-45 w-45 rounded-full object-cover max-sm:h-35 max-sm:w-35"
             height="180"
             src="/avatar-thorsten-seyschab.jpg"
