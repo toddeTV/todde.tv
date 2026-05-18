@@ -1,7 +1,14 @@
 import tailwindcss from '@tailwindcss/vite'
+import projectConfig from './project.config.json'
 import { resolveBuildReleaseMetadata } from './server/utils/build-release-metadata'
 
 const buildReleaseMetadata = resolveBuildReleaseMetadata()
+const staticMachineReadableTextRouteRule = {
+  prerender: true,
+  headers: {
+    'cache-control': 'public, max-age=86400, s-maxage=604800',
+  },
+} as const
 
 export default defineNuxtConfig({
   modules: [
@@ -32,8 +39,8 @@ export default defineNuxtConfig({
       // titleTemplate, description, og:site_name, and htmlAttrs.lang are handled by `@nuxtjs/seo` via `site`
       // config - do not duplicate here.
       meta: [
-        { name: 'application-name', content: 'todde.tv' },
-        { name: 'author', content: 'Thorsten Seyschab' },
+        { name: 'application-name', content: projectConfig.projectName },
+        { name: 'author', content: projectConfig.author.name },
 
         // Ignored by Google since 2009, but some minor search engines (Yandex, Baidu) still
         // consider it. Harmless to include.
@@ -97,11 +104,10 @@ export default defineNuxtConfig({
   ],
 
   site: { // for `@nuxtjs/seo` - shared site config used by all SEO sub-modules (like `ogImage`, `schemaOrg`, etc.)
-    url: 'https://todde.tv',
+    url: projectConfig.siteUrl,
     // name: 'todde.tv',
-    name: 'Thorsten Seyschab',
-    description:
-      'Personal portfolio of Thorsten Seyschab - IT consultant, senior full-stack developer, and conference speaker.',
+    name: projectConfig.author.name,
+    description: projectConfig.siteDescription,
     defaultLocale: 'en',
   },
 
@@ -138,6 +144,13 @@ export default defineNuxtConfig({
     // Privacy Policy alternative paths
     '/privacy': { redirect: { to: '/privacy-policy', statusCode: 301 } },
     '/datenschutz': { redirect: { to: '/privacy-policy', statusCode: 301 } },
+
+    // Machine-readable metadata alias
+    '/security.txt': { redirect: { to: '/.well-known/security.txt', statusCode: 301 } },
+    
+    // Build these machine-readable text endpoints as static files for Cloudflare Pages SSG.
+    '/.well-known/security.txt': staticMachineReadableTextRouteRule,
+    '/humans.txt': staticMachineReadableTextRouteRule,
   },
 
   compatibilityDate: '2026-03-04',
