@@ -110,7 +110,7 @@ reviews:
         - `app/components/ui/` - Reusable UI primitives (App* prefix)
         - `app/components/layout/` - Site-wide layout (header, footer)
         - `app/components/content/` - Domain content components (cards, carousel)
-        - `app/components/OgImage/` - active Takumi OG image templates
+        - `app/components/OgImageTemplate/` - active Takumi OG image templates
         - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/, socials/
         - `public/` - Static assets
         - `scripts/` - Maintenance scripts
@@ -156,7 +156,7 @@ reviews:
         ### Nuxt Config
         - Module-driven architecture. Check module docs before modifying module options.
 
-    - path: "app/components/OgImage/**/*.vue"
+    - path: "app/components/OgImageTemplate/**/*.vue"
       instructions: |
         OG image components are rendered by Takumi. Follow `.claude/rules/13-og-image.md`.
         - Prefer inline styles for renderer-critical layout and effects.
