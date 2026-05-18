@@ -2,7 +2,6 @@
 /**
  * Shared ambient glow effects for all OG image components.
  * Renders two radial gradient spotlights: top-right and bottom-left.
- * Satori constraints: inline styles only, no Tailwind, hardcoded colors.
  */
 </script>
 

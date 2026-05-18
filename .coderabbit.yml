@@ -110,7 +110,7 @@ reviews:
         - `app/components/ui/` - Reusable UI primitives (App* prefix)
         - `app/components/layout/` - Site-wide layout (header, footer)
         - `app/components/content/` - Domain content components (cards, carousel)
-        - `app/components/OgImage/` - Satori-rendered OG image templates
+        - `app/components/OgImageTemplate/` - active Takumi OG image templates
         - `content/` - File-based CMS (Markdown, YAML): talks/, projects/, clients/, publications/, socials/
         - `public/` - Static assets
         - `scripts/` - Maintenance scripts
@@ -130,7 +130,7 @@ reviews:
         - Block order: `<script setup lang="ts">` -> `<template>` -> `<i18n lang="yaml">` -> `<style scoped>`.
         - Use `<NuxtLink>` for ALL links (internal and external), never raw `<a>` tags.
         - Use `<NuxtImg>` for ALL images (from `@nuxt/image`), never raw `<img>` tags.
-          Exception: `app/components/OgImage/` must use `<img>` (Satori limitation).
+          Exception: Takumi OG templates may use raw `<img>` only if `13-og-image.md` allows it for renderer compatibility.
         - Never nest `<a>` inside `<a>` (or `<NuxtLink>` inside a linked `AppCard`). Use the stretched-link pattern instead.
         - Icons: `<Icon name="collection:name" :size="N" />`.
 
@@ -156,14 +156,12 @@ reviews:
         ### Nuxt Config
         - Module-driven architecture. Check module docs before modifying module options.
 
-    - path: "app/components/OgImage/**/*.vue"
+    - path: "app/components/OgImageTemplate/**/*.vue"
       instructions: |
-        OG image components are rendered by Satori (not a browser). Special rules:
-        - Use inline styles only (no Tailwind, no `<style>` blocks). Hardcode hex colors.
-        - Use `<img>` for photos, inline `<svg>` for icons (never `<Icon>`, `<NuxtImg>`, or data URI `<img>`).
-        - Set icon `width`/`height` both as HTML attributes AND in `:style`.
-        - CRITICAL: nuxt-og-image's flex plugin overrides `flexDirection` to `column` on any `<div>` whose children include block elements (div, p, ul, ol, li, blockquote, pre, hr, table, dl). To preserve `flexDirection: 'row'`, add `class="flex-row"` (any class containing "flex-") to the container. Use `<span>` instead of `<div>` for text inside row containers.
-        - The flex plugin also forces `flexWrap: 'wrap'` and `gap: '0.2em'` on elements without a class containing "flex-".
+        OG image components are rendered by Takumi. Follow `.claude/rules/13-og-image.md`.
+        - Prefer inline styles for renderer-critical layout and effects.
+        - Use only Takumi-safe patterns already documented in `13-og-image.md`.
+        - Do not use known failing patterns such as `<style scoped>` for renderer-critical styling, CSS variables, `display: inline`, `flex-basis: auto`, or width keywords like `min-content`, `max-content`, and `fit-content`.
 
     - path: "app/pages/**"
       instructions: |

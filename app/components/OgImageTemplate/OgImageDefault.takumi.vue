@@ -2,7 +2,6 @@
 /**
  * Default/fallback OG image component for generic pages.
  * Used by [...slug].vue when no specific OG component is configured.
- * Rendered by Satori (not a browser) - must use inline styles, <img>, and hardcoded colors.
  */
 withDefaults(defineProps<{
   /** Page title override. */
@@ -25,7 +24,6 @@ withDefaults(defineProps<{
       justifyContent: 'center',
       backgroundColor: '#0a0a0b',
       fontFamily: 'Inter, system-ui, sans-serif',
-      padding: '60px 80px',
       position: 'relative',
       overflow: 'hidden',
     }"
@@ -33,13 +31,15 @@ withDefaults(defineProps<{
     <OgImageGlow />
     <OgImageAvatar />
 
-    <!-- Main content -->
     <div
       :style="{
         display: 'flex',
         flexDirection: 'column',
-        flexWrap: 'nowrap',
+        justifyContent: 'center',
+        height: '100%',
         maxWidth: '960px',
+        padding: '60px 80px',
+        boxSizing: 'border-box',
       }"
     >
       <OgImageTitle size="md" :text="title" />

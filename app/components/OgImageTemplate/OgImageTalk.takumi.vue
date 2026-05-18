@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /**
  * OG image component for talk pages.
- * Rendered by Satori (not a browser) - must use inline styles and hardcoded colors.
  */
 defineProps<{
   title?: string
@@ -21,7 +20,6 @@ defineProps<{
       justifyContent: 'center',
       backgroundColor: '#0a0a0b',
       fontFamily: 'Inter, system-ui, sans-serif',
-      padding: '60px 80px',
       position: 'relative',
       overflow: 'hidden',
     }"
@@ -29,13 +27,15 @@ defineProps<{
     <OgImageGlow />
     <OgImageAvatar />
 
-    <!-- Main content -->
     <div
       :style="{
         display: 'flex',
         flexDirection: 'column',
-        flexWrap: 'nowrap',
+        justifyContent: 'center',
+        height: '100%',
         maxWidth: '960px',
+        padding: '60px 80px',
+        boxSizing: 'border-box',
       }"
     >
       <OgImageCategoryLabel text="Talk" />
@@ -44,25 +44,15 @@ defineProps<{
 
       <OgImageDescription v-if="event" :text="event" />
 
-      <!-- Date and location row -->
-      <!--
-        class="flex-row" prevents nuxt-og-image's flex plugin from overriding
-        flexDirection to 'column' (it does so for any div containing div children
-        unless the parent has a class containing "flex-").
-        Text nodes use <span> to avoid being classified as block elements.
-      -->
       <div
         v-if="date || location"
-        class="flex-row"
         :style="{
           display: 'flex',
           flexDirection: 'row',
-          flexWrap: 'nowrap',
           alignItems: 'center',
           marginTop: '20px',
         }"
       >
-        <!-- Phosphor calendar-blank icon (regular weight) -->
         <svg
           v-if="date"
           height="18"
@@ -87,7 +77,6 @@ defineProps<{
         >
           {{ date }}
         </span>
-        <!-- Phosphor map-pin icon (regular weight) -->
         <svg
           v-if="location"
           height="18"

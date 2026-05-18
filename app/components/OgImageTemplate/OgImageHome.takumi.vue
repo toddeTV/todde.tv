@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /**
  * Default OG image component for the homepage.
- * Rendered by Satori (not a browser) - must use inline styles, <img>, and hardcoded colors.
  */
 withDefaults(defineProps<{
   /** Page title override. */
@@ -24,39 +23,27 @@ withDefaults(defineProps<{
       justifyContent: 'center',
       backgroundColor: '#0a0a0b',
       fontFamily: 'Inter, system-ui, sans-serif',
-      padding: '60px',
       position: 'relative',
       overflow: 'hidden',
     }"
   >
     <OgImageGlow />
 
-    <!-- Subtle horizontal rule -->
-    <div
-      :style="{
-        position: 'absolute',
-        top: '315px',
-        left: '60px',
-        width: '600px',
-        height: '1px',
-        background: 'linear-gradient(90deg, rgba(0,220,130,0.15), transparent)',
-      }"
-    />
-
-    <!-- Title and description (vertically centered) -->
     <div
       :style="{
         display: 'flex',
         flexDirection: 'column',
-        flexWrap: 'nowrap',
-        width: '670px',
+        justifyContent: 'center',
+        height: '100%',
+        width: '740px',
+        padding: '60px 30px 60px 60px',
+        boxSizing: 'border-box',
       }"
     >
       <OgImageTitle :text="title" />
       <OgImageDescription size="lg" :text="description" />
     </div>
 
-    <!-- Avatar with accent gradient border (large, centered-right) -->
     <div
       :style="{
         position: 'absolute',
@@ -64,22 +51,22 @@ withDefaults(defineProps<{
         right: '80px',
         width: '350px',
         height: '350px',
-        borderRadius: '50%',
+        borderRadius: '999px',
         background: 'linear-gradient(135deg, #00dc82, #00c474)',
         padding: '5px',
-        flexWrap: 'nowrap',
       }"
     >
-      <img
-        alt="Thorsten Seyschab"
+      <NuxtImg
+        height="340"
         src="/avatar-thorsten-seyschab.jpg"
         :style="{
           width: '340px',
           height: '340px',
-          borderRadius: '50%',
+          borderRadius: '999px',
           objectFit: 'cover',
         }"
-      >
+        width="340"
+      />
     </div>
 
     <OgImageFooter />

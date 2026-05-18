@@ -6,7 +6,7 @@ useSeoMeta({
 })
 
 defineOgImage('Talk', {
-  title: 'Talks',
+  title: 'Talks Overview',
   event: 'Conference talks & speaking engagements',
 })
 

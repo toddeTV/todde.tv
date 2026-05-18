@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /**
  * OG image component for project pages.
- * Rendered by Satori (not a browser) - must use inline styles, <img>, and hardcoded colors.
  */
 defineProps<{
   title?: string
@@ -21,7 +20,6 @@ defineProps<{
       justifyContent: 'center',
       backgroundColor: '#0a0a0b',
       fontFamily: 'Inter, system-ui, sans-serif',
-      padding: '60px 80px',
       position: 'relative',
       overflow: 'hidden',
     }"
@@ -29,24 +27,23 @@ defineProps<{
     <OgImageGlow />
     <OgImageAvatar />
 
-    <!-- Main content -->
     <div
       :style="{
         display: 'flex',
         flexDirection: 'column',
-        flexWrap: 'nowrap',
+        justifyContent: 'center',
+        height: '100%',
         maxWidth: '960px',
+        padding: '60px 80px',
+        boxSizing: 'border-box',
       }"
     >
       <OgImageCategoryLabel text="Project" />
 
-      <!-- Project name with stars -->
       <div
-        class="flex-row"
         :style="{
           display: 'flex',
           flexDirection: 'row',
-          flexWrap: 'nowrap',
           alignItems: 'center',
           marginBottom: '20px',
         }"
@@ -54,7 +51,7 @@ defineProps<{
         <span
           :style="{
             fontSize: '72px',
-            fontWeight: 800,
+            fontWeight: 700,
             color: '#fafafa',
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
@@ -64,16 +61,13 @@ defineProps<{
         </span>
         <span
           v-if="repoStars"
-          class="flex-row"
           :style="{
             display: 'flex',
             flexDirection: 'row',
-            flexWrap: 'nowrap',
             alignItems: 'center',
             marginLeft: '20px',
           }"
         >
-          <!-- Phosphor star icon (regular weight) -->
           <svg
             height="28"
             :style="{ width: '28px', height: '28px', marginRight: '6px' }"
@@ -100,19 +94,15 @@ defineProps<{
 
       <OgImageDescription v-if="description" :max-length="120" :text="description" />
 
-      <!-- Tags -->
       <div
         v-if="tags?.length"
-        class="flex-row"
         :style="{
           display: 'flex',
           flexDirection: 'row',
-          flexWrap: 'nowrap',
           alignItems: 'center',
           marginTop: '20px',
         }"
       >
-        <!-- Phosphor tag icon (regular weight) -->
         <svg
           height="18"
           :style="{ width: '18px', height: '18px', marginRight: '8px' }"

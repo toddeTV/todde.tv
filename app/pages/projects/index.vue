@@ -5,7 +5,7 @@ useSeoMeta({
 })
 
 defineOgImage('Project', {
-  title: 'Projects',
+  title: 'Projects Overview',
   description: 'Tools, experiments, and applications for 3D on the web, Vue/Nuxt, and developer tooling.',
 })
 
