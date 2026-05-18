@@ -50,33 +50,39 @@ const yearSpan = computed(() =>
         Thorsten Seyschab, &copy; {{ yearSpan }}, All Rights Reserved.
       </p>
 
-      <p class="text-center text-xs text-text-dim">
-        <!-- `link-checker/valid-sitemap-link` does not resolve content-backed catch-all pages here, so we need: -->
-        <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
-        <NuxtLink class="text-xs text-text-dim hover:text-text" to="/legal-notice">
-          Legal Notice
-        </NuxtLink>
+      <p class="flex flex-wrap items-center justify-center gap-y-1 text-center text-xs text-text-dim">
+        <span class="inline-flex items-center whitespace-nowrap">
+          <!-- `link-checker/valid-sitemap-link` does not resolve content-backed catch-all pages here, so we need: -->
+          <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
+          <NuxtLink class="text-xs text-text-dim hover:text-text" to="/legal-notice">
+            Legal Notice
+          </NuxtLink>
 
-        <span class="mx-1.5">·</span>
+          <span aria-hidden="true" class="mx-1.5">·</span>
+        </span>
 
-        <!-- `link-checker/valid-sitemap-link` does not resolve content-backed catch-all pages here, so we need: -->
-        <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
-        <NuxtLink class="text-xs text-text-dim hover:text-text" to="/privacy-policy">
-          Privacy Policy
-        </NuxtLink>
+        <span class="inline-flex items-center whitespace-nowrap">
+          <!-- `link-checker/valid-sitemap-link` does not resolve content-backed catch-all pages here, so we need: -->
+          <!-- eslint-disable-next-line link-checker/valid-sitemap-link -->
+          <NuxtLink class="text-xs text-text-dim hover:text-text" to="/privacy-policy">
+            Privacy Policy
+          </NuxtLink>
 
-        <span class="mx-1.5">·</span>
+          <span aria-hidden="true" class="mx-1.5">·</span>
+        </span>
 
-        <span>Version {{ releaseLabel }}</span>
+        <span class="inline-flex items-center whitespace-nowrap">
+          <span>Version {{ releaseLabel }}</span>
 
-        <NuxtLink
-          aria-label="GitHub repository"
-          class="relative -top-px ml-1.5 inline-flex items-center align-middle text-xs"
-          target="_blank"
-          :to="REPOSITORY_URL"
-        >
-          <Icon name="simple-icons:github" :size="14" />
-        </NuxtLink>
+          <NuxtLink
+            aria-label="GitHub repository"
+            class="relative -top-px ml-1.5 inline-flex items-center align-middle text-xs"
+            target="_blank"
+            :to="REPOSITORY_URL"
+          >
+            <Icon name="simple-icons:github" :size="14" />
+          </NuxtLink>
+        </span>
       </p>
     </AppContainer>
   </footer>
