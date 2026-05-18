@@ -11,26 +11,23 @@ const props = defineProps<{
   type: 'email' | 'phone'
 }>()
 
-const urlPrefix = computed(() => (props.type === 'email' ? 'mailto:' : 'tel:'))
+const { data: projectMetadata } = await useProjectMetadata()
 
-const { data: social } = await useAsyncData(
-  `legal-contact-info-${props.type}`,
-  () =>
-    queryCollection('socials')
-      .where('active', '=', true)
-      .order('sortOrder', 'ASC')
-      .all(),
-  {
-    transform: socials =>
-      socials.find(s => s.url.startsWith(urlPrefix.value)) ?? null,
-  },
-)
+const social = computed(() => {
+  if (!projectMetadata.value) {
+    return null
+  }
+
+  return props.type === 'email'
+    ? projectMetadata.value.primaryEmailSocial
+    : projectMetadata.value.primaryPhoneSocial
+})
 </script>
 
 <template>
   <NuxtLink
     v-if="social"
-    :href="social.url"
+    :to="social.url"
   >
     {{ social.handle }}
   </NuxtLink>
