@@ -1,20 +1,13 @@
 {
   "author": {
-    "contact": "hello@todde.tv",
     "familyName": "Seyschab",
     "givenName": "Thorsten",
     "handle": "@toddeTV",
     "location": "Dresden, Germany",
     "name": "Thorsten Seyschab",
     "nickname": "toddeTV",
-    "roleSummary": "IT consultant, senior full-stack developer, and conference speaker",
     "role": "IT consultant, senior full-stack developer, and conference speaker",
-    "sameAs": [
-      "https://github.com/toddeTV/",
-      "https://x.com/toddeTV",
-      "https://bsky.app/profile/todde.tv",
-      "https://www.linkedin.com/in/toddetv/"
-    ],
+    "roleSummary": "IT consultant, senior full-stack developer, and conference speaker",
     "url": "https://todde.tv"
   },
   "legal": {
