@@ -71,11 +71,11 @@ const yearSpan = computed(() =>
 
         <NuxtLink
           aria-label="GitHub repository"
-          class="ml-1 inline-flex align-middle text-xs"
+          class="relative -top-px ml-1.5 inline-flex items-center align-middle text-xs"
           target="_blank"
           :to="REPOSITORY_URL"
         >
-          <Icon name="simple-icons:github" :size="12" />
+          <Icon name="simple-icons:github" :size="14" />
         </NuxtLink>
       </p>
     </AppContainer>
