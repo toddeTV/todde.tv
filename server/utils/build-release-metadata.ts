@@ -21,10 +21,12 @@ export interface BuildReleaseMetadata {
   releaseLabel: string
 }
 
+/** Builds the footer release label from an ISO build date and short commit SHA. */
 function createReleaseLabel(buildDateIso: string, commitShort: string): string {
   return `${buildDateIso.replaceAll('-', '.')}+${commitShort}`
 }
 
+/** Returns the first non-empty trimmed environment value for the provided keys. */
 function getFirstEnvValue(env: NodeJS.ProcessEnv, keys: string[]): string | undefined {
   for (const key of keys) {
     const value = env[key]?.trim()
@@ -37,6 +39,7 @@ function getFirstEnvValue(env: NodeJS.ProcessEnv, keys: string[]): string | unde
   return undefined
 }
 
+/** Normalizes supported date input to an ISO 8601 calendar date. */
 function normalizeBuildDateIso(value: string | undefined): string | undefined {
   if (!value) {
     return undefined
@@ -76,10 +79,12 @@ function normalizeBuildDateIso(value: string | undefined): string | undefined {
   return parsedDate.toISOString().slice(0, 10)
 }
 
+/** Returns the current UTC build date as an ISO 8601 calendar date. */
 function getCurrentBuildDateIso(): string {
   return new Date().toISOString().slice(0, 10)
 }
 
+/** Normalizes a commit SHA-like value to a lowercase 7-character short SHA. */
 function normalizeCommitShort(value: string | undefined): string | undefined {
   if (!value) {
     return undefined
@@ -94,6 +99,7 @@ function normalizeCommitShort(value: string | undefined): string | undefined {
   return normalizedMatch[0].slice(0, 7)
 }
 
+/** Reads the current Git HEAD and returns a normalized short SHA when available. */
 function readGitCommitShort(): string | undefined {
   try {
     return normalizeCommitShort(execSync('git rev-parse --short=7 HEAD', { encoding: 'utf8' }))
