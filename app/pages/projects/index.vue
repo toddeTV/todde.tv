@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
+
 useSeoMeta({
   title: 'Projects',
-  description: 'Projects by Thorsten Seyschab (toddeTV).',
+  description: `Projects by ${projectConfig.author.name} (${projectConfig.author.nickname}).`,
 })
 
 defineOgImage('Project', {

@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
+
 useSeoMeta({
   title: 'Talks',
-  description: 'Conference talks and speaking engagements by Thorsten Seyschab (toddeTV) on '
+  description:
+    `Conference talks and speaking engagements by ${projectConfig.author.name} (${projectConfig.author.nickname}) on `
     + 'tech and life topics - from Vue.js, Nuxt, and Vite plugins to 3D on the web.',
 })
 
