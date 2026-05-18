@@ -9,6 +9,7 @@ interface SecurityTxtContentOptions {
   preferredLanguages: string[]
 }
 
+/** Returns the ISO 8601 expiration timestamp for `security.txt`. */
 function createSecurityTxtExpires(
   now: Date = new Date(),
   lifetimeDays: number = defaultSecurityTxtLifetimeDays,
@@ -20,6 +21,7 @@ function createSecurityTxtExpires(
   return expiresAt.toISOString()
 }
 
+/** Builds the plain text `security.txt` response body from route metadata. */
 function buildSecurityTxtContent(
   options: SecurityTxtContentOptions,
   now: Date = new Date(),
