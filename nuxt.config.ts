@@ -258,7 +258,7 @@ export default defineNuxtConfig({
   ogImage: { // for `nuxt-og-image` (via `@nuxtjs/seo`)
     componentDirs: [
       'OgImage',
-      // 'OgImageTemplate',
+      'OgImageTemplate',
     ],
   },
 
