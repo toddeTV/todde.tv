@@ -46,20 +46,27 @@ const skills = [
 ]
 
 const [
-  { data: socials },
+  { data: projectMetadata },
   { data: testimonials },
   { data: recentTalks },
   { data: recentProjects },
 ] = await Promise.all([
-  useAsyncData('index-socials-all', () =>
-    queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
-  ),
+  useProjectMetadata(),
   useAllTestimonials(),
   useAsyncData('recent-talks', () =>
     queryCollection('talks').order('date', 'DESC').limit(3).all(),
   ),
   useSortedProjects(2),
 ])
+
+const socials = computed(() => projectMetadata.value?.socials ?? [])
+const authorName = computed(() => projectMetadata.value?.author.name ?? 'Thorsten Seyschab')
+const authorRole = computed(
+  () => projectMetadata.value?.author.roleSummary
+    ?? projectMetadata.value?.author.role
+    ?? projectConfig.author.roleSummary,
+)
+const authorLocation = computed(() => projectMetadata.value?.author.location ?? projectConfig.author.location)
 </script>
 
 <template>
@@ -72,14 +79,14 @@ const [
             Hi, I'm
           </p>
           <h1 class="mb-3 text-4xl sm:text-5xl">
-            {{ projectConfig.author.name }}
+            {{ authorName }}
           </h1>
           <p class="mb-3 text-lg">
-            {{ projectConfig.author.roleSummary }}
+            {{ authorRole }}
           </p>
           <p class="flex items-center gap-1.5 text-sm text-text-dim max-sm:justify-center">
             <Icon name="ph:map-pin" :size="16" />
-            {{ projectConfig.author.location }}
+            {{ authorLocation }}
           </p>
         </div>
         <div>
