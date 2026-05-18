@@ -20,7 +20,6 @@ defineProps<{
       justifyContent: 'center',
       backgroundColor: '#0a0a0b',
       fontFamily: 'Inter, system-ui, sans-serif',
-      padding: '60px 80px',
       position: 'relative',
       overflow: 'hidden',
     }"
@@ -32,7 +31,11 @@ defineProps<{
       :style="{
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'center',
+        height: '100%',
         maxWidth: '960px',
+        padding: '60px 80px',
+        boxSizing: 'border-box',
       }"
     >
       <OgImageCategoryLabel text="Talk" />

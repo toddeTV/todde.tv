@@ -49,7 +49,7 @@
         position: 'absolute',
         bottom: '0',
         left: '0',
-        right: '0',
+        right: '120px',
         height: '4px',
         background: 'linear-gradient(90deg, #00dc82, #00c474, transparent)',
       }"

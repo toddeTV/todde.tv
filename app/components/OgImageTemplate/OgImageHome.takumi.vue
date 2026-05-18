@@ -23,7 +23,6 @@ withDefaults(defineProps<{
       justifyContent: 'center',
       backgroundColor: '#0a0a0b',
       fontFamily: 'Inter, system-ui, sans-serif',
-      padding: '60px',
       position: 'relative',
       overflow: 'hidden',
     }"
@@ -35,7 +34,7 @@ withDefaults(defineProps<{
         position: 'absolute',
         top: '315px',
         left: '60px',
-        width: '600px',
+        width: '700px',
         height: '1px',
         background: 'linear-gradient(90deg, rgba(0,220,130,0.15), transparent)',
       }"
@@ -45,7 +44,11 @@ withDefaults(defineProps<{
       :style="{
         display: 'flex',
         flexDirection: 'column',
-        width: '670px',
+        justifyContent: 'center',
+        height: '100%',
+        width: '740px',
+        padding: '60px 30px 60px 60px',
+        boxSizing: 'border-box',
       }"
     >
       <OgImageTitle :text="title" />

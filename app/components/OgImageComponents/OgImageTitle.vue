@@ -20,7 +20,7 @@ withDefaults(defineProps<{
   <div
     :style="{
       fontSize: size === 'lg' ? '72px' : '64px',
-      fontWeight: 800,
+      fontWeight: 700,
       color: '#fafafa',
       lineHeight: 1.05,
       letterSpacing: '-0.03em',
