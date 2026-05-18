@@ -1,7 +1,34 @@
-ignoredBuiltDependencies:
-  - "@parcel/watcher"
-  - esbuild
-  - sharp
-  - unrs-resolver
-onlyBuiltDependencies:
-  - better-sqlite3
+# Allow or block dependency build scripts during install.
+allowBuilds:
+  "@parcel/watcher": false
+  better-sqlite3: true
+  esbuild: false
+  sharp: false
+  unrs-resolver: false
+  vue-demi: false
+
+# Pin shared dependency versions used across the workspace.
+catalog:
+  # vite-plus ecosystem, all same version to avoid mismatches
+  vite: npm:@voidzero-dev/vite-plus-core@~0.1.19
+  vite-plus: ~0.1.19
+  vitest: npm:@voidzero-dev/vite-plus-test@~0.1.19
+
+# Force selected packages in the full dependency graph to one spec.
+overrides:
+  vite: "catalog:"
+  vitest: "catalog:"
+
+# Expose selected transitive packages at root node_modules for flawed tooling.
+publicHoistPattern:
+  - h3
+  - tailwindcss
+
+# Run package scripts through pnpm's cross-platform shell emulator.
+shellEmulator: true
+
+# Reject installs if a package version drops below prior trust evidence.
+trustPolicy: no-downgrade
+
+# Ignore trust-policy checks for packages older than this many minutes.
+trustPolicyIgnoreAfter: 10080
