@@ -12,9 +12,8 @@ useRobotsRule(false)
 
 defineOgImage('Default')
 
-const { data: socials } = await useAsyncData('vcard-socials', () =>
-  queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
-)
+const { data: projectMetadata } = await useProjectMetadata()
+const socials = computed(() => projectMetadata.value?.socials)
 
 const {
   emailEntries,
