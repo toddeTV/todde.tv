@@ -24,6 +24,7 @@ overrides:
 
 # Temporary compatibility patch: `nuxt-og-image@6.5.0` still computes island
 # hashes with the pre-Nuxt-4.4 shape and breaks OG prerendering on `nuxt@4.4.6`.
+# -> remove if not anymore needed
 patchedDependencies:
   nuxt-og-image@6.5.0: patches/nuxt-og-image@6.5.0.patch
 
