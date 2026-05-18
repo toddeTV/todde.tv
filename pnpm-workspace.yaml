@@ -22,6 +22,11 @@ overrides:
   # `@nuxtjs/seo` version `~5.1.3` introduces a `unhead` version missmatch, so pin sub-dependency to fix -> remove if not anymore needed:
   nuxt-seo-utils: 8.1.8
 
+# Temporary compatibility patch: `nuxt-og-image@6.5.0` still computes island
+# hashes with the pre-Nuxt-4.4 shape and breaks OG prerendering on `nuxt@4.4.6`.
+patchedDependencies:
+  nuxt-og-image@6.5.0: patches/nuxt-og-image@6.5.0.patch
+
 # Allow Vite+ core alias versions where packages peer on `vite` semver only.
 # Fix needed as we otherwise have issues with peer dependencies on install -> remove if not anymore needed:
 # ```
