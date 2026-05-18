@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
+
 /**
  * Default OG image component for the homepage.
  */
@@ -8,8 +10,8 @@ withDefaults(defineProps<{
   /** Page description override. */
   description?: string
 }>(), {
-  title: 'todde.tv',
-  description: 'IT consultant, senior full-stack developer, and conference speaker.',
+  title: projectConfig.projectName,
+  description: projectConfig.author.roleSummary,
 })
 </script>
 

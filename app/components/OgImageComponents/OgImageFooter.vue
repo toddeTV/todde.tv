@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
+
 /**
  * Shared footer for all OG image components.
  * Renders author name (left), site URL (right), and a bottom gradient accent line.
@@ -30,7 +32,7 @@
           color: '#00dc82',
         }"
       >
-        Thorsten Seyschab
+        {{ projectConfig.author.name }}
       </span>
       <span
         :style="{
@@ -39,7 +41,7 @@
           color: '#71717a',
         }"
       >
-        todde.tv
+        {{ projectConfig.projectName }}
       </span>
     </div>
 

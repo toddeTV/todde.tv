@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import projectConfig from '~~/project.config.json'
+
 /**
  * Default/fallback OG image component for generic pages.
  * Used by [...slug].vue when no specific OG component is configured.
@@ -9,8 +11,8 @@ withDefaults(defineProps<{
   /** Page description override. */
   description?: string
 }>(), {
-  title: 'todde.tv',
-  description: 'IT consultant, senior full-stack developer, and conference speaker.',
+  title: projectConfig.projectName,
+  description: projectConfig.author.roleSummary,
 })
 </script>
 
