@@ -1,6 +1,5 @@
 import type { SocialsCollectionItem } from '@nuxt/content'
 import { queryCollection } from '@nuxt/content/server'
-
 import { prepareProjectMetadata } from '#shared/utils/project-metadata'
 
 /** Returns the plain text `humans.txt` response using prepared project metadata. */
