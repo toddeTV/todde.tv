@@ -147,7 +147,7 @@ export default defineNuxtConfig({
 
     // Machine-readable metadata alias
     '/security.txt': { redirect: { to: '/.well-known/security.txt', statusCode: 301 } },
-    
+
     // Build these machine-readable text endpoints as static files for Cloudflare Pages SSG.
     '/.well-known/security.txt': staticMachineReadableTextRouteRule,
     '/humans.txt': staticMachineReadableTextRouteRule,

@@ -5,6 +5,7 @@ export default defineEventHandler((event) => {
   const legalNoticeUrl = new URL(legal.legalNoticePath, siteUrl).toString()
   const privacyPolicyUrl = new URL(legal.privacyPolicyPath, siteUrl).toString()
   const runtimeConfig = useRuntimeConfig(event)
+  const authorProfiles = author.sameAs.map(profileUrl => `  Profile: ${profileUrl}`)
 
   const content = [
     '# humanstxt.org/',
@@ -19,8 +20,10 @@ export default defineEventHandler((event) => {
     '',
     '/* AUTHOR */',
     `  Name: ${author.name}`,
+    `  Role: ${author.role}`,
     `  Contact: ${author.contact}`,
     `  Website: ${author.url}`,
+    ...authorProfiles,
     '',
     '/* SOURCE CODE */',
     `  Repository: ${repository.url}`,
