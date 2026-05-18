@@ -106,7 +106,7 @@ export default defineNuxtConfig({
   site: { // for `@nuxtjs/seo` - shared site config used by all SEO sub-modules (like `ogImage`, `schemaOrg`, etc.)
     url: projectConfig.siteUrl,
     // name: 'todde.tv',
-    name: projectConfig.projectName,
+    name: projectConfig.author.name,
     description: projectConfig.siteDescription,
     defaultLocale: 'en',
   },
