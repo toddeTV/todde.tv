@@ -1,5 +1,6 @@
 import projectConfig from '~~/project.config.json'
 
+/** Returns the plain text `humans.txt` response using `projectConfig`, `useRuntimeConfig`, and `setResponseHeader`. */
 export default defineEventHandler((event) => {
   const { author, legal, projectName, repository, siteDescription, siteUrl } = projectConfig
   const legalNoticeUrl = new URL(legal.legalNoticePath, siteUrl).toString()
