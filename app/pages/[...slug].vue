@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { OgImageComponents } from '#og-image/components'
+
 const route = useRoute()
 
 // Strip trailing slash to prevent hydration key mismatches on CDNs that redirect
@@ -16,14 +18,22 @@ if (!page.value) {
 if (page.value.seo) {
   useSeoMeta(page.value.seo)
 }
-if (page.value.head) {
-  useHead(page.value.head as Record<string, unknown>)
+if (page.value.schemaOrg) {
+  useSchemaOrg(page.value.schemaOrg)
 }
-if (page.value.ogImage) {
-  defineOgImage(page.value.ogImage)
+if (page.value.ogImage?.url) {
+  useSeoMeta({
+    ogImage: page.value.ogImage.url,
+  })
+}
+else if (page.value.ogImage?.component) {
+  defineOgImage(
+    page.value.ogImage.component as keyof OgImageComponents,
+    page.value.ogImage.props,
+  )
 }
 else {
-  defineOgImageComponent('Default')
+  defineOgImage('Default')
 }
 </script>
 

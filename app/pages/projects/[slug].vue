@@ -27,7 +27,7 @@ useSeoMeta({
   description: project.value.description,
 })
 
-defineOgImageComponent('Project', {
+defineOgImage('Project', {
   title: project.value.name,
   description: project.value.description,
   repoStars: project.value.repoStars,

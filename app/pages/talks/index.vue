@@ -5,7 +5,7 @@ useSeoMeta({
     + 'tech and life topics - from Vue.js, Nuxt, and Vite plugins to 3D on the web.',
 })
 
-defineOgImageComponent('Talk', {
+defineOgImage('Talk', {
   title: 'Talks',
   event: 'Conference talks & speaking engagements',
 })

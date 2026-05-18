@@ -1,0 +1,18 @@
+diff --git a/dist/runtime/server/util/kit.js b/dist/runtime/server/util/kit.js
+index 386f4cc7beb21f2402ce1a33846d1314c1950d1f..95e6acee61a440a44c947c0726a0d73894373527 100644
+--- a/dist/runtime/server/util/kit.js
++++ b/dist/runtime/server/util/kit.js
+@@ -1,11 +1,11 @@
+ import { defu } from "defu";
++import { computeIslandHash, filterIslandProps } from "#app/island-hash";
+ import { useRuntimeConfig } from "nitropack/runtime";
+-import { hash } from "ohash";
+ import { createRouter as createRadixRouter, toRouteMatcher } from "radix3";
+ import { withoutBase, withoutTrailingSlash } from "ufo";
+ export { withoutQuery } from "nuxtseo-shared/utils";
+ export function fetchIsland(e, component, props, timeout) {
+-  const hashId = hash([component, props]).replaceAll("_", "-");
++  const hashId = computeIslandHash(component, filterIslandProps(props), {}, void 0);
+   const signal = timeout ? AbortSignal.timeout(timeout) : void 0;
+   return e.$fetch(`/__nuxt_island/${component}_${hashId}.json`, {
+     params: {

@@ -5,6 +5,7 @@
 .nitro
 .cache
 dist
+.vite-hooks
 
 # Node dependencies
 node_modules
@@ -12,10 +13,23 @@ node_modules
 # Logs
 logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Misc
 .DS_Store
 .fleet
+.fleetrm
+dist-ssr
+*.local
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Local env files
 .env

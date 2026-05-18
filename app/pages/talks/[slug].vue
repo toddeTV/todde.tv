@@ -17,7 +17,7 @@ useSeoMeta({
   description: talk.value.description || `${talk.value.title} at ${talk.value.event} in ${talk.value.location}.`,
 })
 
-defineOgImageComponent('Talk', {
+defineOgImage('Talk', {
   title: talk.value.title,
   event: talk.value.event,
   date: talk.value.date,

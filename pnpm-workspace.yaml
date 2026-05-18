@@ -1,7 +1,63 @@
-ignoredBuiltDependencies:
-  - "@parcel/watcher"
-  - esbuild
-  - sharp
-  - unrs-resolver
-onlyBuiltDependencies:
-  - better-sqlite3
+# Allow or block dependency build scripts during install.
+allowBuilds:
+  "@parcel/watcher": false
+  better-sqlite3: true
+  esbuild: false
+  sharp: false
+  unrs-resolver: false
+  vue-demi: false
+
+# Pin shared dependency versions used across the workspace.
+catalog:
+  # vite-plus ecosystem, all same version to avoid mismatches
+  vite: npm:@voidzero-dev/vite-plus-core@~0.1.19
+  vite-plus: ~0.1.19
+  vitest: npm:@voidzero-dev/vite-plus-test@~0.1.19
+
+# Force selected packages in the full dependency graph to one spec.
+overrides:
+  vite: "catalog:"
+  vitest: "catalog:"
+
+  # `@nuxtjs/seo` version `~5.1.3` introduces a `unhead` version missmatch, so pin sub-dependency to fix -> remove if not anymore needed:
+  nuxt-seo-utils: 8.1.8
+
+# Temporary compatibility patch: `nuxt-og-image@6.5.0` still computes island
+# hashes with the pre-Nuxt-4.4 shape and breaks OG prerendering on `nuxt@4.4.6`.
+# -> remove if not anymore needed
+patchedDependencies:
+  nuxt-og-image@6.5.0: patches/nuxt-og-image@6.5.0.patch
+
+# Allow Vite+ core alias versions where packages peer on `vite` semver only.
+# Fix needed as we otherwise have issues with peer dependencies on install -> remove if not anymore needed:
+# ```
+# [WARN] Issues with peer dependencies found
+# .
+# └─┬ nuxt 4.4.5
+#   └─┬ @nuxt/vite-builder 4.4.5
+#     ├─┬ @vitejs/plugin-vue-jsx 5.1.5
+#     │ └── ✕ unmet peer vite@"^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0": found 0.1.21 in @nuxt/vite-builder
+#     ├─┬ @vitejs/plugin-vue 6.0.7
+#     │ └── ✕ unmet peer vite@"^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0": found 0.1.21 in @nuxt/vite-builder
+#     └─┬ vite-plugin-checker 0.13.0
+#       └── ✕ unmet peer vite@>=5.4.21: found 0.1.21 in @nuxt/vite-builder
+# ```
+peerDependencyRules:
+  allowedVersions:
+    "@vitejs/plugin-vue>vite": 0.x || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+    "@vitejs/plugin-vue-jsx>vite": 0.x || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+    vite-plugin-checker>vite: 0.x || >=5.4.21
+
+# Expose selected transitive packages at root node_modules for flawed tooling.
+publicHoistPattern:
+  - h3
+  - tailwindcss
+
+# Run package scripts through pnpm's cross-platform shell emulator.
+shellEmulator: true
+
+# Reject installs if a package version drops below prior trust evidence.
+trustPolicy: no-downgrade
+
+# Ignore trust-policy checks for packages older than this many minutes.
+trustPolicyIgnoreAfter: 10080

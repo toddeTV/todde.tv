@@ -9,7 +9,7 @@ useSeoMeta({
 // Personal utility page - exclude from search engine indexing (robots file)
 useRobotsRule(false)
 
-defineOgImageComponent('Default')
+defineOgImage('Default')
 
 const { data: socials } = await useAsyncData('vcard-socials', () =>
   queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),

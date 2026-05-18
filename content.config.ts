@@ -4,7 +4,10 @@
  */
 
 import { defineContentConfig, defineCollection } from '@nuxt/content'
-import { asSeoCollection } from '@nuxtjs/seo/content'
+import { defineRobotsSchema } from '@nuxtjs/robots/content'
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
+import { defineSchemaOrgSchema } from 'nuxt-schema-org/content'
+import { defineOgImageSchema } from 'nuxt-og-image/content'
 import { z } from 'zod'
 
 const testimonialSchema = z.object({
@@ -18,15 +21,19 @@ const testimonialSchema = z.object({
 
 export default defineContentConfig({
   collections: {
-    content: defineCollection(
-      asSeoCollection({
-        type: 'page',
-        source: {
-          include: 'pages/**',
-          prefix: '/',
-        },
+    content: defineCollection({
+      type: 'page',
+      source: {
+        include: 'pages/**',
+        prefix: '/',
+      },
+      schema: z.object({
+        robots: defineRobotsSchema(),
+        sitemap: defineSitemapSchema(),
+        ogImage: defineOgImageSchema(),
+        schemaOrg: defineSchemaOrgSchema(),
       }),
-    ),
+    }),
 
     socials: defineCollection({
       type: 'data',
