@@ -1,0 +1,33 @@
+{
+  "author": {
+    "contact": "hello@todde.tv",
+    "location": "Dresden, Germany",
+    "name": "Thorsten Seyschab",
+    "role": "IT consultant, senior full-stack developer, and conference speaker",
+    "sameAs": [
+      "https://github.com/toddeTV/",
+      "https://x.com/toddeTV",
+      "https://bsky.app/profile/todde.tv",
+      "https://www.linkedin.com/in/toddetv/"
+    ],
+    "url": "https://todde.tv"
+  },
+  "legal": {
+    "legalNoticePath": "/legal-notice",
+    "privacyPolicyPath": "/privacy-policy"
+  },
+  "projectName": "todde.tv",
+  "repository": {
+    "licenseUrl": "https://github.com/toddeTV/todde.tv/blob/main/LICENSE.md",
+    "url": "https://github.com/toddeTV/todde.tv"
+  },
+  "security": {
+    "contact": "mailto:hello@todde.tv",
+    "preferredLanguages": [
+      "en",
+      "de"
+    ]
+  },
+  "siteDescription": "Personal portfolio of Thorsten Seyschab - IT consultant, senior full-stack developer, and conference speaker.",
+  "siteUrl": "https://todde.tv"
+}

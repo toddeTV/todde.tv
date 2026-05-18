@@ -9,3 +9,6 @@
 # Privacy Policy alternative paths
 /privacy      /privacy-policy  301
 /datenschutz  /privacy-policy  301
+
+# Machine-readable metadata alias
+/security.txt  /.well-known/security.txt  301
