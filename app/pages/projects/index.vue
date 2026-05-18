@@ -4,7 +4,7 @@ useSeoMeta({
   description: 'Projects by Thorsten Seyschab (toddeTV).',
 })
 
-defineOgImageComponent('Project', {
+defineOgImage('Project', {
   title: 'Projects',
   description: 'Tools, experiments, and applications for 3D on the web, Vue/Nuxt, and developer tooling.',
 })

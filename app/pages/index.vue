@@ -11,7 +11,7 @@ useSeoMeta({
     + 'Nuxt, 3D on the web, and full-stack development.',
 })
 
-defineOgImageComponent('Home', {
+defineOgImage('Home', {
   title: 'Thorsten Seyschab',
   description: 'IT consultant, senior full-stack developer, and conference speaker.',
 })

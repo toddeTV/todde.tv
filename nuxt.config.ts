@@ -252,9 +252,6 @@ export default defineNuxtConfig({
       'OgImage',
       // 'OgImageTemplate',
     ],
-    defaults: {
-      component: 'Default',
-    },
   },
 
   robots: { // for `nuxt-robots` (via `@nuxtjs/seo`)
