@@ -241,6 +241,7 @@ export default defineNuxtConfig({
   },
 
   image: { // for `@nuxt/image`
+    none: {},
   },
 
   ogImage: { // for `nuxt-og-image` (via `@nuxtjs/seo`)
