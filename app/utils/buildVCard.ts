@@ -68,7 +68,9 @@ export function buildVCard(
   ]
 
   if (fixed.name) {
-    lines.push(`N:${projectMetadata.author.lastName};${projectMetadata.author.firstName};;;`)
+    const escapedLastName = escapeVCardValue(projectMetadata.author.lastName)
+    const escapedFirstName = escapeVCardValue(projectMetadata.author.firstName)
+    lines.push(`N:${escapedLastName};${escapedFirstName};;;`)
     lines.push(`FN:${escapeVCardValue(projectMetadata.author.name)}`)
   }
 
