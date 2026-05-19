@@ -13,7 +13,7 @@ export interface ProjectMetadataSocialEntry {
   url: string
 }
 
-export interface ProjectMetadataConfig {
+export interface ProjectMetadata {
   author: {
     contact?: string
     familyName: string
@@ -23,7 +23,6 @@ export interface ProjectMetadataConfig {
     name: string
     nickname: string
     role: string
-    roleSummary: string
     sameAs?: string[]
     url: string
   }
@@ -44,9 +43,9 @@ export interface ProjectMetadataConfig {
   siteUrl: string
 }
 
-export interface PreparedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
-  extends Omit<ProjectMetadataConfig, 'author'> {
-  author: Omit<ProjectMetadataConfig['author'], 'contact' | 'sameAs'> & {
+export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
+  extends Omit<ProjectMetadata, 'author'> {
+  author: Omit<ProjectMetadata['author'], 'contact' | 'sameAs'> & {
     contact: string
     sameAs: string[]
   }
@@ -59,9 +58,9 @@ export interface PreparedProjectMetadata<TSocial extends ProjectMetadataSocialEn
   socials: TSocial[]
 }
 
-/** Returns the raw project metadata config stored in `project.config.json`. */
-export function getProjectMetadataConfig(): ProjectMetadataConfig {
-  return rawProjectMetadata as ProjectMetadataConfig
+/** Returns the raw project metadata stored in `project.config.json`. */
+export function getProjectMetadata(): ProjectMetadata {
+  return rawProjectMetadata as ProjectMetadata
 }
 
 function isMailtoUrl(url: string): boolean {
@@ -85,13 +84,13 @@ function dedupeUrls(urls: string[]): string[] {
 }
 
 /**
- * Merges the raw project config with active socials content so app and server code
- * can consume one prepared metadata object.
+ * Merges the raw project metadata with active socials content so app and server code
+ * can consume one hydrated metadata object.
  */
 export function prepareProjectMetadata<TSocial extends ProjectMetadataSocialEntry>(
   socials: TSocial[] = [],
-): PreparedProjectMetadata<TSocial> {
-  const projectMetadataConfig = getProjectMetadataConfig()
+): HydratedProjectMetadata<TSocial> {
+  const projectMetadata = getProjectMetadata()
   const sortedSocials = [...socials]
     .filter(social => social.active !== false)
     .sort((left, right) => left.sortOrder - right.sortOrder)
@@ -108,15 +107,15 @@ export function prepareProjectMetadata<TSocial extends ProjectMetadataSocialEntr
   )
 
   return {
-    ...projectMetadataConfig,
+    ...projectMetadata,
     author: {
-      ...projectMetadataConfig.author,
+      ...projectMetadata.author,
       contact: primaryEmailSocial
         ? removeMailtoPrefix(primaryEmailSocial.url)
-        : (projectMetadataConfig.author.contact ?? ''),
+        : (projectMetadata.author.contact ?? ''),
       sameAs: sameAs.length > 0
         ? sameAs
-        : dedupeUrls(projectMetadataConfig.author.sameAs ?? []),
+        : dedupeUrls(projectMetadata.author.sameAs ?? []),
     },
     socials: sortedSocials,
     featuredSocials,
