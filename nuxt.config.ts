@@ -141,6 +141,7 @@ export default defineNuxtConfig({
         '@unhead/schema-org/vue',
         '@vue/devtools-core',
         '@vue/devtools-kit',
+        'qrcode', // CJS
       ],
     },
     plugins: [
