@@ -36,6 +36,11 @@ dist-ssr
 .env.*
 !.env.example
 
+# CloudFlare
+.cloudflare
+_redirects
+_redirects.json
+
 # no IDE and LLM/AI settings
 AGENTS.md
 CLAUDE.md

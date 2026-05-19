@@ -10,7 +10,17 @@ const TEL_PREFIX = 'tel:'
 export type {
   HydratedProjectMetadata,
   ProjectMetadata,
+  ProjectMetadataRedirectEntry,
+  ProjectMetadataRedirectGroup,
+  ProjectMetadataRedirectRouteRule,
   ProjectMetadataSocialEntry,
+} from '../../project-metadata.config'
+
+export {
+  buildProjectMetadataRedirectRouteRules,
+  getProjectMetadataRedirectEntries,
+  getProjectMetadataRedirectGroups,
+  renderProjectMetadataRedirectsFile,
 } from '../../project-metadata.config'
 
 /** Returns the raw project metadata stored in `project-metadata.config.ts`. */
