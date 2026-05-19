@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import projectConfig from '~~/project.config.json'
+const projectMetadata = getProjectMetadata()
 
 /**
  * Shared footer for all OG image components.
@@ -32,7 +32,7 @@ import projectConfig from '~~/project.config.json'
           color: '#00dc82',
         }"
       >
-        {{ projectConfig.author.name }}
+        {{ projectMetadata.author.name }}
       </span>
       <span
         :style="{
@@ -41,7 +41,7 @@ import projectConfig from '~~/project.config.json'
           color: '#71717a',
         }"
       >
-        {{ projectConfig.projectName }}
+        {{ projectMetadata.projectName }}
       </span>
     </div>
 
