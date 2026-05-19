@@ -3,7 +3,17 @@
  * Used by the /vcard page to generate QR code content.
  */
 
-import projectConfig from '~~/project.config.json'
+export interface VCardProjectMetadata {
+  author: {
+    familyName: string
+    givenName: string
+    handle: string
+    name: string
+    nickname: string
+    role: string
+  }
+  siteUrl: string
+}
 
 export interface VCardFixedFields {
   /** Include full name. */
@@ -46,6 +56,7 @@ function escapeVCardValue(value: string): string {
  * @returns formatted vCard 3.0 string
  */
 export function buildVCard(
+  projectMetadata: VCardProjectMetadata,
   fixed: VCardFixedFields,
   emails: string[],
   phones: string[],
@@ -57,26 +68,26 @@ export function buildVCard(
   ]
 
   if (fixed.name) {
-    lines.push(`N:${projectConfig.author.familyName};${projectConfig.author.givenName};;;`)
-    lines.push(`FN:${escapeVCardValue(projectConfig.author.name)}`)
+    lines.push(`N:${projectMetadata.author.familyName};${projectMetadata.author.givenName};;;`)
+    lines.push(`FN:${escapeVCardValue(projectMetadata.author.name)}`)
   }
 
   if (fixed.nickname) {
     // NICKNAME is recognized by Apple Contacts but ignored on Android.
-    lines.push(`NICKNAME:${escapeVCardValue(projectConfig.author.nickname)}`)
+    lines.push(`NICKNAME:${escapeVCardValue(projectMetadata.author.nickname)}`)
   }
 
   if (fixed.website) {
-    lines.push(`URL:${projectConfig.siteUrl}`)
+    lines.push(`URL:${projectMetadata.siteUrl}`)
   }
 
   // Build NOTE from handle and/or bio (handle first, two blank lines between).
   const noteParts: string[] = []
   if (fixed.nickname) {
-    noteParts.push(projectConfig.author.handle)
+    noteParts.push(projectMetadata.author.handle)
   }
   if (fixed.bio) {
-    noteParts.push(projectConfig.author.roleSummary)
+    noteParts.push(projectMetadata.author.role)
   }
   if (noteParts.length > 0) {
     lines.push(`NOTE:${escapeVCardValue(noteParts.join(' - '))}`)

@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import projectConfig from '~~/project.config.json'
 import QRCode from 'qrcode'
+
+const { data: projectMetadata } = await useProjectMetadata()
+const authorName = computed(() => projectMetadata.value?.author.name ?? '')
+const authorHandle = computed(() => projectMetadata.value?.author.handle ?? '')
+const projectName = computed(() => projectMetadata.value?.projectName ?? '')
 
 useSeoMeta({
   title: 'vCard',
-  description: `Generate a QR code contact card for ${projectConfig.author.name}.`,
+  description: () => `Generate a QR code contact card for ${authorName.value}.`,
 })
 
 // Personal utility page - exclude from search engine indexing (robots file)
 useRobotsRule(false)
 
 defineOgImage('Default')
-
-const { data: projectMetadata } = await useProjectMetadata()
 const socials = computed(() => projectMetadata.value?.socials)
 
 const {
@@ -40,7 +42,12 @@ const vcardString = computed(() => {
     .filter(s => checked.value[s.id])
     .map(s => ({ name: s.name, url: s.url }))
 
+  if (!projectMetadata.value) {
+    return ''
+  }
+
   return buildVCard(
+    projectMetadata.value,
     {
       name: includeName.value,
       nickname: includeNickname.value,
@@ -114,7 +121,7 @@ watch(vcardString, () => {
         >
           <img
             v-if="qrDataUrl"
-            :alt="`QR code encoding a vCard for ${projectConfig.author.name}`"
+            :alt="`QR code encoding a vCard for ${authorName}`"
             class="h-full w-full rounded-lg"
             :src="qrDataUrl"
           >
@@ -138,17 +145,17 @@ watch(vcardString, () => {
             <VCardCheckbox
               v-model="includeName"
               icon="ph:user"
-              :label="`Name (${projectConfig.author.name})`"
+              :label="`Name (${authorName})`"
             />
             <VCardCheckbox
               v-model="includeNickname"
               icon="ph:at"
-              :label="`Handle (${projectConfig.author.handle})`"
+              :label="`Handle (${authorHandle})`"
             />
             <VCardCheckbox
               v-model="includeWebsite"
               icon="ph:globe"
-              :label="`Website (${projectConfig.projectName})`"
+              :label="`Website (${projectName})`"
             />
             <VCardCheckbox
               v-model="includeBio"
