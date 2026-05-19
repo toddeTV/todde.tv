@@ -31,6 +31,7 @@ export interface ProjectMetadata {
     legalNoticePath: string
     privacyPolicyPath: string
   }
+  redirects: ProjectMetadataRedirectGroup[]
   projectName: string
   repository: {
     licenseUrl: string
@@ -45,6 +46,24 @@ export interface ProjectMetadata {
   }
   siteDescription: string
   siteUrl: string
+}
+
+export interface ProjectMetadataRedirectEntry {
+  from: string
+  statusCode: number
+  to: string
+}
+
+export interface ProjectMetadataRedirectGroup {
+  comment: string
+  entries: ProjectMetadataRedirectEntry[]
+}
+
+export interface ProjectMetadataRedirectRouteRule {
+  redirect: {
+    statusCode: number
+    to: string
+  }
 }
 
 export interface ProjectMetadataSocialEntry {
@@ -81,6 +100,10 @@ export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEn
   socials: TSocial[]
 }
 
+const LEGAL_NOTICE_PATH = '/legal-notice'
+const PRIVACY_POLICY_PATH = '/privacy-policy'
+const SECURITY_TXT_PATH = '/.well-known/security.txt'
+
 /**
  * Raw config source.
  *
@@ -114,9 +137,34 @@ const projectMetadataConfig = {
 
   /** Legal routes. */
   legal: {
-    legalNoticePath: '/legal-notice',
-    privacyPolicyPath: '/privacy-policy',
+    legalNoticePath: LEGAL_NOTICE_PATH,
+    privacyPolicyPath: PRIVACY_POLICY_PATH,
   },
+
+  /** Redirect aliases used in route rules and Cloudflare Pages `_redirects`. */
+  redirects: [
+    {
+      comment: 'Legal Notice alternative paths',
+      entries: [
+        { from: '/imprint', to: LEGAL_NOTICE_PATH, statusCode: 301 },
+        { from: '/impressum', to: LEGAL_NOTICE_PATH, statusCode: 301 },
+        { from: '/legal', to: LEGAL_NOTICE_PATH, statusCode: 301 },
+      ],
+    },
+    {
+      comment: 'Privacy Policy alternative paths',
+      entries: [
+        { from: '/privacy', to: PRIVACY_POLICY_PATH, statusCode: 301 },
+        { from: '/datenschutz', to: PRIVACY_POLICY_PATH, statusCode: 301 },
+      ],
+    },
+    {
+      comment: 'Machine-readable metadata alias',
+      entries: [
+        { from: '/security.txt', to: SECURITY_TXT_PATH, statusCode: 301 },
+      ],
+    },
+  ],
 
   /** Project identity. */
   projectName: 'todde.tv',
@@ -181,5 +229,47 @@ const projectMetadataConfig = {
   /** Canonical site URL. */
   siteUrl: 'https://todde.tv',
 } satisfies ProjectMetadata
+
+/** Returns redirect groups from `project-metadata.config.ts` in declaration order. */
+export function getProjectMetadataRedirectGroups(): ProjectMetadataRedirectGroup[] {
+  return projectMetadataConfig.redirects
+}
+
+/** Returns all redirect entries from `project-metadata.config.ts` in declaration order. */
+export function getProjectMetadataRedirectEntries(): ProjectMetadataRedirectEntry[] {
+  return getProjectMetadataRedirectGroups().flatMap(group => group.entries)
+}
+
+/** Builds the Nuxt `routeRules` redirect subset from project metadata redirects. */
+export function buildProjectMetadataRedirectRouteRules(): Record<string, ProjectMetadataRedirectRouteRule> {
+  return Object.fromEntries(
+    getProjectMetadataRedirectEntries().map(entry => [
+      entry.from,
+      {
+        redirect: {
+          to: entry.to,
+          statusCode: entry.statusCode,
+        },
+      },
+    ]),
+  )
+}
+
+/** Renders the Cloudflare Pages `_redirects` file from project metadata redirects. */
+export function renderProjectMetadataRedirectsFile(): string {
+  const lines = [
+    '# Cloudflare Pages edge-level redirects.',
+    '# Generated from `project-metadata.config.ts`. Do not edit manually.',
+  ]
+
+  for (const group of getProjectMetadataRedirectGroups()) {
+    lines.push('', `# ${group.comment}`)
+    for (const entry of group.entries) {
+      lines.push(`${entry.from} ${entry.to} ${entry.statusCode}`)
+    }
+  }
+
+  return `${lines.join('\n')}\n`
+}
 
 export default projectMetadataConfig
