@@ -9,6 +9,12 @@ interface GeneratorOptions {
 
 const DEFAULT_OUTPUT_PATH = '.output/public/_redirects'
 
+/**
+ * Parses CLI arguments for redirect artifact generation.
+ * @param {string[]} argv Command-line arguments after the executable and script path.
+ * @returns {GeneratorOptions} Parsed generator options.
+ * @throws {Error} Thrown when an argument is unknown or `--output` has no value.
+ */
 function parseArgs(argv: string[]): GeneratorOptions {
   let check = false
   let outputPath = DEFAULT_OUTPUT_PATH
@@ -40,6 +46,13 @@ function parseArgs(argv: string[]): GeneratorOptions {
   }
 }
 
+/**
+ * Verifies that the redirect artifact exists and matches the expected content.
+ * @param {string} outputPath Absolute path to the generated redirect artifact.
+ * @param {string} expectedContent Redirect artifact content derived from project metadata.
+ * @returns {Promise<void>} Resolves when the artifact exists and has no drift.
+ * @throws {Error} Thrown when the artifact is missing, unreadable, or differs from expected content.
+ */
 async function assertRedirectsFile(outputPath: string, expectedContent: string): Promise<void> {
   let actualContent = ''
 
@@ -72,11 +85,21 @@ async function assertRedirectsFile(outputPath: string, expectedContent: string):
   }
 }
 
+/**
+ * Writes the generated redirect artifact to disk.
+ * @param {string} outputPath Absolute path where the redirect artifact should be written.
+ * @param {string} expectedContent Redirect artifact content to persist.
+ * @returns {Promise<void>} Resolves after the artifact directory exists and the file is written.
+ */
 async function writeRedirectsFile(outputPath: string, expectedContent: string): Promise<void> {
   await mkdir(dirname(outputPath), { recursive: true })
   await writeFile(outputPath, expectedContent, 'utf8')
 }
 
+/**
+ * Runs the redirect artifact generator in write or check mode.
+ * @returns {Promise<void>} Resolves after the requested generator action completes.
+ */
 async function main(): Promise<void> {
   const options = parseArgs(process.argv.slice(2))
   const outputPath = resolve(process.cwd(), options.outputPath)
