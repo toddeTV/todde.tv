@@ -141,6 +141,7 @@ export default defineNuxtConfig({
         '@unhead/schema-org/vue',
         '@vue/devtools-core',
         '@vue/devtools-kit',
+        'qrcode', // CJS
       ],
     },
     plugins: [
@@ -241,6 +242,7 @@ export default defineNuxtConfig({
   },
 
   image: { // for `@nuxt/image`
+    none: {},
   },
 
   ogImage: { // for `nuxt-og-image` (via `@nuxtjs/seo`)

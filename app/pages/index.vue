@@ -139,7 +139,24 @@ defineOgImage('Home', {
 
     <!-- Connect -->
     <AppSeparator />
-    <AppSection id="connect" heading="Connect">
+    <AppSection id="connect">
+      <template #headline>
+        <h2 class="mb-0">
+          Connect
+        </h2>
+      </template>
+
+      <template #headline-right>
+        <NuxtLink
+          aria-label="Open vCard QR code"
+          class="section-link section-link-vcard"
+          to="/vcard"
+        >
+          <Icon name="ph:qr-code" :size="16" />
+          <span class="font-mono text-xs">vCard</span>
+        </NuxtLink>
+      </template>
+
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <AppCard
           v-for="social in socials"
@@ -170,18 +187,22 @@ defineOgImage('Home', {
     <!-- Recent Talks -->
     <AppSeparator v-if="recentTalks?.length" />
     <AppSection v-if="recentTalks?.length">
-      <div class="mb-6 flex items-center justify-between">
-        <h2>
+      <template #headline>
+        <h2 class="mb-0">
           Recent Talks
         </h2>
+      </template>
+
+      <template #headline-right>
         <NuxtLink
-          class="flex items-center gap-1.5 text-sm font-medium whitespace-nowrap"
+          class="section-link"
           to="/talks"
         >
           View all talks
           <Icon name="ph:arrow-right" :size="16" />
         </NuxtLink>
-      </div>
+      </template>
+
       <div class="flex flex-col gap-4">
         <TalkCard v-for="talk in recentTalks" :key="talk.path" :talk="talk" />
       </div>
@@ -190,21 +211,39 @@ defineOgImage('Home', {
     <!-- Recent Projects -->
     <AppSeparator v-if="recentProjects?.length" />
     <AppSection v-if="recentProjects?.length">
-      <div class="mb-6 flex items-center justify-between">
-        <h2>
+      <template #headline>
+        <h2 class="mb-0">
           Recent Projects
         </h2>
+      </template>
+
+      <template #headline-right>
         <NuxtLink
-          class="flex items-center gap-1.5 text-sm font-medium whitespace-nowrap"
+          class="section-link"
           to="/projects"
         >
           View all projects
           <Icon name="ph:arrow-right" :size="16" />
         </NuxtLink>
-      </div>
+      </template>
+
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <ProjectCard v-for="project in recentProjects" :key="project.path" :project="project" />
       </div>
     </AppSection>
   </div>
 </template>
+
+<style scoped>
+@reference "~/assets/css/main.css";
+
+.section-link {
+  @apply inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2;
+  @apply text-sm font-medium whitespace-nowrap text-text no-underline transition-colors;
+  @apply hover:border-accent hover:bg-surface-hover hover:text-accent;
+}
+
+.section-link-vcard {
+  @apply px-2.5 py-1.5 text-xs;
+}
+</style>
