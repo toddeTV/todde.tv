@@ -8,6 +8,11 @@ name: Build & Deploy
 #   CLOUDFLARE_ACCOUNT_ID  - Cloudflare account ID (found in dashboard sidebar)
 #
 # Required GitHub Actions variables (Settings > Variables > Actions):
+#   NUXT_PUBLIC_LEGAL_NAME             - Full legal name for legal notice (e.g. "Thorsten Seyschab")
+#   NUXT_PUBLIC_LEGAL_OCCUPATION       - Occupation in English (e.g. "Freelance IT Consultant")
+#   NUXT_PUBLIC_LEGAL_OCCUPATION_DE    - Occupation in German (e.g. "Freiberuflicher IT-Berater")
+#   NUXT_PUBLIC_LEGAL_EMAIL            - Public legal contact email (e.g. "hello@example.com")
+#   NUXT_PUBLIC_LEGAL_PHONE            - Public legal contact phone (e.g. "+49 351 1234567")
 #   NUXT_PUBLIC_LEGAL_ADDRESS_STREET   - Street and house number for legal notice (e.g. "Musterstrasse 1")
 #   NUXT_PUBLIC_LEGAL_ADDRESS_CITY     - Postal code and city (e.g. "01234 Dresden")
 #   NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY  - Country (e.g. "Germany")
@@ -55,6 +60,11 @@ jobs:
       - name: Generate static site
         run: pnpm run build:ssg
         env:
+          NUXT_PUBLIC_LEGAL_NAME: ${{ vars.NUXT_PUBLIC_LEGAL_NAME }}
+          NUXT_PUBLIC_LEGAL_OCCUPATION: ${{ vars.NUXT_PUBLIC_LEGAL_OCCUPATION }}
+          NUXT_PUBLIC_LEGAL_OCCUPATION_DE: ${{ vars.NUXT_PUBLIC_LEGAL_OCCUPATION_DE }}
+          NUXT_PUBLIC_LEGAL_EMAIL: ${{ vars.NUXT_PUBLIC_LEGAL_EMAIL }}
+          NUXT_PUBLIC_LEGAL_PHONE: ${{ vars.NUXT_PUBLIC_LEGAL_PHONE }}
           NUXT_PUBLIC_LEGAL_ADDRESS_STREET: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_STREET }}
           NUXT_PUBLIC_LEGAL_ADDRESS_CITY: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_CITY }}
           NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY: ${{ vars.NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY }}
