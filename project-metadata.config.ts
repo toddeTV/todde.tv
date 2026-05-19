@@ -36,6 +36,9 @@ export interface ProjectMetadata {
     licenseUrl: string
     url: string
   }
+  seo: {
+    extraKeywords: string[]
+  }
   security: {
     contact: string
     preferredLanguages: string[]
@@ -122,6 +125,38 @@ const projectMetadataConfig = {
   repository: {
     licenseUrl: 'https://github.com/toddeTV/todde.tv/blob/main/LICENSE.md',
     url: 'https://github.com/toddeTV/todde.tv',
+  },
+
+  /** SEO-only keyword variants. */
+  seo: {
+    extraKeywords: [
+      'IT consultant',
+      'IT-consultant',
+      'full-stack developer',
+      'full stack developer',
+      'conference speaker',
+      'computer science',
+      'computer scientist',
+      'M.Sc. Computer Science',
+      'M.Sc.',
+      'master',
+      'master degree',
+      'masters degree',
+      'TUD Dresden University of Technology',
+      'Dresden',
+      'Dresden, Deutschland',
+      'Germany',
+      'Deutschland',
+      'web engineer',
+      'open source',
+      'open-source',
+      'OpenSource',
+      'projects',
+      'portfolio',
+      'Vue',
+      'Nuxt',
+      'TypeScript',
+    ],
   },
 
   /**

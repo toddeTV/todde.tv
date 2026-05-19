@@ -4,6 +4,13 @@ import { getProjectMetadata } from './shared/utils/project-metadata'
 
 const buildReleaseMetadata = resolveBuildReleaseMetadata()
 const projectMetadata = getProjectMetadata()
+const seoKeywords = [
+  projectMetadata.author.name,
+  projectMetadata.author.nickname,
+  projectMetadata.projectName,
+  projectMetadata.author.location,
+  ...projectMetadata.seo.extraKeywords,
+].join(', ')
 const staticMachineReadableTextRouteRule = {
   prerender: true,
   headers: {
@@ -47,38 +54,7 @@ export default defineNuxtConfig({
         // consider it. Harmless to include.
         {
           name: 'keywords',
-          content: [
-            'Thorsten Seyschab',
-            'toddeTV',
-            'todde.tv',
-            'IT consultant',
-            'IT-consultant',
-            'full-stack developer',
-            'full stack developer',
-            'conference speaker',
-            'computer science',
-            'computer scientist',
-            'M.Sc. Computer Science',
-            'M.Sc.',
-            'master',
-            'master degree',
-            'masters degree',
-            'TUD Dresden University of Technology',
-            'Dresden',
-            'Dresden, Germany',
-            'Dresden, Deutschland',
-            'Germany',
-            'Deutschland',
-            'web engineer',
-            'open source',
-            'open-source',
-            'OpenSource',
-            'projects',
-            'portfolio',
-            'Vue',
-            'Nuxt',
-            'TypeScript',
-          ].join(', '),
+          content: seoKeywords,
         },
 
         // Dark-only site: inform browser about color scheme and mobile chrome color.
@@ -92,7 +68,7 @@ export default defineNuxtConfig({
       ],
       htmlAttrs: {
         'lang': 'en',
-        'data-theme-source': 'todde.tv',
+        'data-theme-source': projectMetadata.projectName,
       },
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
