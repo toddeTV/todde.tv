@@ -10,17 +10,25 @@ const props = defineProps<{
 }>()
 
 const config = useRuntimeConfig()
+const legalEmail = computed(() => config.public.legalEmail as string)
+const legalPhone = computed(() => config.public.legalPhone as string)
 
 const label = computed(() => {
   return props.type === 'email'
-    ? config.public.legalEmail as string
-    : config.public.legalPhoneDisplay as string
+    ? legalEmail.value
+    : legalPhone.value
 })
 
 const url = computed(() => {
   return props.type === 'email'
-    ? `mailto:${config.public.legalEmail as string}`
-    : config.public.legalPhoneUri as string
+    ? (legalEmail.value ? `mailto:${legalEmail.value}` : '')
+    : buildPhoneUri(legalPhone.value)
+})
+
+const missingConfigMessage = computed(() => {
+  return props.type === 'email'
+    ? 'Email not configured - set NUXT_PUBLIC_LEGAL_EMAIL'
+    : 'Phone not configured - set NUXT_PUBLIC_LEGAL_PHONE'
 })
 </script>
 
@@ -32,6 +40,6 @@ const url = computed(() => {
     {{ label }}
   </NuxtLink>
   <span v-else class="text-text-dim italic">
-    [{{ type === 'email' ? 'Email' : 'Phone' }} not configured - set matching legal env vars]
+    [{{ missingConfigMessage }}]
   </span>
 </template>
