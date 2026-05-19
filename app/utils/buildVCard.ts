@@ -49,6 +49,7 @@ function escapeVCardValue(value: string): string {
 
 /**
  * Builds a vCard 3.0 string from the provided fields.
+ * @param projectMetadata - project-level author and site metadata used in the vCard
  * @param fixed - toggle flags for name, website, and bio
  * @param emails - array of selected email addresses (raw, without mailto: prefix)
  * @param phones - array of selected phone numbers (raw, without tel: prefix)
