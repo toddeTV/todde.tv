@@ -1,4 +1,4 @@
-import rawProjectMetadata from '../../project.config.json'
+import projectMetadataConfig, { type ProjectMetadata } from '../../project.config'
 
 const MAILTO_PREFIX = 'mailto:'
 const TEL_PREFIX = 'tel:'
@@ -13,35 +13,7 @@ export interface ProjectMetadataSocialEntry {
   url: string
 }
 
-export interface ProjectMetadata {
-  author: {
-    contact?: string
-    familyName: string
-    givenName: string
-    handle: string
-    location: string
-    name: string
-    nickname: string
-    role: string
-    sameAs?: string[]
-    url: string
-  }
-  legal: {
-    legalNoticePath: string
-    privacyPolicyPath: string
-  }
-  projectName: string
-  repository: {
-    licenseUrl: string
-    url: string
-  }
-  security: {
-    contact: string
-    preferredLanguages: string[]
-  }
-  siteDescription: string
-  siteUrl: string
-}
+export type { ProjectMetadata } from '../../project.config'
 
 export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
   extends Omit<ProjectMetadata, 'author'> {
@@ -58,9 +30,9 @@ export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEn
   socials: TSocial[]
 }
 
-/** Returns the raw project metadata stored in `project.config.json`. */
+/** Returns the raw project metadata stored in `project.config.ts`. */
 export function getProjectMetadata(): ProjectMetadata {
-  return rawProjectMetadata as ProjectMetadata
+  return projectMetadataConfig
 }
 
 function isMailtoUrl(url: string): boolean {
