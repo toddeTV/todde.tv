@@ -17,8 +17,8 @@
 export interface ProjectMetadata {
   author: {
     contact?: string
-    familyName: string
-    givenName: string
+    lastName: string
+    firstName: string
     handle: string
     location: string
     name: string
@@ -96,8 +96,8 @@ const projectMetadataConfig = {
     sameAs: undefined, // hydrated from featured profile socials
 
     /** Raw name fields. */
-    familyName: 'Seyschab',
-    givenName: 'Thorsten',
+    lastName: 'Seyschab',
+    firstName: 'Thorsten',
 
     /** Base handles and labels. */
     handle: '@toddeTV',

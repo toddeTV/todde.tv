@@ -5,8 +5,8 @@
 
 export interface VCardProjectMetadata {
   author: {
-    familyName: string
-    givenName: string
+    lastName: string
+    firstName: string
     handle: string
     name: string
     nickname: string
@@ -68,7 +68,7 @@ export function buildVCard(
   ]
 
   if (fixed.name) {
-    lines.push(`N:${projectMetadata.author.familyName};${projectMetadata.author.givenName};;;`)
+    lines.push(`N:${projectMetadata.author.lastName};${projectMetadata.author.firstName};;;`)
     lines.push(`FN:${escapeVCardValue(projectMetadata.author.name)}`)
   }
 
