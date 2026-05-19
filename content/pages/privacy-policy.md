@@ -12,7 +12,7 @@ _Datenschutzerklärung gemäß Art. 13, 14 DSGVO (Datenschutz-Grundverordnung) /
 The controller within the meaning of Art. 4 (7) GDPR (_DSGVO_) is:
 
 :legal-author-name<br>
-Freelance IT Consultant (_Freiberuflicher IT-Berater_)
+:legal-occupation
 
 **Address** (_Adresse_):<br>
 ::legal-address

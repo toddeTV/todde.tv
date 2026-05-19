@@ -1,9 +1,14 @@
 <script setup lang="ts">
-/** Renders the canonical author name from centralized project metadata. */
+/** Renders the legal name from runtimeConfig. */
 
-const projectMetadata = getProjectMetadata()
+const config = useRuntimeConfig()
+
+const legalName = computed(() => config.public.legalName as string)
 </script>
 
 <template>
-  <span>{{ projectMetadata.author.name }}</span>
+  <span v-if="legalName">{{ legalName }}</span>
+  <span v-else class="text-text-dim italic">
+    [Legal name not configured - set NUXT_PUBLIC_LEGAL_NAME]
+  </span>
 </template>

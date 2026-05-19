@@ -100,6 +100,12 @@ export default defineNuxtConfig({
       },
       // Legal page data - injected via GitHub Variables at build time.
       // Not committed to Git. Set `NUXT_PUBLIC_LEGAL_*` env vars (see `.env.example`).
+      legalName: '',
+      legalOccupation: '',
+      legalOccupationDe: '',
+      legalEmail: '',
+      legalPhoneDisplay: '',
+      legalPhoneUri: '',
       legalAddressStreet: '',
       legalAddressCity: '',
       legalAddressCountry: '',
@@ -192,6 +198,12 @@ export default defineNuxtConfig({
       if (!isBuildOrGenerate) return
 
       const required = [
+        'NUXT_PUBLIC_LEGAL_NAME',
+        'NUXT_PUBLIC_LEGAL_OCCUPATION',
+        'NUXT_PUBLIC_LEGAL_OCCUPATION_DE',
+        'NUXT_PUBLIC_LEGAL_EMAIL',
+        'NUXT_PUBLIC_LEGAL_PHONE_DISPLAY',
+        'NUXT_PUBLIC_LEGAL_PHONE_URI',
         'NUXT_PUBLIC_LEGAL_ADDRESS_STREET',
         'NUXT_PUBLIC_LEGAL_ADDRESS_CITY',
         'NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY',

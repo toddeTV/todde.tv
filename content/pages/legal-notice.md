@@ -12,7 +12,7 @@ _Impressum gemäß § 5 DDG (Digitale-Dienste-Gesetz)_
 _Angaben gemäß § 5 DDG_
 
 :legal-author-name<br>
-Freelance IT Consultant (_Freiberuflicher IT-Berater_)
+:legal-occupation
 
 ::legal-address
 ::

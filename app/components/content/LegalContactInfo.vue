@@ -1,8 +1,6 @@
 <script setup lang="ts">
 /**
- * Renders contact info (email or phone) by querying the socials collection.
- * Finds the social entry with the lowest sortOrder whose URL starts with
- * `mailto:` (for email) or `tel:` (for phone) and displays its handle.
+ * Renders legal contact info from runtimeConfig.
  * Used as inline MDC component in legal content pages.
  */
 
@@ -11,27 +9,29 @@ const props = defineProps<{
   type: 'email' | 'phone'
 }>()
 
-const { data: projectMetadata } = await useProjectMetadata()
+const config = useRuntimeConfig()
 
-const social = computed(() => {
-  if (!projectMetadata.value) {
-    return null
-  }
-
+const label = computed(() => {
   return props.type === 'email'
-    ? projectMetadata.value.primaryEmailSocial
-    : projectMetadata.value.primaryPhoneSocial
+    ? config.public.legalEmail as string
+    : config.public.legalPhoneDisplay as string
+})
+
+const url = computed(() => {
+  return props.type === 'email'
+    ? `mailto:${config.public.legalEmail as string}`
+    : config.public.legalPhoneUri as string
 })
 </script>
 
 <template>
   <NuxtLink
-    v-if="social"
-    :to="social.url"
+    v-if="label && url"
+    :to="url"
   >
-    {{ social.handle }}
+    {{ label }}
   </NuxtLink>
   <span v-else class="text-text-dim italic">
-    [{{ type === 'email' ? 'Email' : 'Phone' }} not configured - add a matching social entry]
+    [{{ type === 'email' ? 'Email' : 'Phone' }} not configured - set matching legal env vars]
   </span>
 </template>
