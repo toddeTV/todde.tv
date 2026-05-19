@@ -48,9 +48,17 @@ async function assertRedirectsFile(outputPath: string, expectedContent: string):
   }
   catch (error) {
     const relativeOutputPath = relative(process.cwd(), outputPath)
+
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error(
+        `Redirect artifact is missing at ${relativeOutputPath}. `
+        + 'Run `node scripts/generate-redirects.ts` first.',
+        { cause: error },
+      )
+    }
+
     throw new Error(
-      `Redirect artifact is missing at ${relativeOutputPath}. `
-      + 'Run `node scripts/generate-redirects.ts` first.',
+      `Failed to read redirect artifact at ${relativeOutputPath}.`,
       { cause: error },
     )
   }
