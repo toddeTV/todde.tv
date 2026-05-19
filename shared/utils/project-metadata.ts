@@ -1,4 +1,4 @@
-import projectMetadataConfig, { type ProjectMetadata } from '../../project.config'
+import projectMetadataConfig, { type ProjectMetadata } from '../../project-metadata.config'
 
 const MAILTO_PREFIX = 'mailto:'
 const TEL_PREFIX = 'tel:'
@@ -13,7 +13,7 @@ export interface ProjectMetadataSocialEntry {
   url: string
 }
 
-export type { ProjectMetadata } from '../../project.config'
+export type { ProjectMetadata } from '../../project-metadata.config'
 
 export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
   extends Omit<ProjectMetadata, 'author'> {
@@ -30,7 +30,7 @@ export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEn
   socials: TSocial[]
 }
 
-/** Returns the raw project metadata stored in `project.config.ts`. */
+/** Returns the raw project metadata stored in `project-metadata.config.ts`. */
 export function getProjectMetadata(): ProjectMetadata {
   return projectMetadataConfig
 }
