@@ -1,3 +1,19 @@
+/**
+ * Project metadata model.
+ *
+ * Layers:
+ * - `ProjectMetadata`: raw base values from this file
+ * - `HydratedProjectMetadata`: raw values plus socials-derived fields
+ *
+ * Access:
+ * - Raw: `getProjectMetadata()`
+ * - Hydrated: `prepareProjectMetadata()`
+ * - App runtime: `useProjectMetadata()`
+ *
+ * Rules:
+ * - Keep only non-hydrated source values here
+ * - Keep this file aligned with `shared/utils/project-metadata.ts`
+ */
 export interface ProjectMetadata {
   author: {
     contact?: string
@@ -38,6 +54,14 @@ export interface ProjectMetadataSocialEntry {
   url: string
 }
 
+/**
+ * Hydrated metadata shape.
+ *
+ * Adds:
+ * - normalized `author.contact`
+ * - normalized `author.sameAs`
+ * - grouped socials collections
+ */
 export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
   extends Omit<ProjectMetadata, 'author'> {
   author: Omit<ProjectMetadata['author'], 'contact' | 'sameAs'> & {
@@ -53,84 +77,77 @@ export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEn
   socials: TSocial[]
 }
 
-// Base project metadata only.
-// Hydration and normalization happen in `shared/utils/project-metadata.ts`.
-// Raw access: `getProjectMetadata()`.
-// Hydrated access with socials merged in: `prepareProjectMetadata()`.
-// Frontend app/runtime code should prefer `app/composables/useProjectMetadata.ts`
-// and call `useProjectMetadata()` for reactive, socials-enriched metadata.
-// Backend, server, build, and plain sync code should use `getProjectMetadata()`
-// when the raw shape is enough and no socials-derived fields are needed.
-// Use `prepareProjectMetadata()` in non-frontend contexts only when you already
-// have socials data and need the hydrated shape.
-// Hydrated-only root fields such as `socials`, `featuredSocials`, `emailSocials`,
-// `phoneSocials`, `profileSocials`, `primaryEmailSocial`, and
-// `primaryPhoneSocial` do not belong in this file.
-// Keep this file, its comments, and `shared/utils/project-metadata.ts` in sync.
+/**
+ * Raw config source.
+ *
+ * Keep out:
+ * - socials lists
+ * - featured/grouped socials
+ * - derived primary contact fields
+ */
 const projectMetadataConfig = {
-  // Base author fields.
-  // Hydration may add or replace `author.contact` from the first active `mailto:` social.
-  // Hydration may add or replace `author.sameAs` from featured profile socials.
-  // Keep only non-social base author data in this object.
+  /**
+   * Author base data.
+   *
+   * Hydration may fill:
+   * - `author.contact`
+   * - `author.sameAs`
+   */
   author: {
-    // Raw name fields. Not modified by hydration.
+    /** Raw name fields. */
     familyName: 'Seyschab',
     givenName: 'Thorsten',
 
-    // Base handles and display labels. Not modified by hydration.
+    /** Base handles and labels. */
     handle: '@toddeTV',
     location: 'Dresden, Germany',
     name: 'Thorsten Seyschab',
     nickname: 'toddeTV',
 
-    // Base role text.
-    // Frontend consumers should read this through `useProjectMetadata()`.
-    // Plain sync and backend consumers should read it through `getProjectMetadata()`.
+    /** Base role text. */
     role: 'IT consultant, senior full-stack developer, and conference speaker',
 
-    // Canonical author/site URL. Not modified by hydration.
+    /** Canonical author URL. */
     url: 'https://todde.tv',
   },
 
-  // Legal route metadata.
-  // Not modified by hydration.
+  /** Legal routes. */
   legal: {
     legalNoticePath: '/legal-notice',
     privacyPolicyPath: '/privacy-policy',
   },
 
-  // Base project/site identity.
-  // Not modified by hydration.
+  /** Project identity. */
   projectName: 'todde.tv',
 
-  // Repository metadata.
-  // Not modified by hydration.
+  /** Repository links. */
   repository: {
     licenseUrl: 'https://github.com/toddeTV/todde.tv/blob/main/LICENSE.md',
     url: 'https://github.com/toddeTV/todde.tv',
   },
 
-  // Machine-readable security metadata.
-  // Not hydrated from socials.
-  // Keep `security.contact` distinct from hydrated `author.contact`.
+  /**
+   * RFC 9116 metadata.
+   *
+   * Keep separate from:
+   * - hydrated `author.contact`
+   */
   security: {
-    // RFC 9116 contact URI. Must stay explicit here.
+    /** Explicit RFC 9116 contact URI. */
     contact: 'mailto:hello@todde.tv',
 
-    // Preferred languages for `security.txt`. Not modified by hydration.
+    /** Preferred languages for `security.txt`. */
     preferredLanguages: [
       'en',
       'de',
     ],
   },
 
-  // Base site-wide descriptive text.
-  // Not modified by hydration.
+  /** Site description. */
   siteDescription:
     'Personal portfolio of Thorsten Seyschab - IT consultant, senior full-stack developer, and conference speaker.',
 
-  // Canonical site URL.
-  // Not modified by hydration.
+  /** Canonical site URL. */
   siteUrl: 'https://todde.tv',
 } satisfies ProjectMetadata
 
