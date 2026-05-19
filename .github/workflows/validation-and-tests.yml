@@ -33,6 +33,8 @@ jobs:
         include:
           - name: Lint & Format Check
             command: pnpm test:lint
+          - name: Redirect Artifact Check
+            command: pnpm test:redirects
           - name: Type Check
             command: pnpm test:types
 

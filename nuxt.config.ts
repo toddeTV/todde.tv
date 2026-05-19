@@ -1,9 +1,10 @@
 import tailwindcss from '@tailwindcss/vite'
 import { resolveBuildReleaseMetadata } from './server/utils/build-release-metadata'
-import { getProjectMetadata } from './shared/utils/project-metadata'
+import { buildProjectMetadataRedirectRouteRules, getProjectMetadata } from './shared/utils/project-metadata'
 
 const buildReleaseMetadata = resolveBuildReleaseMetadata()
 const projectMetadata = getProjectMetadata()
+const redirectRouteRules = buildProjectMetadataRedirectRouteRules()
 const seoKeywords = [
   projectMetadata.author.name,
   projectMetadata.author.nickname,
@@ -114,22 +115,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    // Redirect paths. In production (Cloudflare Pages), the `public/_redirects` file handles
-    // these as proper HTTP 301 at the CDN edge. These routeRules serve as fallback for
-    // local preview (`nuxt preview`) and as authoritative documentation.
-    // Keep both in sync.
-
-    // Legal Notice alternative paths
-    '/imprint': { redirect: { to: projectMetadata.legal.legalNoticePath, statusCode: 301 } },
-    '/impressum': { redirect: { to: projectMetadata.legal.legalNoticePath, statusCode: 301 } },
-    '/legal': { redirect: { to: projectMetadata.legal.legalNoticePath, statusCode: 301 } },
-
-    // Privacy Policy alternative paths
-    '/privacy': { redirect: { to: projectMetadata.legal.privacyPolicyPath, statusCode: 301 } },
-    '/datenschutz': { redirect: { to: projectMetadata.legal.privacyPolicyPath, statusCode: 301 } },
-
-    // Machine-readable metadata alias
-    '/security.txt': { redirect: { to: '/.well-known/security.txt', statusCode: 301 } },
+    // Redirect paths come from `project-metadata.config.ts`.
+    // The Cloudflare Pages `_redirects` artifact and local `routeRules` fallback share this source.
+    ...redirectRouteRules,
 
     // Build these machine-readable text endpoints as static files for Cloudflare Pages SSG.
     '/.well-known/security.txt': staticMachineReadableTextRouteRule,
