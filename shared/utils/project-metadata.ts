@@ -1,34 +1,17 @@
-import projectMetadataConfig, { type ProjectMetadata } from '../../project-metadata.config'
+import projectMetadataConfig, {
+  type HydratedProjectMetadata,
+  type ProjectMetadata,
+  type ProjectMetadataSocialEntry,
+} from '../../project-metadata.config'
 
 const MAILTO_PREFIX = 'mailto:'
 const TEL_PREFIX = 'tel:'
 
-export interface ProjectMetadataSocialEntry {
-  active?: boolean
-  featured: boolean
-  handle: string
-  icon: string
-  name: string
-  sortOrder: number
-  url: string
-}
-
-export type { ProjectMetadata } from '../../project-metadata.config'
-
-export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
-  extends Omit<ProjectMetadata, 'author'> {
-  author: Omit<ProjectMetadata['author'], 'contact' | 'sameAs'> & {
-    contact: string
-    sameAs: string[]
-  }
-  emailSocials: TSocial[]
-  featuredSocials: TSocial[]
-  phoneSocials: TSocial[]
-  primaryEmailSocial: TSocial | null
-  primaryPhoneSocial: TSocial | null
-  profileSocials: TSocial[]
-  socials: TSocial[]
-}
+export type {
+  HydratedProjectMetadata,
+  ProjectMetadata,
+  ProjectMetadataSocialEntry,
+} from '../../project-metadata.config'
 
 /** Returns the raw project metadata stored in `project-metadata.config.ts`. */
 export function getProjectMetadata(): ProjectMetadata {

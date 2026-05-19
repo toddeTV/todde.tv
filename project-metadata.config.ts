@@ -28,6 +28,31 @@ export interface ProjectMetadata {
   siteUrl: string
 }
 
+export interface ProjectMetadataSocialEntry {
+  active?: boolean
+  featured: boolean
+  handle: string
+  icon: string
+  name: string
+  sortOrder: number
+  url: string
+}
+
+export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
+  extends Omit<ProjectMetadata, 'author'> {
+  author: Omit<ProjectMetadata['author'], 'contact' | 'sameAs'> & {
+    contact: string
+    sameAs: string[]
+  }
+  emailSocials: TSocial[]
+  featuredSocials: TSocial[]
+  phoneSocials: TSocial[]
+  primaryEmailSocial: TSocial | null
+  primaryPhoneSocial: TSocial | null
+  profileSocials: TSocial[]
+  socials: TSocial[]
+}
+
 // Base project metadata only.
 // Hydration and normalization happen in `shared/utils/project-metadata.ts`.
 // Raw access: `getProjectMetadata()`.
