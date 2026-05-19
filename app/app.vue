@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * Loads prepared project metadata and injects the derived Schema.org identity fields.
+ * Loads hydrated project metadata and injects the derived Schema.org identity fields.
  */
 const { data: projectMetadata } = await useProjectMetadata()
 

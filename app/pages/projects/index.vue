@@ -1,17 +1,22 @@
 <script setup lang="ts">
-import projectConfig from '~~/project.config.json'
+const [
+  { data: projectMetadata },
+  { data: projects },
+] = await Promise.all([
+  useProjectMetadata(),
+  useSortedProjects(),
+])
 
 useSeoMeta({
   title: 'Projects',
-  description: `Projects by ${projectConfig.author.name} (${projectConfig.author.nickname}).`,
+  description: () =>
+    `Projects by ${projectMetadata.value?.author.name ?? ''} (${projectMetadata.value?.author.nickname ?? ''}).`,
 })
 
 defineOgImage('Project', {
   title: 'Projects Overview',
   description: 'Tools, experiments, and applications for 3D on the web, Vue/Nuxt, and developer tooling.',
 })
-
-const { data: projects } = await useSortedProjects()
 </script>
 
 <template>

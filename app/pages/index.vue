@@ -1,23 +1,4 @@
 <script setup lang="ts">
-import projectConfig from '~~/project.config.json'
-
-// Override the default titleTemplate (`%s %separator %siteName`) from `@nuxtjs/seo` so the home
-// page title is rendered as-is without appending the author name.
-useHead({
-  titleTemplate: '%s',
-})
-
-useSeoMeta({
-  title: `${projectConfig.author.name} - ${projectConfig.author.handle}`,
-  description: `${projectConfig.author.roleSummary}. Specializing in Vue.js, `
-    + 'Nuxt, 3D on the web, and full-stack development.',
-})
-
-defineOgImage('Home', {
-  title: projectConfig.author.name,
-  description: projectConfig.author.roleSummary,
-})
-
 /**
  * High-level skill areas displayed on the landing page.
  * Order: consulting & leadership → core engineering → data & infrastructure →
@@ -59,14 +40,27 @@ const [
   useSortedProjects(2),
 ])
 
+// Override the default titleTemplate (`%s %separator %siteName`) from `@nuxtjs/seo` so the home
+// page title is rendered as-is without appending the author name.
+useHead({
+  titleTemplate: '%s',
+})
+
 const socials = computed(() => projectMetadata.value?.socials ?? [])
-const authorName = computed(() => projectMetadata.value?.author.name ?? 'Thorsten Seyschab')
-const authorRole = computed(
-  () => projectMetadata.value?.author.roleSummary
-    ?? projectMetadata.value?.author.role
-    ?? projectConfig.author.roleSummary,
-)
-const authorLocation = computed(() => projectMetadata.value?.author.location ?? projectConfig.author.location)
+const authorName = computed(() => projectMetadata.value?.author.name ?? '')
+const authorHandle = computed(() => projectMetadata.value?.author.handle ?? '')
+const authorRole = computed(() => projectMetadata.value?.author.role ?? '')
+const authorLocation = computed(() => projectMetadata.value?.author.location ?? '')
+
+useSeoMeta({
+  title: () => `${authorName.value} - ${authorHandle.value}`,
+  description: () => `${authorRole.value}. Specializing in Vue.js, Nuxt, 3D on the web, and full-stack development.`,
+})
+
+defineOgImage('Home', {
+  title: authorName.value,
+  description: authorRole.value,
+})
 </script>
 
 <template>
@@ -91,7 +85,7 @@ const authorLocation = computed(() => projectMetadata.value?.author.location ?? 
         </div>
         <div>
           <NuxtImg
-            :alt="projectConfig.author.name"
+            :alt="authorName"
             class="img-bordered h-45 w-45 rounded-full object-cover max-sm:h-35 max-sm:w-35"
             height="180"
             src="/avatar-thorsten-seyschab.jpg"
@@ -105,7 +99,7 @@ const authorLocation = computed(() => projectMetadata.value?.author.location ?? 
     <AppSeparator />
     <AppSection heading="About Me">
       <p class="mb-4">
-        I'm an IT consultant, senior full-stack developer, and conference speaker from Germany,
+        I'm an {{ authorRole }} from Germany,
         <strong>self-employed since 2014</strong>. I help companies ship their projects, provide
         technical guidance, and build robust applications - from architecture to deployment.
       </p>

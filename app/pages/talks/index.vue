@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import projectConfig from '~~/project.config.json'
+const [
+  { data: projectMetadata },
+  { data: allTalks },
+] = await Promise.all([
+  useProjectMetadata(),
+  useAsyncData('talks', () =>
+    queryCollection('talks').order('date', 'DESC').all(),
+  ),
+])
 
 useSeoMeta({
   title: 'Talks',
-  description:
-    `Conference talks and speaking engagements by ${projectConfig.author.name} (${projectConfig.author.nickname}) on `
+  description: () =>
+    `Conference talks and speaking engagements by ${projectMetadata.value?.author.name ?? ''} `
+    + `(${projectMetadata.value?.author.nickname ?? ''}) on `
     + 'tech and life topics - from Vue.js, Nuxt, and Vite plugins to 3D on the web.',
 })
 
@@ -12,10 +21,6 @@ defineOgImage('Talk', {
   title: 'Talks Overview',
   event: 'Conference talks & speaking engagements',
 })
-
-const { data: allTalks } = await useAsyncData('talks', () =>
-  queryCollection('talks').order('date', 'DESC').all(),
-)
 
 const today = useTodayDate()
 
