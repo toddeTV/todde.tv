@@ -77,10 +77,10 @@ async function generateQrCode() {
       width: 400,
       margin: 2,
       // QR foreground/background must be raw hex (library requirement).
-      // dark = neutral-50 (#fafafa), light = neutral-900 (#141416) - update if palette changes.
+      // dark = neutral-900 (#141416), light = neutral-50 (#fafafa) - update if palette changes.
       color: {
-        dark: '#fafafa',
-        light: '#141416',
+        dark: '#141416',
+        light: '#fafafa',
       },
       errorCorrectionLevel: 'M',
     })
@@ -119,12 +119,15 @@ watch(vcardString, () => {
           class="flex h-70 w-70 items-center justify-center rounded-lg
             border border-border bg-surface sm:h-80 sm:w-80"
         >
-          <img
+          <NuxtImg
             v-if="qrDataUrl"
             :alt="`QR code encoding a vCard for ${authorName}`"
             class="h-full w-full rounded-lg"
+            height="400"
+            provider="none"
             :src="qrDataUrl"
-          >
+            width="400"
+          />
           <p v-else-if="qrError" class="text-sm text-text-muted">
             Failed to generate QR code.
           </p>
