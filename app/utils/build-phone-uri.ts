@@ -1,5 +1,9 @@
 const TEL_PREFIX = 'tel:'
 
+/**
+ * Normalizes a phone string by stripping the `tel:` prefix and separator characters.
+ * Preserves a leading `+` and returns an empty string when no digits remain.
+ */
 function normalizePhoneValue(phone: string): string {
   const trimmedPhone = phone.trim()
   const rawPhone = trimmedPhone.startsWith(TEL_PREFIX)
