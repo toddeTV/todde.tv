@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const projectMetadata = getProjectMetadata()
+
 /**
  * Shared footer for all OG image components.
  * Renders author name (left), site URL (right), and a bottom gradient accent line.
@@ -30,7 +32,7 @@
           color: '#00dc82',
         }"
       >
-        Thorsten Seyschab
+        {{ projectMetadata.author.name }}
       </span>
       <span
         :style="{
@@ -39,7 +41,7 @@
           color: '#71717a',
         }"
       >
-        todde.tv
+        {{ projectMetadata.projectName }}
       </span>
     </div>
 

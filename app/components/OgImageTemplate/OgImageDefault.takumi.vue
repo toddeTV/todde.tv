@@ -1,17 +1,19 @@
 <script setup lang="ts">
-/**
- * Default/fallback OG image component for generic pages.
- * Used by [...slug].vue when no specific OG component is configured.
- */
-withDefaults(defineProps<{
+const props = defineProps<{
   /** Page title override. */
   title?: string
   /** Page description override. */
   description?: string
-}>(), {
-  title: 'todde.tv',
-  description: 'IT consultant, senior full-stack developer, and conference speaker.',
-})
+}>()
+
+const projectMetadata = getProjectMetadata()
+const resolvedTitle = computed(() => props.title ?? projectMetadata.projectName)
+const resolvedDescription = computed(() => props.description ?? projectMetadata.author.role)
+
+/**
+ * Default/fallback OG image component for generic pages.
+ * Used by [...slug].vue when no specific OG component is configured.
+ */
 </script>
 
 <template>
@@ -42,8 +44,8 @@ withDefaults(defineProps<{
         boxSizing: 'border-box',
       }"
     >
-      <OgImageTitle size="md" :text="title" />
-      <OgImageDescription v-if="description" size="lg" :text="description" />
+      <OgImageTitle size="md" :text="resolvedTitle" />
+      <OgImageDescription v-if="resolvedDescription" size="lg" :text="resolvedDescription" />
     </div>
 
     <OgImageFooter />

@@ -11,8 +11,8 @@ _Impressum gemäß § 5 DDG (Digitale-Dienste-Gesetz)_
 
 _Angaben gemäß § 5 DDG_
 
-Thorsten Seyschab<br>
-Freelance IT Consultant (_Freiberuflicher IT-Berater_)
+:legal-author-name<br>
+:legal-occupation
 
 ::legal-address
 ::
@@ -34,7 +34,7 @@ _Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG_
 
 _Verantwortlich für journalistisch-redaktionelle Inhalte gem. § 18 Abs. 2 MStV (Medienstaatsvertrag)_
 
-Thorsten Seyschab
+:legal-author-name
 
 ::legal-address
 ::
@@ -65,4 +65,4 @@ The content and works created by the site operator on these pages are subject to
 
 Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. Third-party content is identified as such. Should you become aware of a copyright infringement, please notify us accordingly. Upon becoming aware of legal violations, we will remove such content immediately.
 
-The source code of this website is available on [GitHub](https://github.com/toddeTV/todde.tv) under the license specified in the repository.
+The source code of this website is available on :legal-repository-link under the license specified in the repository.

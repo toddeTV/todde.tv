@@ -1,8 +1,16 @@
 import tailwindcss from '@tailwindcss/vite'
-import projectConfig from './project.config.json'
 import { resolveBuildReleaseMetadata } from './server/utils/build-release-metadata'
+import { getProjectMetadata } from './shared/utils/project-metadata'
 
 const buildReleaseMetadata = resolveBuildReleaseMetadata()
+const projectMetadata = getProjectMetadata()
+const seoKeywords = [
+  projectMetadata.author.name,
+  projectMetadata.author.nickname,
+  projectMetadata.projectName,
+  projectMetadata.author.location,
+  ...projectMetadata.seo.extraKeywords,
+].join(', ')
 const staticMachineReadableTextRouteRule = {
   prerender: true,
   headers: {
@@ -39,45 +47,14 @@ export default defineNuxtConfig({
       // titleTemplate, description, og:site_name, and htmlAttrs.lang are handled by `@nuxtjs/seo` via `site`
       // config - do not duplicate here.
       meta: [
-        { name: 'application-name', content: projectConfig.projectName },
-        { name: 'author', content: projectConfig.author.name },
+        { name: 'application-name', content: projectMetadata.projectName },
+        { name: 'author', content: projectMetadata.author.name },
 
         // Ignored by Google since 2009, but some minor search engines (Yandex, Baidu) still
         // consider it. Harmless to include.
         {
           name: 'keywords',
-          content: [
-            'Thorsten Seyschab',
-            'toddeTV',
-            'todde.tv',
-            'IT consultant',
-            'IT-consultant',
-            'full-stack developer',
-            'full stack developer',
-            'conference speaker',
-            'computer science',
-            'computer scientist',
-            'M.Sc. Computer Science',
-            'M.Sc.',
-            'master',
-            'master degree',
-            'masters degree',
-            'TUD Dresden University of Technology',
-            'Dresden',
-            'Dresden, Germany',
-            'Dresden, Deutschland',
-            'Germany',
-            'Deutschland',
-            'web engineer',
-            'open source',
-            'open-source',
-            'OpenSource',
-            'projects',
-            'portfolio',
-            'Vue',
-            'Nuxt',
-            'TypeScript',
-          ].join(', '),
+          content: seoKeywords,
         },
 
         // Dark-only site: inform browser about color scheme and mobile chrome color.
@@ -91,7 +68,7 @@ export default defineNuxtConfig({
       ],
       htmlAttrs: {
         'lang': 'en',
-        'data-theme-source': 'todde.tv',
+        'data-theme-source': projectMetadata.projectName,
       },
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -104,10 +81,10 @@ export default defineNuxtConfig({
   ],
 
   site: { // for `@nuxtjs/seo` - shared site config used by all SEO sub-modules (like `ogImage`, `schemaOrg`, etc.)
-    url: projectConfig.siteUrl,
+    url: projectMetadata.siteUrl,
     // name: 'todde.tv',
-    name: projectConfig.author.name,
-    description: projectConfig.siteDescription,
+    name: projectMetadata.author.name,
+    description: projectMetadata.siteDescription,
     defaultLocale: 'en',
   },
 
@@ -123,6 +100,12 @@ export default defineNuxtConfig({
       },
       // Legal page data - injected via GitHub Variables at build time.
       // Not committed to Git. Set `NUXT_PUBLIC_LEGAL_*` env vars (see `.env.example`).
+      legalName: '',
+      legalOccupation: '',
+      legalOccupationDe: '',
+      legalEmail: '',
+      legalPhoneDisplay: '',
+      legalPhoneUri: '',
       legalAddressStreet: '',
       legalAddressCity: '',
       legalAddressCountry: '',
@@ -137,13 +120,13 @@ export default defineNuxtConfig({
     // Keep both in sync.
 
     // Legal Notice alternative paths
-    '/imprint': { redirect: { to: '/legal-notice', statusCode: 301 } },
-    '/impressum': { redirect: { to: '/legal-notice', statusCode: 301 } },
-    '/legal': { redirect: { to: '/legal-notice', statusCode: 301 } },
+    '/imprint': { redirect: { to: projectMetadata.legal.legalNoticePath, statusCode: 301 } },
+    '/impressum': { redirect: { to: projectMetadata.legal.legalNoticePath, statusCode: 301 } },
+    '/legal': { redirect: { to: projectMetadata.legal.legalNoticePath, statusCode: 301 } },
 
     // Privacy Policy alternative paths
-    '/privacy': { redirect: { to: '/privacy-policy', statusCode: 301 } },
-    '/datenschutz': { redirect: { to: '/privacy-policy', statusCode: 301 } },
+    '/privacy': { redirect: { to: projectMetadata.legal.privacyPolicyPath, statusCode: 301 } },
+    '/datenschutz': { redirect: { to: projectMetadata.legal.privacyPolicyPath, statusCode: 301 } },
 
     // Machine-readable metadata alias
     '/security.txt': { redirect: { to: '/.well-known/security.txt', statusCode: 301 } },
@@ -215,6 +198,12 @@ export default defineNuxtConfig({
       if (!isBuildOrGenerate) return
 
       const required = [
+        'NUXT_PUBLIC_LEGAL_NAME',
+        'NUXT_PUBLIC_LEGAL_OCCUPATION',
+        'NUXT_PUBLIC_LEGAL_OCCUPATION_DE',
+        'NUXT_PUBLIC_LEGAL_EMAIL',
+        'NUXT_PUBLIC_LEGAL_PHONE_DISPLAY',
+        'NUXT_PUBLIC_LEGAL_PHONE_URI',
         'NUXT_PUBLIC_LEGAL_ADDRESS_STREET',
         'NUXT_PUBLIC_LEGAL_ADDRESS_CITY',
         'NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY',
@@ -327,11 +316,11 @@ export default defineNuxtConfig({
   schemaOrg: { // for `nuxt-schema-org` (via `@nuxtjs/seo`)
     identity: {
       type: 'Person',
-      name: 'Thorsten Seyschab',
-      url: 'https://todde.tv',
+      name: projectMetadata.author.name,
+      url: projectMetadata.author.url,
       image: '/avatar-thorsten-seyschab.jpg',
       // logo: '/favicon.svg', // not a standard Schema.org property for Person, but some tools check for it.
-      // `sameAs` and `email` are populated at runtime from the `socials` content collection (see `app.vue`).
+      // `sameAs` and `email` are populated from the hydrated project metadata at runtime.
     },
   },
 

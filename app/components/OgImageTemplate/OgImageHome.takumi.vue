@@ -1,16 +1,18 @@
 <script setup lang="ts">
-/**
- * Default OG image component for the homepage.
- */
-withDefaults(defineProps<{
+const props = defineProps<{
   /** Page title override. */
   title?: string
   /** Page description override. */
   description?: string
-}>(), {
-  title: 'todde.tv',
-  description: 'IT consultant, senior full-stack developer, and conference speaker.',
-})
+}>()
+
+const projectMetadata = getProjectMetadata()
+const resolvedTitle = computed(() => props.title ?? projectMetadata.projectName)
+const resolvedDescription = computed(() => props.description ?? projectMetadata.author.role)
+
+/**
+ * Default OG image component for the homepage.
+ */
 </script>
 
 <template>
@@ -40,8 +42,8 @@ withDefaults(defineProps<{
         boxSizing: 'border-box',
       }"
     >
-      <OgImageTitle :text="title" />
-      <OgImageDescription size="lg" :text="description" />
+      <OgImageTitle :text="resolvedTitle" />
+      <OgImageDescription size="lg" :text="resolvedDescription" />
     </div>
 
     <div

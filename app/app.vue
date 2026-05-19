@@ -1,20 +1,14 @@
 <script setup lang="ts">
 /**
- * Load social links from the `socials` content collection and injects them into the Schema.org Person identity
- * via `sameAs` and `email`.
+ * Loads hydrated project metadata and injects the derived Schema.org identity fields.
  */
-const { data: socials } = await useAsyncData('app-socials-all', () =>
-  queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
-)
-if (socials.value?.length) {
-  const emailEntry = socials.value.find(s => s.url.startsWith('mailto:'))
+const { data: projectMetadata } = await useProjectMetadata()
+
+if (projectMetadata.value) {
   useSchemaOrg([
     definePerson({
-      // sameAs expects profile URLs; exclude mailto: and tel: schemes.
-      sameAs: socials.value
-        .filter(s => !s.url.startsWith('mailto:') && !s.url.startsWith('tel:'))
-        .map(s => s.url),
-      ...(emailEntry ? { email: emailEntry.url.replace('mailto:', '') } : {}),
+      sameAs: projectMetadata.value.author.sameAs,
+      ...(projectMetadata.value.author.contact ? { email: projectMetadata.value.author.contact } : {}),
     }),
   ])
 }

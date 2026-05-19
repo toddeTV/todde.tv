@@ -1,6 +1,5 @@
-import projectConfig from '~~/project.config.json'
-
 const defaultSecurityTxtLifetimeDays = 180
+const projectMetadata = getProjectMetadata()
 
 interface SecurityTxtContentOptions {
   canonicalUrl: string
@@ -42,9 +41,9 @@ function buildSecurityTxtContent(
 
 export default defineEventHandler((event) => {
   const content = buildSecurityTxtContent({
-    canonicalUrl: new URL('/.well-known/security.txt', projectConfig.siteUrl).toString(),
-    contact: projectConfig.security.contact,
-    preferredLanguages: projectConfig.security.preferredLanguages,
+    canonicalUrl: new URL('/.well-known/security.txt', projectMetadata.siteUrl).toString(),
+    contact: projectMetadata.security.contact,
+    preferredLanguages: projectMetadata.security.preferredLanguages,
   })
 
   setResponseHeader(event, 'Content-Type', 'text/plain; charset=utf-8')

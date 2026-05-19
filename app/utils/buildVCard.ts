@@ -3,12 +3,24 @@
  * Used by the /vcard page to generate QR code content.
  */
 
+export interface VCardProjectMetadata {
+  author: {
+    lastName: string
+    firstName: string
+    handle: string
+    name: string
+    nickname: string
+    role: string
+  }
+  siteUrl: string
+}
+
 export interface VCardFixedFields {
-  /** Include full name (Thorsten Seyschab). */
+  /** Include full name. */
   name: boolean
-  /** Include nickname / handle (@toddeTV). */
+  /** Include nickname / handle. */
   nickname: boolean
-  /** Include website URL (https://todde.tv). */
+  /** Include website URL. */
   website: boolean
   /** Include short bio/description. */
   bio: boolean
@@ -37,6 +49,7 @@ function escapeVCardValue(value: string): string {
 
 /**
  * Builds a vCard 3.0 string from the provided fields.
+ * @param projectMetadata - project-level author and site metadata used in the vCard
  * @param fixed - toggle flags for name, website, and bio
  * @param emails - array of selected email addresses (raw, without mailto: prefix)
  * @param phones - array of selected phone numbers (raw, without tel: prefix)
@@ -44,6 +57,7 @@ function escapeVCardValue(value: string): string {
  * @returns formatted vCard 3.0 string
  */
 export function buildVCard(
+  projectMetadata: VCardProjectMetadata,
   fixed: VCardFixedFields,
   emails: string[],
   phones: string[],
@@ -55,26 +69,28 @@ export function buildVCard(
   ]
 
   if (fixed.name) {
-    lines.push('N:Seyschab;Thorsten;;;')
-    lines.push('FN:Thorsten Seyschab')
+    const escapedLastName = escapeVCardValue(projectMetadata.author.lastName)
+    const escapedFirstName = escapeVCardValue(projectMetadata.author.firstName)
+    lines.push(`N:${escapedLastName};${escapedFirstName};;;`)
+    lines.push(`FN:${escapeVCardValue(projectMetadata.author.name)}`)
   }
 
   if (fixed.nickname) {
     // NICKNAME is recognized by Apple Contacts but ignored on Android.
-    lines.push('NICKNAME:toddeTV')
+    lines.push(`NICKNAME:${escapeVCardValue(projectMetadata.author.nickname)}`)
   }
 
   if (fixed.website) {
-    lines.push('URL:https://todde.tv')
+    lines.push(`URL:${projectMetadata.siteUrl}`)
   }
 
   // Build NOTE from handle and/or bio (handle first, two blank lines between).
   const noteParts: string[] = []
   if (fixed.nickname) {
-    noteParts.push('@toddeTV')
+    noteParts.push(projectMetadata.author.handle)
   }
   if (fixed.bio) {
-    noteParts.push('IT consultant, senior full-stack developer, and conference speaker.')
+    noteParts.push(projectMetadata.author.role)
   }
   if (noteParts.length > 0) {
     lines.push(`NOTE:${escapeVCardValue(noteParts.join(' - '))}`)

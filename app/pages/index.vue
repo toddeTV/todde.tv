@@ -1,21 +1,4 @@
 <script setup lang="ts">
-// Override the default titleTemplate (`%s %separator %siteName`) from `@nuxtjs/seo` so the home
-// page title is rendered as-is without appending `| Thorsten Seyschab`.
-useHead({
-  titleTemplate: '%s',
-})
-
-useSeoMeta({
-  title: 'Thorsten Seyschab - @toddeTV',
-  description: 'IT consultant, senior full-stack developer, and conference speaker. Specializing in Vue.js, '
-    + 'Nuxt, 3D on the web, and full-stack development.',
-})
-
-defineOgImage('Home', {
-  title: 'Thorsten Seyschab',
-  description: 'IT consultant, senior full-stack developer, and conference speaker.',
-})
-
 /**
  * High-level skill areas displayed on the landing page.
  * Order: consulting & leadership → core engineering → data & infrastructure →
@@ -44,20 +27,40 @@ const skills = [
 ]
 
 const [
-  { data: socials },
+  { data: projectMetadata },
   { data: testimonials },
   { data: recentTalks },
   { data: recentProjects },
 ] = await Promise.all([
-  useAsyncData('index-socials-all', () =>
-    queryCollection('socials').where('active', '=', true).order('sortOrder', 'ASC').all(),
-  ),
+  useProjectMetadata(),
   useAllTestimonials(),
   useAsyncData('recent-talks', () =>
     queryCollection('talks').order('date', 'DESC').limit(3).all(),
   ),
   useSortedProjects(2),
 ])
+
+// Override the default titleTemplate (`%s %separator %siteName`) from `@nuxtjs/seo` so the home
+// page title is rendered as-is without appending the author name.
+useHead({
+  titleTemplate: '%s',
+})
+
+const socials = computed(() => projectMetadata.value?.socials ?? [])
+const authorName = computed(() => projectMetadata.value?.author.name ?? '')
+const authorHandle = computed(() => projectMetadata.value?.author.handle ?? '')
+const authorRole = computed(() => projectMetadata.value?.author.role ?? '')
+const authorLocation = computed(() => projectMetadata.value?.author.location ?? '')
+
+useSeoMeta({
+  title: () => `${authorName.value} - ${authorHandle.value}`,
+  description: () => `${authorRole.value}. Specializing in Vue.js, Nuxt, 3D on the web, and full-stack development.`,
+})
+
+defineOgImage('Home', {
+  title: authorName.value,
+  description: authorRole.value,
+})
 </script>
 
 <template>
@@ -70,19 +73,19 @@ const [
             Hi, I'm
           </p>
           <h1 class="mb-3 text-4xl sm:text-5xl">
-            Thorsten Seyschab
+            {{ authorName }}
           </h1>
           <p class="mb-3 text-lg">
-            IT consultant, senior full-stack developer, and conference speaker
+            {{ authorRole }}
           </p>
           <p class="flex items-center gap-1.5 text-sm text-text-dim max-sm:justify-center">
             <Icon name="ph:map-pin" :size="16" />
-            Dresden, Germany
+            {{ authorLocation }}
           </p>
         </div>
         <div>
           <NuxtImg
-            alt="Thorsten Seyschab"
+            :alt="authorName"
             class="img-bordered h-45 w-45 rounded-full object-cover max-sm:h-35 max-sm:w-35"
             height="180"
             src="/avatar-thorsten-seyschab.jpg"
@@ -96,7 +99,7 @@ const [
     <AppSeparator />
     <AppSection heading="About Me">
       <p class="mb-4">
-        I'm an IT consultant, senior full-stack developer, and conference speaker from Germany,
+        I'm an {{ authorRole }} from Germany,
         <strong>self-employed since 2014</strong>. I help companies ship their projects, provide
         technical guidance, and build robust applications - from architecture to deployment.
       </p>

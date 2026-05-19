@@ -1,8 +1,10 @@
-import projectConfig from '~~/project.config.json'
+import type { SocialsCollectionItem } from '@nuxt/content'
+import { queryCollection } from '@nuxt/content/server'
 
-/** Returns the plain text `humans.txt` response using `projectConfig`, `useRuntimeConfig`, and `setResponseHeader`. */
-export default defineEventHandler((event) => {
-  const { author, legal, projectName, repository, siteDescription, siteUrl } = projectConfig
+/** Returns the plain text `humans.txt` response using hydrated project metadata. */
+export default defineEventHandler(async (event) => {
+  const socials = await queryCollection(event, 'socials').all() as SocialsCollectionItem[]
+  const { author, legal, projectName, repository, siteDescription, siteUrl } = prepareProjectMetadata(socials)
   const legalNoticeUrl = new URL(legal.legalNoticePath, siteUrl).toString()
   const privacyPolicyUrl = new URL(legal.privacyPolicyPath, siteUrl).toString()
   const runtimeConfig = useRuntimeConfig(event)
