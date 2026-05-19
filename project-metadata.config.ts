@@ -63,7 +63,8 @@ export interface ProjectMetadataSocialEntry {
  * - grouped socials collections
  */
 export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEntry = ProjectMetadataSocialEntry>
-  extends Omit<ProjectMetadata, 'author'> {
+  extends Omit<ProjectMetadata, 'author'>
+{
   author: Omit<ProjectMetadata['author'], 'contact' | 'sameAs'> & {
     contact: string
     sameAs: string[]
@@ -86,14 +87,11 @@ export interface HydratedProjectMetadata<TSocial extends ProjectMetadataSocialEn
  * - derived primary contact fields
  */
 const projectMetadataConfig = {
-  /**
-   * Author base data.
-   *
-   * Hydration may fill:
-   * - `author.contact`
-   * - `author.sameAs`
-   */
+  /** Author base data. */
   author: {
+    contact: undefined, // hydrated from first active `mailto:` social
+    sameAs: undefined, // hydrated from featured profile socials
+
     /** Raw name fields. */
     familyName: 'Seyschab',
     givenName: 'Thorsten',
@@ -128,9 +126,7 @@ const projectMetadataConfig = {
 
   /**
    * RFC 9116 metadata.
-   *
-   * Keep separate from:
-   * - hydrated `author.contact`
+   * Keep separate from `author`, as the security mail might differ from the main contact.
    */
   security: {
     /** Explicit RFC 9116 contact URI. */
