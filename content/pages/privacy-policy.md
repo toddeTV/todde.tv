@@ -11,7 +11,7 @@ _Datenschutzerklärung gemäß Art. 13, 14 DSGVO (Datenschutz-Grundverordnung) /
 
 The controller within the meaning of Art. 4 (7) GDPR (_DSGVO_) is:
 
-Thorsten Seyschab<br>
+:legal-author-name<br>
 Freelance IT Consultant (_Freiberuflicher IT-Berater_)
 
 **Address** (_Adresse_):<br>
