@@ -19,7 +19,7 @@ function normalizePhoneValue(phone: string): string {
 
 /**
  * Builds a `tel:` URI from a human-readable phone string.
- * Accepts display values such as `+49 351 0000000` and existing `tel:` URIs.
+ * Accepts display values such as `+49 176 00000000` and existing `tel:` URIs.
  */
 export function buildPhoneUri(phone: string): string {
   const normalizedPhone = normalizePhoneValue(phone)
