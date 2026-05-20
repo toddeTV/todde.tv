@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: Cloudflare Deploy
 
 on:
   push:
@@ -8,39 +8,37 @@ on:
     # Twice a week: Monday 03:00 UTC and Thursday 03:00 UTC
     - cron: "0 3 * * 1"
     - cron: "0 3 * * 4"
-  workflow_dispatch: {} # Allow manual trigger from GitHub UI
+  workflow_dispatch: {}
 
 permissions:
   contents: read
 
-# Cancel in-progress runs when a newer run is triggered (e.g. two PRs merged quickly).
 concurrency:
-  group: deploy-production
+  group: cloudflare-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build & Deploy
+  deploy-pages:
+    name: Deploy Cloudflare Pages
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Checkout the Codebase
         uses: actions/checkout@v6
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: 24
-          cache: pnpm
+          version: 0.1.19
+          node-version: "24"
+          cache: true
+          run-install: false
 
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile --prefer-offline
+        run: vp install
 
       - name: Generate static site
-        run: pnpm run build:ssg
+        run: vp run build:ssg
         env:
           NUXT_PUBLIC_LEGAL_NAME: ${{ vars.NUXT_PUBLIC_LEGAL_NAME }}
           NUXT_PUBLIC_LEGAL_OCCUPATION: ${{ vars.NUXT_PUBLIC_LEGAL_OCCUPATION }}
