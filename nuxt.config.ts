@@ -19,6 +19,22 @@ const staticMachineReadableTextRouteRule = {
   },
 } as const
 
+const requiredLegalEnvKeys = [
+  'NUXT_PUBLIC_LEGAL_NAME',
+  'NUXT_PUBLIC_LEGAL_OCCUPATION',
+  'NUXT_PUBLIC_LEGAL_OCCUPATION_DE',
+  'NUXT_PUBLIC_LEGAL_EMAIL',
+  'NUXT_PUBLIC_LEGAL_PHONE',
+  'NUXT_PUBLIC_LEGAL_ADDRESS_STREET',
+  'NUXT_PUBLIC_LEGAL_ADDRESS_CITY',
+  'NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY',
+  'NUXT_PUBLIC_LEGAL_VAT_ID',
+] as const
+
+function getMissingLegalEnvKeys() {
+  return requiredLegalEnvKeys.filter(key => !process.env[key]?.trim())
+}
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -184,25 +200,29 @@ export default defineNuxtConfig({
           || process.argv.some(a => a === 'build' || a === 'generate')
       if (!isBuildOrGenerate) return
 
-      const required = [
-        'NUXT_PUBLIC_LEGAL_NAME',
-        'NUXT_PUBLIC_LEGAL_OCCUPATION',
-        'NUXT_PUBLIC_LEGAL_OCCUPATION_DE',
-        'NUXT_PUBLIC_LEGAL_EMAIL',
-        'NUXT_PUBLIC_LEGAL_PHONE',
-        'NUXT_PUBLIC_LEGAL_ADDRESS_STREET',
-        'NUXT_PUBLIC_LEGAL_ADDRESS_CITY',
-        'NUXT_PUBLIC_LEGAL_ADDRESS_COUNTRY',
-        'NUXT_PUBLIC_LEGAL_VAT_ID',
-      ]
-      const missing = required.filter(key => !process.env[key]?.trim())
+      const missing = getMissingLegalEnvKeys()
       if (missing.length > 0) {
         throw new Error(
           `Build aborted: required legal env vars are missing or empty:\n`
           + missing.map(k => `  - ${k}`).join('\n')
-          + `\nSet them in \`.env\` (local) or GitHub Variables (CI). See \`.env.example\`.`,
+          + `\nSet them in local \`.env\` for dev and GitHub Variables for CI builds.`,
         )
       }
+    },
+
+    ready(nuxt) {
+      if (!nuxt.options.dev) return
+
+      const missing = getMissingLegalEnvKeys()
+      if (missing.length === 0) return
+
+      console.warn(
+        [
+          'Missing legal env vars for local dev. Legal page fields render empty until configured.',
+          ...missing.map(key => `  - ${key}`),
+          'Set them in local `.env` before validating the legal page locally.',
+        ].join('\n'),
+      )
     },
 
     'vite:extendConfig'(config) {
