@@ -24,12 +24,6 @@ const url = computed(() => {
     ? (legalEmail.value ? `mailto:${legalEmail.value}` : '')
     : buildPhoneUri(legalPhone.value)
 })
-
-const missingConfigMessage = computed(() => {
-  return props.type === 'email'
-    ? 'Email not configured - set NUXT_PUBLIC_LEGAL_EMAIL'
-    : 'Phone not configured - set NUXT_PUBLIC_LEGAL_PHONE'
-})
 </script>
 
 <template>
@@ -39,7 +33,4 @@ const missingConfigMessage = computed(() => {
   >
     {{ label }}
   </NuxtLink>
-  <span v-else class="text-text-dim italic">
-    [{{ missingConfigMessage }}]
-  </span>
 </template>

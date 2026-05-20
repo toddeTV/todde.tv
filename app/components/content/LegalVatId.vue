@@ -10,8 +10,5 @@ const vatId = computed(() => config.public.legalVatId as string)
 </script>
 
 <template>
-  <span v-if="vatId">{{ vatId }}</span>
-  <span v-else class="text-text-dim italic">
-    [VAT ID not configured - set NUXT_PUBLIC_LEGAL_VAT_ID env var]
-  </span>
+  <span>{{ vatId }}</span>
 </template>
