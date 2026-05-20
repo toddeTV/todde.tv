@@ -5,6 +5,7 @@ event: Vue Fes Japan 2025
 location: Tokyo, Japan
 repoUrl: https://github.com/toddeTV/talk-2025-10-25-vue-fes-japan
 slidesUrl: https://talk-2025-10-25-vue-fes-japan.vercel.app/1
+videoUrl: https://www.youtube.com/watch?v=6045CAhe2ds
 testimonials:
   - quote: One of the most engaging conference talks I've attended. Thorsten made 3D on the web feel approachable and exciting for the entire audience.
     author: Attendee
