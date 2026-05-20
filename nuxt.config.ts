@@ -127,10 +127,9 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      // Routes not discoverable by the crawler (e.g. not linked from any page).
+      // Routes not discoverable by the crawler (e.g. not linked from any page). Needed for build.
       routes: [
         '/g',
-        '/vcard',
       ],
     },
   },
