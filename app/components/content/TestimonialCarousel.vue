@@ -50,20 +50,20 @@ function onScroll() {
 
 const DRAG_THRESHOLD = 5
 let isPointerDown = false
-let hasDragged = false
+let isDragging = false
+let shouldSuppressClick = false
 let startX = 0
 let startScrollLeft = 0
 
 function onPointerDown(e: PointerEvent) {
-  if (e.pointerType === 'touch') return
+  if (e.pointerType === 'touch' || !e.isPrimary || e.button !== 0) return
   const el = scrollContainer.value
   if (!el) return
-  e.preventDefault()
   isPointerDown = true
-  hasDragged = false
+  isDragging = false
+  shouldSuppressClick = false
   startX = e.clientX
   startScrollLeft = el.scrollLeft
-  el.setPointerCapture(e.pointerId)
 }
 
 function onPointerMove(e: PointerEvent) {
@@ -71,28 +71,48 @@ function onPointerMove(e: PointerEvent) {
   const el = scrollContainer.value
   if (!el) return
   const dx = e.clientX - startX
-  if (!hasDragged && Math.abs(dx) >= DRAG_THRESHOLD) {
-    hasDragged = true
+  if (!isDragging && Math.abs(dx) >= DRAG_THRESHOLD) {
+    isDragging = true
+    shouldSuppressClick = true
+    el.setPointerCapture(e.pointerId)
     el.style.scrollSnapType = 'none'
     el.style.scrollBehavior = 'auto'
   }
-  if (hasDragged) {
+  if (isDragging) {
+    e.preventDefault()
     el.scrollLeft = startScrollLeft - dx
   }
 }
 
-function onPointerUp(e: PointerEvent) {
-  if (!isPointerDown) return
+function resetPointerState(pointerId?: number) {
   isPointerDown = false
+  isDragging = false
+
   const el = scrollContainer.value
   if (!el) return
-  el.releasePointerCapture(e.pointerId)
+
+  if (pointerId !== undefined && el.hasPointerCapture(pointerId)) {
+    el.releasePointerCapture(pointerId)
+  }
+
   el.style.scrollBehavior = ''
   el.style.scrollSnapType = ''
 }
 
+function onPointerUp(e: PointerEvent) {
+  if (!isPointerDown) return
+  resetPointerState(e.pointerId)
+}
+
+function onPointerCancel() {
+  if (!isPointerDown) return
+  shouldSuppressClick = false
+  resetPointerState()
+}
+
 function onClickCapture(e: MouseEvent) {
-  if (hasDragged) {
+  if (shouldSuppressClick) {
+    shouldSuppressClick = false
     e.preventDefault()
     e.stopPropagation()
   }
@@ -124,11 +144,11 @@ function scrollTo(index: number) {
     <div class="relative">
       <div
         v-if="canScrollLeft"
-        class="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-bg to-transparent"
+        class="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-linear-to-r from-bg to-transparent"
       />
       <div
         v-if="canScrollRight && testimonials.length > 1"
-        class="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-bg to-transparent"
+        class="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-linear-to-l from-bg to-transparent"
       />
       <div
         ref="scrollContainer"
@@ -136,7 +156,7 @@ function scrollTo(index: number) {
                select-none active:cursor-grabbing"
         @click.capture="onClickCapture"
         @dragstart.prevent
-        @pointercancel="onPointerUp"
+        @pointercancel="onPointerCancel"
         @pointerdown="onPointerDown"
         @pointermove="onPointerMove"
         @pointerup="onPointerUp"
@@ -145,7 +165,7 @@ function scrollTo(index: number) {
         <div
           v-for="(t, i) in testimonials"
           :key="i"
-          class="w-[85%] flex-shrink-0 sm:w-[70%]"
+          class="w-[85%] shrink-0 sm:w-[70%]"
           :class="i === 0 ? 'snap-start' : i === testimonials.length - 1 ? 'snap-end' : 'snap-center'"
         >
           <TestimonialCard :testimonial="t" />
