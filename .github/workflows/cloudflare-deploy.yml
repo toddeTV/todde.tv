@@ -1,4 +1,4 @@
-name: Cloudflare Deploy
+name: Cloudflare Build & Deploy
 
 on:
   push:
@@ -8,18 +8,19 @@ on:
     # Twice a week: Monday 03:00 UTC and Thursday 03:00 UTC
     - cron: "0 3 * * 1"
     - cron: "0 3 * * 4"
-  workflow_dispatch: {}
+  workflow_dispatch: {} # Allow manual trigger from GitHub UI
 
 permissions:
   contents: read
 
+# Cancel in-progress runs when a newer run is triggered (e.g. two PRs merged quickly).
 concurrency:
   group: cloudflare-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy-pages:
-    name: Deploy Cloudflare Pages
+  build-and-deploy:
+    name: Build & Deploy on Cloudflare Pages
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
