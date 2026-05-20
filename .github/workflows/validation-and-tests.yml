@@ -45,7 +45,7 @@ jobs:
 
       # Install and set up Vite+ with Node and pnpm for use in the workflow
       - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1
+        uses: voidzero-dev/setup-vp@ca1c46663915d6c1042ae23bd39ab85718bfb0fa
         with:
           version: 0.1.19
           node-version: "24"
