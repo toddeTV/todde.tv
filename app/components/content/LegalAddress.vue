@@ -25,7 +25,4 @@ const hasAddress = computed(() => street.value || city.value || country.value)
       {{ country }}
     </template>
   </address>
-  <p v-else class="text-text-dim italic">
-    [Address not configured - set NUXT_PUBLIC_LEGAL_ADDRESS_* environment variables]
-  </p>
 </template>
