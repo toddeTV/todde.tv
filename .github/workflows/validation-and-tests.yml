@@ -42,6 +42,8 @@ jobs:
       # Check out the repository
       - name: Checkout the Codebase
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
 
       # Install and set up Vite+ with Node and pnpm for use in the workflow
       - name: Setup Vite+
