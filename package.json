@@ -46,8 +46,9 @@
     "pnpm": "10.x"
   },
   "scripts": {
-    "build:ssg": "cross-env NODE_OPTIONS=--max-old-space-size=8192 nuxt generate && vp dlx tsx@4.21.0 scripts/generate-redirects.ts && vp dlx tsx@4.21.0 scripts/generate-redirects.ts --check",
-    "build:ssr": "cross-env NODE_OPTIONS=--max-old-space-size=8192 nuxt build",
+    "build:ssg": "vp dlx tsx@4.21.0 scripts/build-ssg.ts",
+    "build:ssr": "vp dlx tsx@4.21.0 scripts/build-ssr.ts",
+    "build:ssr:cloudflare": "vp dlx tsx@4.21.0 scripts/build-ssr-cloudflare.ts",
     "dev": "nuxt dev",
     "dev:preset": "nuxt dev --port 3000 --public",
     "deploy:cloudflare:page": "vp dlx tsx@4.21.0 scripts/deploy-cloudflare.ts",
@@ -57,10 +58,12 @@
     "prepare": "nuxt prepare",
     "preview:ssg": "pnpm exec serve .output/public",
     "preview:ssr": "nuxt preview",
+    "redirects:check": "vp dlx tsx@4.21.0 scripts/generate-redirects.ts --check",
+    "redirects:generate": "vp dlx tsx@4.21.0 scripts/generate-redirects.ts",
     "reset": "rimraf node_modules .nuxt .output dist .data",
     "test": "run-s test:*",
     "test:lint": "eslint .",
-    "test:redirects": "vp dlx tsx@4.21.0 scripts/generate-redirects.ts && vp dlx tsx@4.21.0 scripts/generate-redirects.ts --check",
+    "test:redirects": "vp run redirects:generate && vp run redirects:check",
     "test:types": "nuxt typecheck",
     "verify:cloudflare:smoke": "vp dlx tsx@4.21.0 scripts/check-cloudflare-smoke.ts"
   },
