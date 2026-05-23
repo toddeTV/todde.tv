@@ -65,7 +65,7 @@ async function assertRedirectsFile(outputPath: string, expectedContent: string):
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
       throw new Error(
         `Redirect artifact is missing at ${relativeOutputPath}. `
-        + 'Run `node scripts/generate-redirects.ts` first.',
+        + 'Run `vp dlx tsx@4.21.0 scripts/generate-redirects.ts` first.',
         { cause: error },
       )
     }
@@ -80,7 +80,7 @@ async function assertRedirectsFile(outputPath: string, expectedContent: string):
     const relativeOutputPath = relative(process.cwd(), outputPath)
     throw new Error(
       `Redirect artifact drift detected at ${relativeOutputPath}. `
-      + 'Regenerate it with `node scripts/generate-redirects.ts`.',
+      + 'Regenerate it with `vp dlx tsx@4.21.0 scripts/generate-redirects.ts`.',
     )
   }
 }

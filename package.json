@@ -46,7 +46,7 @@
     "pnpm": "10.x"
   },
   "scripts": {
-    "build:ssg": "cross-env NODE_OPTIONS=--max-old-space-size=8192 nuxt generate && node scripts/generate-redirects.ts && node scripts/generate-redirects.ts --check",
+    "build:ssg": "cross-env NODE_OPTIONS=--max-old-space-size=8192 nuxt generate && vp dlx tsx@4.21.0 scripts/generate-redirects.ts && vp dlx tsx@4.21.0 scripts/generate-redirects.ts --check",
     "build:ssr": "cross-env NODE_OPTIONS=--max-old-space-size=8192 nuxt build",
     "dev": "nuxt dev",
     "dev:preset": "nuxt dev --port 3000 --public",
@@ -60,7 +60,7 @@
     "reset": "rimraf node_modules .nuxt .output dist .data",
     "test": "run-s test:*",
     "test:lint": "eslint .",
-    "test:redirects": "node scripts/generate-redirects.ts && node scripts/generate-redirects.ts --check",
+    "test:redirects": "vp dlx tsx@4.21.0 scripts/generate-redirects.ts && vp dlx tsx@4.21.0 scripts/generate-redirects.ts --check",
     "test:types": "nuxt typecheck",
     "verify:cloudflare:smoke": "vp dlx tsx@4.21.0 scripts/check-cloudflare-smoke.ts"
   },
