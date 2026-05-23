@@ -1,4 +1,4 @@
-name: Build & Deploy
+name: Cloudflare Build & Deploy
 
 on:
   push:
@@ -15,32 +15,33 @@ permissions:
 
 # Cancel in-progress runs when a newer run is triggered (e.g. two PRs merged quickly).
 concurrency:
-  group: deploy-production
+  group: cloudflare-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build & Deploy
+  build-and-deploy:
+    name: Build & Deploy on Cloudflare Pages
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - name: Checkout the Codebase
-        uses: actions/checkout@v6
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
-          node-version: 24
-          cache: pnpm
+          persist-credentials: false
+
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@ca1c46663915d6c1042ae23bd39ab85718bfb0fa
+        with:
+          version: 0.1.19
+          node-version: "24"
+          cache: true
+          run-install: false
 
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile --prefer-offline
+        run: vp install --frozen-lockfile --prefer-offline
 
       - name: Generate static site
-        run: pnpm run build:ssg
+        run: vp run build:ssg
         env:
           NUXT_PUBLIC_LEGAL_NAME: ${{ vars.NUXT_PUBLIC_LEGAL_NAME }}
           NUXT_PUBLIC_LEGAL_OCCUPATION: ${{ vars.NUXT_PUBLIC_LEGAL_OCCUPATION }}
@@ -53,7 +54,7 @@ jobs:
           NUXT_PUBLIC_LEGAL_VAT_ID: ${{ vars.NUXT_PUBLIC_LEGAL_VAT_ID }}
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

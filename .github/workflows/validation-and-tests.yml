@@ -18,7 +18,7 @@ jobs:
     permissions:
       pull-requests: read
     steps:
-      - uses: amannn/action-semantic-pull-request@v6
+      - uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -32,36 +32,36 @@ jobs:
       matrix:
         include:
           - name: Lint & Format Check
-            command: pnpm test:lint
+            command: vp run test:lint
           - name: Redirect Artifact Check
-            command: pnpm test:redirects
+            command: vp run test:redirects
           - name: Type Check
-            command: pnpm test:types
+            command: vp run test:types
 
     steps:
       # Check out the repository
       - name: Checkout the Codebase
-        uses: actions/checkout@v6
-
-      # Install and set up pnpm for use in the workflow
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      # Set up Node.js and enable pnpm caching
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
-          node-version: 24
-          cache: pnpm
+          persist-credentials: false
+
+      # Install and set up Vite+ with Node and pnpm for use in the workflow
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@ca1c46663915d6c1042ae23bd39ab85718bfb0fa
+        with:
+          version: 0.1.19
+          node-version: "24"
+          cache: true
+          run-install: false
 
       # Install project dependencies with automatic `nuxt prepare` at the end.
       # Thanks to the cache, this step is extremely fast on subsequent runs.
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile --prefer-offline
+        run: vp install --frozen-lockfile --prefer-offline
 
       # Execute the specific check command from the matrix
       - name: Run Check
-        # could also run as `pnpm test` as all commands are defined to run sequentially, but more control this way for now
+        # could also run as `vp run test` as all commands are defined to run sequentially, but more control this way for now
         run: ${{ matrix.command }}
 
   # This job acts as a single, final status check for branch protection.
