@@ -87,7 +87,10 @@ defineOgImage('Home', {
           <NuxtImg
             :alt="authorName"
             class="img-bordered h-45 w-45 rounded-full object-cover max-sm:h-35 max-sm:w-35"
+            fetchpriority="high"
             height="180"
+            loading="eager"
+            preload
             src="/avatar-thorsten-seyschab.jpg"
             width="180"
           />
