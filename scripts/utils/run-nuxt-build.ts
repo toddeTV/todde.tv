@@ -1,8 +1,6 @@
 import { execFileSync } from 'node:child_process'
 import { resolveBuildReleaseMetadata } from '../../server/utils/build-release-metadata'
 
-const TSX_PACKAGE = 'tsx@4.21.0'
-
 const cloudflareNitroPresets = [
   'cloudflare_module',
   'cloudflare_pages',
@@ -55,16 +53,13 @@ export function runRedirectArtifactGeneration(): void {
   const buildEnv = createBuildEnv()
 
   runVpCommand([
-    'dlx',
-    TSX_PACKAGE,
-    'scripts/generate-redirects.ts',
+    'run',
+    'redirects:generate',
   ], buildEnv)
 
   runVpCommand([
-    'dlx',
-    TSX_PACKAGE,
-    'scripts/generate-redirects.ts',
-    '--check',
+    'run',
+    'redirects:check',
   ], buildEnv)
 }
 
