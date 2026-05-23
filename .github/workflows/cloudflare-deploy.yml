@@ -65,7 +65,7 @@ jobs:
     needs:
       - build-and-deploy
     runs-on: ubuntu-24.04
-    timeout-minutes: 6
+    timeout-minutes: 10
     steps:
       - name: Checkout the Codebase
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
