@@ -61,7 +61,8 @@
     "test": "run-s test:*",
     "test:lint": "eslint .",
     "test:redirects": "node scripts/generate-redirects.ts && node scripts/generate-redirects.ts --check",
-    "test:types": "nuxt typecheck"
+    "test:types": "nuxt typecheck",
+    "verify:cloudflare:smoke": "vp dlx tsx@4.21.0 scripts/check-cloudflare-smoke.ts"
   },
   "dependencies": {
     "nuxt": "~4.4.6",

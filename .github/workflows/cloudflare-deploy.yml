@@ -59,3 +59,15 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_PAGES_PROJECT_NAME: todde-tv
+
+  post-deploy-smoke-test:
+    name: Post-Deploy Smoke Test
+    needs:
+      - build-and-deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Verify public routes
+        env:
+          BASE_URL: https://todde.tv
+        run: vp run verify:cloudflare:smoke
