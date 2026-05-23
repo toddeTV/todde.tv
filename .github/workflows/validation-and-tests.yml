@@ -37,6 +37,8 @@ jobs:
             command: vp run test:redirects
           - name: Type Check
             command: vp run test:types
+          - name: Unit Tests
+            command: vp run test:unit
 
     steps:
       # Check out the repository
