@@ -38,6 +38,7 @@ dist-ssr
 
 # CloudFlare
 .cloudflare
+.wrangler
 _redirects
 _redirects.json
 

@@ -57,7 +57,7 @@
     "nuxt": "nuxt",
     "postinstall": "nuxt prepare",
     "prepare": "vp config --hooks-only",
-    "preview:ssg": "pnpm exec serve .output/public",
+    "preview:ssg": "vp exec serve .output/public",
     "preview:ssr": "nuxt preview",
     "redirects:check": "vp dlx tsx@4.21.0 scripts/generate-redirects.ts --check",
     "redirects:generate": "vp dlx tsx@4.21.0 scripts/generate-redirects.ts",

@@ -19,6 +19,7 @@ export default withNuxt(
       '.output/',
       'dist/',
       '.data/',
+      '.wrangler/',
       '.claude/skills/**/.skilld/',
       'pnpm-lock.yaml',
     ],
