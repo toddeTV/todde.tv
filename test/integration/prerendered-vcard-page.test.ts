@@ -36,6 +36,9 @@ describe('prerendered vCard page', () => {
 
   it('renders representative enabled and optional contact values', () => {
     const vCardHtml = readGeneratedRoute('/vcard')
+    const vCardCheckboxInputs = vCardHtml.match(/<input\b[^>]*class="vcard-checkbox"[^>]*>/g) ?? []
+    const checkedVCardCheckboxInputs = vCardCheckboxInputs.filter(inputTag => /\bchecked\b/.test(inputTag))
+    const uncheckedVCardCheckboxInputs = vCardCheckboxInputs.filter(inputTag => !/\bchecked\b/.test(inputTag))
 
     expect(vCardHtml).toContain('Name (Thorsten Seyschab)')
     expect(vCardHtml).toContain('Handle (@toddeTV)')
@@ -46,7 +49,7 @@ describe('prerendered vCard page', () => {
     expect(vCardHtml).toContain('GitHub (@toddeTV)')
     expect(vCardHtml).toContain('Bluesky (@todde.tv)')
     expect(vCardHtml).toContain('Twitch (@toddeTV)')
-    expect(vCardHtml.match(/<input checked class="vcard-checkbox/g)).toHaveLength(6)
-    expect(vCardHtml.match(/<input class="vcard-checkbox/g)).toHaveLength(5)
+    expect(checkedVCardCheckboxInputs).toHaveLength(6)
+    expect(uncheckedVCardCheckboxInputs).toHaveLength(5)
   })
 })
