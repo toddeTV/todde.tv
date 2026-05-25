@@ -63,7 +63,7 @@
     "redirects:generate": "vp dlx tsx@4.21.0 scripts/generate-redirects.ts",
     "reset": "rimraf node_modules .nuxt .output dist .data",
     "test": "run-s test:lint test:redirects test:types test:unit test:integration",
-    "test:integration": "vp test test/",
+    "test:integration": "vp dlx tsx@4.21.0 test/utils/prepare-static-site-build.ts && vp test test/",
     "test:lint": "eslint .",
     "test:redirects": "vp run redirects:generate && vp run redirects:check",
     "test:types": "nuxt typecheck",

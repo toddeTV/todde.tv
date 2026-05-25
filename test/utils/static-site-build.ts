@@ -5,6 +5,7 @@ import { runNuxtBuild, runRedirectArtifactGeneration } from '../../scripts/utils
 
 const outputRoot = resolve(process.cwd(), '.output/public')
 const buildLockPath = resolve(process.cwd(), '.integration-static-site-build.lock')
+const redirectsOutputPath = resolve(outputRoot, '_redirects')
 
 export const integrationLegalEnv = {
   NUXT_PUBLIC_LEGAL_NAME: 'Integration Test Name',
@@ -19,6 +20,11 @@ export const integrationLegalEnv = {
 } satisfies NodeJS.ProcessEnv
 
 let staticSiteBuilt = false
+
+/** Checks whether the shared integration output already exists and is ready for reuse. */
+function hasPreparedStaticSiteOutput(): boolean {
+  return existsSync(outputRoot) && existsSync(redirectsOutputPath)
+}
 
 /** Normalizes a route path to the generated directory path below `.output/public`. */
 function resolveGeneratedRouteDirectory(routePath: string): string {
@@ -44,9 +50,19 @@ function waitForConcurrentStaticSiteBuild(): void {
     waitForMilliseconds(100)
   }
 
-  if (!existsSync(outputRoot)) {
+  if (!hasPreparedStaticSiteOutput()) {
     throw new Error('Shared integration static-site build lock cleared without generated output.')
   }
+}
+
+/** Builds the shared static-site output from scratch for integration tests. */
+function buildStaticSiteOutput(): void {
+  rmSync(resolve(process.cwd(), '.output'), {
+    recursive: true,
+    force: true,
+  })
+  runNuxtBuild('generate', integrationLegalEnv)
+  runRedirectArtifactGeneration()
 }
 
 /**
@@ -55,7 +71,9 @@ function waitForConcurrentStaticSiteBuild(): void {
  * @returns Generated public output directory path.
  */
 export function ensureStaticSiteBuild(): string {
-  if (staticSiteBuilt) {
+  if (staticSiteBuilt || hasPreparedStaticSiteOutput()) {
+    staticSiteBuilt = true
+
     return outputRoot
   }
 
@@ -70,12 +88,33 @@ export function ensureStaticSiteBuild(): string {
   }
 
   try {
-    rmSync(resolve(process.cwd(), '.output'), {
+    buildStaticSiteOutput()
+    staticSiteBuilt = true
+  }
+  finally {
+    rmSync(buildLockPath, {
       recursive: true,
       force: true,
     })
-    runNuxtBuild('generate', integrationLegalEnv)
-    runRedirectArtifactGeneration()
+  }
+
+  return outputRoot
+}
+
+/** Forces a fresh shared static-site build before the integration test run starts. */
+export function rebuildStaticSiteBuild(): string {
+  try {
+    mkdirSync(buildLockPath)
+  }
+  catch {
+    waitForConcurrentStaticSiteBuild()
+    staticSiteBuilt = true
+
+    return outputRoot
+  }
+
+  try {
+    buildStaticSiteOutput()
     staticSiteBuilt = true
   }
   finally {
