@@ -1,19 +1,10 @@
-import { readdirSync } from 'node:fs'
-import { resolve } from 'node:path'
-
 import { beforeAll, describe, expect, it } from 'vite-plus/test'
 
+import { listProjectRoutePaths, listTalkRoutePaths } from '../utils/content-routes'
 import { ensureStaticSiteBuild, hasGeneratedRoute } from '../utils/static-site-build'
 
-function listContentSlugs(directoryName: string): string[] {
-  return readdirSync(resolve(process.cwd(), 'content', directoryName))
-    .filter(fileName => fileName.endsWith('.md'))
-    .map(fileName => fileName.slice(0, -3))
-    .sort()
-}
-
-const projectSlugs = listContentSlugs('projects')
-const talkSlugs = listContentSlugs('talks')
+const projectRoutePaths = listProjectRoutePaths()
+const talkRoutePaths = listTalkRoutePaths()
 
 describe('prerendered route coverage', () => {
   beforeAll(() => {
@@ -27,18 +18,18 @@ describe('prerendered route coverage', () => {
   })
 
   it('prerenders every project detail route from content', () => {
-    expect(projectSlugs.length).toBeGreaterThan(0)
+    expect(projectRoutePaths.length).toBeGreaterThan(0)
 
-    for (const projectSlug of projectSlugs) {
-      expect(hasGeneratedRoute(`/projects/${projectSlug}`)).toBe(true)
+    for (const projectRoutePath of projectRoutePaths) {
+      expect(hasGeneratedRoute(projectRoutePath)).toBe(true)
     }
   })
 
   it('prerenders every talk detail route from content', () => {
-    expect(talkSlugs.length).toBeGreaterThan(0)
+    expect(talkRoutePaths.length).toBeGreaterThan(0)
 
-    for (const talkSlug of talkSlugs) {
-      expect(hasGeneratedRoute(`/talks/${talkSlug}`)).toBe(true)
+    for (const talkRoutePath of talkRoutePaths) {
+      expect(hasGeneratedRoute(talkRoutePath)).toBe(true)
     }
   })
 })
