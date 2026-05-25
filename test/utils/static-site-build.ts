@@ -1,9 +1,10 @@
-import { existsSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import { runNuxtBuild, runRedirectArtifactGeneration } from '../../scripts/utils/run-nuxt-build'
 
 const outputRoot = resolve(process.cwd(), '.output/public')
+const buildLockPath = resolve(process.cwd(), '.integration-static-site-build.lock')
 
 const integrationLegalEnv = {
   NUXT_PUBLIC_LEGAL_NAME: 'Integration Test Name',
@@ -26,13 +27,49 @@ function resolveGeneratedRouteDirectory(routePath: string): string {
   return normalizedPath || '.'
 }
 
+/** Sleeps synchronously for a short interval while another test worker finishes the build. */
+function waitForMilliseconds(milliseconds: number): void {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds)
+}
+
+/** Waits for a concurrent static-site build to finish and verifies the shared output exists. */
+function waitForConcurrentStaticSiteBuild(): void {
+  const waitDeadline = Date.now() + 600_000
+
+  while (existsSync(buildLockPath)) {
+    if (Date.now() > waitDeadline) {
+      throw new Error('Timed out waiting for the shared integration static-site build to finish.')
+    }
+
+    waitForMilliseconds(100)
+  }
+
+  if (!existsSync(outputRoot)) {
+    throw new Error('Shared integration static-site build lock cleared without generated output.')
+  }
+}
+
 /**
  * Builds static site output once for integration tests and returns the output root.
  *
  * @returns Generated public output directory path.
  */
 export function ensureStaticSiteBuild(): string {
-  if (!staticSiteBuilt) {
+  if (staticSiteBuilt) {
+    return outputRoot
+  }
+
+  try {
+    mkdirSync(buildLockPath)
+  }
+  catch {
+    waitForConcurrentStaticSiteBuild()
+    staticSiteBuilt = true
+
+    return outputRoot
+  }
+
+  try {
     rmSync(resolve(process.cwd(), '.output'), {
       recursive: true,
       force: true,
@@ -40,6 +77,12 @@ export function ensureStaticSiteBuild(): string {
     runNuxtBuild('generate', integrationLegalEnv)
     runRedirectArtifactGeneration()
     staticSiteBuilt = true
+  }
+  finally {
+    rmSync(buildLockPath, {
+      recursive: true,
+      force: true,
+    })
   }
 
   return outputRoot
