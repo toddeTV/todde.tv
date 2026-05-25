@@ -9,8 +9,9 @@ export function extractMetaContent(
   attributeName: string,
   attributeValue: string,
 ): string | null {
+  const escapedAttributeName = attributeName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const escapedAttributeValue = attributeValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const pattern = new RegExp(`<meta[^>]+${attributeName}="${escapedAttributeValue}"[^>]+content="([^"]+)"`, 'i')
+  const pattern = new RegExp(`<meta[^>]+${escapedAttributeName}="${escapedAttributeValue}"[^>]+content="([^"]+)"`, 'i')
 
   return html.match(pattern)?.[1] ?? null
 }
