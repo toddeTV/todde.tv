@@ -80,7 +80,11 @@ export function ensureStaticSiteBuild(): string {
   try {
     mkdirSync(buildLockPath)
   }
-  catch {
+  catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {
+      throw error
+    }
+
     waitForConcurrentStaticSiteBuild()
     staticSiteBuilt = true
 
@@ -106,7 +110,11 @@ export function rebuildStaticSiteBuild(): string {
   try {
     mkdirSync(buildLockPath)
   }
-  catch {
+  catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {
+      throw error
+    }
+
     waitForConcurrentStaticSiteBuild()
     staticSiteBuilt = true
 
