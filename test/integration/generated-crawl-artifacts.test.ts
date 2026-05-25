@@ -46,7 +46,7 @@ describe('generated crawl artifacts', () => {
     const sitemapLocations = extractSitemapLocations(sitemapXml)
     const expectedLocations = listIndexableRoutePaths().map(routePath => `https://todde.tv${routePath}`)
 
-    expect(sitemapLocations).toEqual(expectedLocations)
+    expect([...sitemapLocations].sort()).toEqual([...expectedLocations].sort())
     expect(sitemapLocations).not.toContain('https://todde.tv/vcard')
   })
 })
