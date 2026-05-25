@@ -27,6 +27,7 @@ export default defineConfig({
       'scripts/**/*.test.ts',
       'shared/**/*.test.ts',
       'server/**/*.test.ts',
+      'test/**/*.test.ts',
     ],
     alias: nuxtTestAliases,
   },

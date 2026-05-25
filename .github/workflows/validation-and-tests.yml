@@ -39,6 +39,8 @@ jobs:
             command: vp run test:types
           - name: Unit Tests
             command: vp run test:unit
+          - name: Integration Tests
+            command: vp run test:integration
 
     steps:
       # Check out the repository
@@ -65,6 +67,19 @@ jobs:
       - name: Run Check
         # could also run as `vp run test` as all commands are defined to run sequentially, but more control this way for now
         run: ${{ matrix.command }}
+
+      - name: Summarize Integration Suite Size
+        if: matrix.name == 'Integration Tests'
+        run: |
+          test_file_count="$(find test/integration -type f -name '*.test.ts' | wc -l | tr -d ' ')"
+          assertion_count="$(grep -Rho --include='*.test.ts' 'expect(' test/integration | wc -l | tr -d ' ')"
+
+          {
+            echo '## Integration Suite Size'
+            echo
+            echo "- Test files: ${test_file_count}"
+            echo "- Assertions: ${assertion_count}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
   # This job acts as a single, final status check for branch protection.
   all_checks_passed:
