@@ -8,19 +8,13 @@ import type { SocialsCollectionItem } from '@nuxt/content'
  */
 export function useVCardSelection(socials: Ref<SocialsCollectionItem[] | null | undefined>) {
   /** Email entries extracted from socials (sorted by sortOrder). */
-  const emailEntries = computed(() =>
-    (socials.value ?? []).filter(s => s.url.startsWith('mailto:')),
-  )
+  const emailEntries = computed(() => partitionVCardSocialEntries(socials.value).emailEntries)
 
   /** Phone entries extracted from socials (sorted by sortOrder). */
-  const phoneEntries = computed(() =>
-    (socials.value ?? []).filter(s => s.url.startsWith('tel:')),
-  )
+  const phoneEntries = computed(() => partitionVCardSocialEntries(socials.value).phoneEntries)
 
   /** Social profile entries (excluding emails and phones). */
-  const socialEntries = computed(() =>
-    (socials.value ?? []).filter(s => !s.url.startsWith('mailto:') && !s.url.startsWith('tel:')),
-  )
+  const socialEntries = computed(() => partitionVCardSocialEntries(socials.value).socialEntries)
 
   // --- Fixed-field toggles ---
 
@@ -37,22 +31,7 @@ export function useVCardSelection(socials: Ref<SocialsCollectionItem[] | null | 
 
   /** Initializes default checked state once socials data is available. */
   function initDefaults() {
-    const first = new Set<string>()
-    const firstEmail = emailEntries.value[0]
-    const firstPhone = phoneEntries.value[0]
-    if (firstEmail) first.add(firstEmail.id)
-    if (firstPhone) first.add(firstPhone.id)
-
-    const defaults: Record<string, boolean> = {}
-    for (const entry of socials.value ?? []) {
-      if (entry.url.startsWith('mailto:') || entry.url.startsWith('tel:')) {
-        defaults[entry.id] = first.has(entry.id)
-      }
-      else {
-        defaults[entry.id] = false
-      }
-    }
-    checked.value = defaults
+    checked.value = buildDefaultVCardSelectionMap(socials.value)
   }
 
   // Set defaults once data is loaded (runs during SSR and on client).
