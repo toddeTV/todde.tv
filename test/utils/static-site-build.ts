@@ -19,6 +19,13 @@ const integrationLegalEnv = {
 
 let staticSiteBuilt = false
 
+/** Normalizes a route path to the generated directory path below `.output/public`. */
+function resolveGeneratedRouteDirectory(routePath: string): string {
+  const normalizedPath = routePath.trim().replace(/^\/|\/$/g, '')
+
+  return normalizedPath || '.'
+}
+
 /**
  * Builds static site output once for integration tests and returns the output root.
  *
@@ -49,6 +56,16 @@ export function generatedOutputPath(relativePath: string): string {
 }
 
 /**
+ * Resolves the generated HTML path for a prerendered route.
+ *
+ * @param routePath Route path such as `/`, `/projects`, or `/projects/example`.
+ * @returns Absolute path to the generated route HTML file.
+ */
+export function generatedRouteOutputPath(routePath: string): string {
+  return generatedOutputPath(resolveGeneratedRouteDirectory(routePath) + '/index.html')
+}
+
+/**
  * Checks whether a generated output file exists.
  *
  * @param relativePath Path relative to `.output/public`.
@@ -59,6 +76,16 @@ export function hasGeneratedOutput(relativePath: string): boolean {
 }
 
 /**
+ * Checks whether a prerendered route HTML file exists.
+ *
+ * @param routePath Route path such as `/`, `/projects`, or `/projects/example`.
+ * @returns `true` when the prerendered route HTML exists.
+ */
+export function hasGeneratedRoute(routePath: string): boolean {
+  return existsSync(generatedRouteOutputPath(routePath))
+}
+
+/**
  * Reads a generated output file as UTF-8 text.
  *
  * @param relativePath Path relative to `.output/public`.
@@ -66,4 +93,14 @@ export function hasGeneratedOutput(relativePath: string): boolean {
  */
 export function readGeneratedOutput(relativePath: string): string {
   return readFileSync(generatedOutputPath(relativePath), 'utf8')
+}
+
+/**
+ * Reads the generated HTML for a prerendered route as UTF-8 text.
+ *
+ * @param routePath Route path such as `/`, `/projects`, or `/projects/example`.
+ * @returns UTF-8 contents of the prerendered route HTML file.
+ */
+export function readGeneratedRoute(routePath: string): string {
+  return readFileSync(generatedRouteOutputPath(routePath), 'utf8')
 }

@@ -4,6 +4,7 @@ import { renderProjectMetadataRedirectsFile } from '#shared/utils/project-metada
 import {
   ensureStaticSiteBuild,
   hasGeneratedOutput,
+  hasGeneratedRoute,
   readGeneratedOutput,
 } from '../utils/static-site-build'
 
@@ -18,9 +19,9 @@ describe('static site integration output', () => {
   })
 
   it('prerenders critical routes and machine-readable endpoints', () => {
-    expect(hasGeneratedOutput('legal-notice/index.html')).toBe(true)
-    expect(hasGeneratedOutput('privacy-policy/index.html')).toBe(true)
-    expect(hasGeneratedOutput('g/index.html')).toBe(true)
+    expect(hasGeneratedRoute('/legal-notice')).toBe(true)
+    expect(hasGeneratedRoute('/privacy-policy')).toBe(true)
+    expect(hasGeneratedRoute('/g')).toBe(true)
     expect(hasGeneratedOutput('humans.txt')).toBe(true)
     expect(hasGeneratedOutput('.well-known/security.txt')).toBe(true)
   })
