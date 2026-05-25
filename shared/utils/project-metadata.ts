@@ -28,23 +28,23 @@ export function getProjectMetadata(): ProjectMetadata {
   return projectMetadataConfig
 }
 
-function isMailtoUrl(url: string): boolean {
+export function isMailtoUrl(url: string): boolean {
   return url.startsWith(MAILTO_PREFIX)
 }
 
-function isPhoneUrl(url: string): boolean {
+export function isPhoneUrl(url: string): boolean {
   return url.startsWith(TEL_PREFIX)
 }
 
-function isProfileUrl(url: string): boolean {
+export function isProfileUrl(url: string): boolean {
   return !isMailtoUrl(url) && !isPhoneUrl(url)
 }
 
-function removeMailtoPrefix(url: string): string {
+export function removeMailtoPrefix(url: string): string {
   return isMailtoUrl(url) ? url.slice(MAILTO_PREFIX.length) : url
 }
 
-function dedupeUrls(urls: string[]): string[] {
+export function dedupeUrls(urls: string[]): string[] {
   return Array.from(new Set(urls))
 }
 
