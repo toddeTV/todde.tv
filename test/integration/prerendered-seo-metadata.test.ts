@@ -1,21 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vite-plus/test'
 
+import { extractCanonicalHref, extractMetaContent, extractTitle } from '../utils/html-head'
 import { ensureStaticSiteBuild, readGeneratedRoute } from '../utils/static-site-build'
-
-function extractTitle(html: string): string | null {
-  return html.match(/<title>([^<]+)<\/title>/)?.[1] ?? null
-}
-
-function extractMetaContent(html: string, attributeName: string, attributeValue: string): string | null {
-  const escapedAttributeValue = attributeValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const pattern = new RegExp(`<meta[^>]+${attributeName}="${escapedAttributeValue}"[^>]+content="([^"]+)"`, 'i')
-
-  return html.match(pattern)?.[1] ?? null
-}
-
-function extractCanonicalHref(html: string): string | null {
-  return html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1] ?? null
-}
 
 describe('prerendered SEO metadata', () => {
   beforeAll(() => {
