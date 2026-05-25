@@ -36,7 +36,8 @@ describe('prerendered vCard page', () => {
 
   it('renders representative enabled and optional contact values', () => {
     const vCardHtml = readGeneratedRoute('/vcard')
-    const vCardCheckboxInputs = vCardHtml.match(/<input\b[^>]*class="vcard-checkbox"[^>]*>/g) ?? []
+    const vCardCheckboxInputs
+      = vCardHtml.match(/<input\b[^>]*class\s*=\s*["'][^"']*\bvcard-checkbox\b[^"']*["'][^>]*>/g) ?? []
     const checkedVCardCheckboxInputs = vCardCheckboxInputs.filter(inputTag => /\bchecked\b/.test(inputTag))
     const uncheckedVCardCheckboxInputs = vCardCheckboxInputs.filter(inputTag => !/\bchecked\b/.test(inputTag))
 
