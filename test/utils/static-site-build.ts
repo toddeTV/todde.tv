@@ -19,6 +19,11 @@ const integrationLegalEnv = {
 
 let staticSiteBuilt = false
 
+/**
+ * Builds static site output once for integration tests and returns the output root.
+ *
+ * @returns Generated public output directory path.
+ */
 export function ensureStaticSiteBuild(): string {
   if (!staticSiteBuilt) {
     rmSync(resolve(process.cwd(), '.output'), {
@@ -33,14 +38,32 @@ export function ensureStaticSiteBuild(): string {
   return outputRoot
 }
 
+/**
+ * Resolves a path inside the generated public output directory.
+ *
+ * @param relativePath Path relative to `.output/public`.
+ * @returns Absolute path to generated output file.
+ */
 export function generatedOutputPath(relativePath: string): string {
   return resolve(outputRoot, relativePath)
 }
 
+/**
+ * Checks whether a generated output file exists.
+ *
+ * @param relativePath Path relative to `.output/public`.
+ * @returns `true` when the generated file exists.
+ */
 export function hasGeneratedOutput(relativePath: string): boolean {
   return existsSync(generatedOutputPath(relativePath))
 }
 
+/**
+ * Reads a generated output file as UTF-8 text.
+ *
+ * @param relativePath Path relative to `.output/public`.
+ * @returns UTF-8 contents of generated output file.
+ */
 export function readGeneratedOutput(relativePath: string): string {
   return readFileSync(generatedOutputPath(relativePath), 'utf8')
 }
