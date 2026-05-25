@@ -6,7 +6,7 @@ import { runNuxtBuild, runRedirectArtifactGeneration } from '../../scripts/utils
 const outputRoot = resolve(process.cwd(), '.output/public')
 const buildLockPath = resolve(process.cwd(), '.integration-static-site-build.lock')
 
-const integrationLegalEnv = {
+export const integrationLegalEnv = {
   NUXT_PUBLIC_LEGAL_NAME: 'Integration Test Name',
   NUXT_PUBLIC_LEGAL_OCCUPATION: 'Integration Test Occupation',
   NUXT_PUBLIC_LEGAL_OCCUPATION_DE: 'Integrationstest Beruf',
