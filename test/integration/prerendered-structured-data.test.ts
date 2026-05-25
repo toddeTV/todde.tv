@@ -25,7 +25,7 @@ type StructuredDataGraph = {
 function readStructuredDataGraph(routePath: string): StructuredDataGraph {
   const html = readGeneratedRoute(routePath)
   const graphMatch
-    = html.match(/<script type="application\/ld\+json"[^>]*>(.*?)<\/script>/i)
+    = html.match(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i)
 
   if (!graphMatch?.[1]) {
     throw new Error(`Missing structured data graph for route: ${routePath}`)
