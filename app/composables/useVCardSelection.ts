@@ -7,14 +7,16 @@ import type { SocialsCollectionItem } from '@nuxt/content'
  * @param socials - reactive reference to the socials collection data
  */
 export function useVCardSelection(socials: Ref<SocialsCollectionItem[] | null | undefined>) {
+  const partitionedEntries = computed(() => partitionVCardSocialEntries(socials.value))
+
   /** Email entries extracted from socials (sorted by sortOrder). */
-  const emailEntries = computed(() => partitionVCardSocialEntries(socials.value).emailEntries)
+  const emailEntries = computed(() => partitionedEntries.value.emailEntries)
 
   /** Phone entries extracted from socials (sorted by sortOrder). */
-  const phoneEntries = computed(() => partitionVCardSocialEntries(socials.value).phoneEntries)
+  const phoneEntries = computed(() => partitionedEntries.value.phoneEntries)
 
   /** Social profile entries (excluding emails and phones). */
-  const socialEntries = computed(() => partitionVCardSocialEntries(socials.value).socialEntries)
+  const socialEntries = computed(() => partitionedEntries.value.socialEntries)
 
   // --- Fixed-field toggles ---
 
