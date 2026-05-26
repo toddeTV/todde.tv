@@ -38,6 +38,15 @@ describe('sortProjectsByRecency', () => {
     expect(projects.map(project => project.id)).toEqual(['two', 'three'])
   })
 
+  it('returns an empty list for an explicit zero limit', () => {
+    const projects = sortProjectsByRecency([
+      { id: 'one', startDate: '2024-01-01', endDate: '2024-02-01' },
+      { id: 'two', startDate: '2024-03-01', endDate: null },
+    ], 0)
+
+    expect(projects).toEqual([])
+  })
+
   it('keeps empty input stable', () => {
     expect(sortProjectsByRecency([])).toEqual([])
   })

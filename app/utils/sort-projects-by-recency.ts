@@ -25,5 +25,5 @@ export function sortProjectsByRecency<TProject extends ProjectRecencySortable>(
     return (b.repoStars ?? 0) - (a.repoStars ?? 0)
   })
 
-  return limit ? sorted.slice(0, limit) : sorted
+  return limit == null ? sorted : sorted.slice(0, Math.max(0, limit))
 }
