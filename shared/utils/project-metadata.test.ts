@@ -1,5 +1,42 @@
 import { describe, expect, it } from 'vite-plus/test'
-import { prepareProjectMetadata } from '#shared/utils/project-metadata'
+import {
+  dedupeUrls,
+  isMailtoUrl,
+  isPhoneUrl,
+  isProfileUrl,
+  prepareProjectMetadata,
+  removeMailtoPrefix,
+} from '#shared/utils/project-metadata'
+
+describe('project metadata url helpers', () => {
+  it('classifies mailto, phone, and profile urls', () => {
+    expect(isMailtoUrl('mailto:hello@todde.tv')).toBe(true)
+    expect(isMailtoUrl('https://todde.tv')).toBe(false)
+    expect(isPhoneUrl('tel:+4917691404834')).toBe(true)
+    expect(isPhoneUrl('mailto:hello@todde.tv')).toBe(false)
+    expect(isProfileUrl('https://github.com/toddeTV')).toBe(true)
+    expect(isProfileUrl('tel:+4917691404834')).toBe(false)
+  })
+
+  it('removes only the mailto prefix', () => {
+    expect(removeMailtoPrefix('mailto:hello@todde.tv')).toBe('hello@todde.tv')
+    expect(removeMailtoPrefix('https://todde.tv')).toBe('https://todde.tv')
+  })
+
+  it('deduplicates urls and keeps first-seen order', () => {
+    expect(dedupeUrls([
+      'https://todde.tv',
+      'https://github.com/toddeTV',
+      'https://todde.tv',
+      'https://x.com/toddeTV',
+      'https://github.com/toddeTV',
+    ])).toEqual([
+      'https://todde.tv',
+      'https://github.com/toddeTV',
+      'https://x.com/toddeTV',
+    ])
+  })
+})
 
 describe('prepareProjectMetadata', () => {
   it('derives author contact and sameAs from socials content', () => {
