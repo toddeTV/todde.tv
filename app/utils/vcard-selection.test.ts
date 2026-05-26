@@ -29,6 +29,18 @@ describe('partitionVCardSocialEntries', () => {
       socialEntries: [],
     })
   })
+
+  it('matches email and phone schemes case-insensitively', () => {
+    const groups = partitionVCardSocialEntries([
+      { id: 'email', url: 'MAILTO:first@example.com' },
+      { id: 'phone', url: 'TeL:+4912345' },
+      { id: 'profile', url: 'https://example.com' },
+    ])
+
+    expect(groups.emailEntries.map(entry => entry.id)).toEqual(['email'])
+    expect(groups.phoneEntries.map(entry => entry.id)).toEqual(['phone'])
+    expect(groups.socialEntries.map(entry => entry.id)).toEqual(['profile'])
+  })
 })
 
 describe('buildDefaultVCardSelectionMap', () => {

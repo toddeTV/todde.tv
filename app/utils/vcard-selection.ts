@@ -4,11 +4,11 @@ export interface VCardSelectableSocialEntry {
 }
 
 export function isEmailSocialEntry<TEntry extends VCardSelectableSocialEntry>(entry: TEntry): boolean {
-  return entry.url.startsWith('mailto:')
+  return /^mailto:/i.test(entry.url)
 }
 
 export function isPhoneSocialEntry<TEntry extends VCardSelectableSocialEntry>(entry: TEntry): boolean {
-  return entry.url.startsWith('tel:')
+  return /^tel:/i.test(entry.url)
 }
 
 /** Split vCard socials into email, phone, and profile groups. */
